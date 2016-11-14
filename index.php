@@ -118,25 +118,18 @@
                 <div class="col-xs-3 footer-menu">
                     <?=foot_menu($db,$lang,$view)?>
                 </div>
-                <div class="col-xs-3">
-                    <div class="social pull-right">
-                        <a href=""><i class="fa fa-twitter"></i></a>
-                        <a href=""><i class="fa fa-facebook"></i></a>
-                        <a href=""><i class="fa fa-google-plus"></i></a>
-                    </div>     
+                <div class="col-xs-3">            
+                </div>
+                <div class="col-xs-6">            
+                    <?=common::qtext($db,4)?>
                 </div>
             </div>
             <?=shadowBottomRow()?>
-            <div class="row">
-                <div class="col-xs-8 copyright">
-                    Copyright © 2016 <b>TAIWANALUMINIUM</b>. All Rights Reserved. Designed by <a>PSmedia.vn</a>
-                </div>
-                <div class="col-xs-4 text-right">
-                <?php
-                common::load('class.visitors');
-                $vs=new visitors($db);
-                ?>
-                    Online: <?=$vs->getOnlineVisitors()?> || Counter: <?=$vs->getCounter()?>
+            <div class="row">                
+                <div class="row">
+                    <div class="col-xs-12 text-center copyright">
+                        Copyright © 2016 <b class="company">Dan Hung Long</b>, All rights reserved. Designed by <a class="psmedia">PSmedia.vn</a>
+                    </div>
                 </div>
             </div>
         </div>

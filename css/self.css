@@ -9,6 +9,14 @@ body{
 a:hover{
     text-decoration:none
 }
+.nav-pills>li>a {
+    border-radius: 0;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #237eb5;
+    border-color: #357ebd;
+}
 .title-head{
     margin-bottom: 30px;
 }
@@ -173,12 +181,16 @@ a.hotline{
 }
 
 .ind-news{
-    padding: 40px 8px 0 8px;
+    padding: 40px 8px 65px 8px;
 }
 .news-item-title { 
     color: #0070b3;
     margin: 22px 0 17px 0;
     
+}
+.news-item{
+    margin-bottom: 45px;
+    font-size: 13px;
 }
 .news-item-sum{
     color: #767676;    
@@ -215,8 +227,17 @@ a.hotline{
 }
 .dropdown-menu{
     z-index: 99999999999999999;
+    margin-top: 0;
 }
-
+.copyright{
+    margin: 15px 0 20px 0;
+}
+.copyright .company{
+    color: #006cad;
+}
+.copyright .psmedia{
+    color: #ff6c00;
+}
 
 
 
