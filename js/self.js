@@ -1,5 +1,5 @@
 $(function(){
-    new WOW().init();
+    
     $( "#tabs" ).tabs();
     $("body").append('<a href="#" class="scrollTo-top" style="display: inline;"><i class="fa fa-angle-double-up"></i></a>');
     var viewPortWidth = $(window).width();
@@ -67,6 +67,13 @@ $(function(){
       },
       fixedContentPos: false
     });  
+    wow = new WOW(
+      {
+        animateClass: 'animated',
+        offset:       100
+      }
+    );
+    wow.init();
 })
 
 

@@ -77,7 +77,7 @@ function home($db,$lang){
     common::page('product');
     $product=new product($db,$lang);
     $str.=$product->ind_product();
-    $str.=shadowBottomProduct();
+    $str.=shadowBottomDent();
     
     common::page('news');
     $news=new news($db,$lang);
@@ -377,8 +377,8 @@ function shadowBottomRow(){
     return '<div id="shadow-bottom" class="row">
             </div>';
 }
-function shadowBottomProduct(){
-    return '<div id="product-shadow-bottom" class="row">
+function shadowBottomDent(){
+    return '<div id="dent-shadow-bottom" class="row">
             </div>';
 }
 ?>

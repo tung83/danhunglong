@@ -45,7 +45,7 @@ class about{
         $str.='
         <div class="container">
         <ul class="breadcrumb clearfix">
-        	<li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
+            <li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
             <li><a href="'.myWeb.$this->lang.$this->view.'">'.$this->title.'</a></li>';
         if(isset($_GET['id'])){
             $this->db->where('id',intval($_GET['id']));
@@ -96,18 +96,28 @@ class about{
         $content=$this->lang=='vi'?$item['content']:$item['e_content'];
         $str.='  
         <section id="about-us">
-        <div class="container">
-			<div class="wow fadeInDown row">
-            <div class="col-md-12">
-                <article>
-                    <div class="text-center">
-                        <h2 class="page-title">'.$title.'</h2>
+            <div class="container">
+                <div class="row about-us-box">
+                    <div class="row wow fadeInDown animated" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="col-xs-6">
+                            <div class="title-head">
+                                <span>'
+                                    .$this->title.' 
+                                </span>
+                            </div>
+                        </div> 
+                        <div class="col-md-12">
+                            <article>
+                                <div class="text-center">
+                                    <h2 class="page-title">'.$title.'</h2>
+                                </div>
+                                <p>'.$content.'</p>
+                            </article>
+                        </div>
                     </div>
-                    <p>'.$content.'</p>
-                </article>
-			</div>
+                </div>
+                '.shadowBottomDent().' 
             </div>
-        </div>
         </section>';
         return $str;
     }

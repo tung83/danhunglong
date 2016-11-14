@@ -11,6 +11,8 @@ a:hover{
 }
 .breadcrumb{
     background-color: transparent;
+    margin-bottom: 18px;
+    margin-top: 8px;
 }
 .breadcrumb a{
     color: #767676;
@@ -129,7 +131,7 @@ a.hotline{
     height: 10px;
     background: url(/file/front/menu-shadow.png) no-repeat bottom center;
 }
-#product-shadow-bottom{
+#dent-shadow-bottom{
     height: 10px;
     background: url(/file/front/product-shadow.png) no-repeat bottom center;
 }
@@ -142,8 +144,9 @@ a.hotline{
     background-repeat: repeat-x, repeat;
     background-position: bottom left, top left;
 }
-#slider-box, .ind-product{
+#slider-box, .ind-product,.about-us-box, .contact-box{
     border: 5px solid #fff;
+    background: #fff;
     border-radius:5px 5px 5px 5px;
 }
 #wowslider-container1 img {
@@ -171,7 +174,6 @@ a.hotline{
 }
 
 .ind-product{
-    background: #fff;
     padding: 40px 8px 0 8px;
 }
 .ind-product .product-item{
@@ -244,6 +246,16 @@ a.hotline{
 }
 .copyright .psmedia{
     color: #ff6c00;
+}
+
+ .about-us-box,.contact-box{
+    padding: 40px 21px 0 21px;
+}
+#about-us, #contact-page{
+    margin-bottom: 30px;
+}
+.contact-wrap{
+    margin-bottom: 40px;
 }
 
 
