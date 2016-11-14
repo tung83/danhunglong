@@ -45,7 +45,7 @@ class about{
         $str.='
         <div class="container">
         <ul class="breadcrumb clearfix">
-        	<li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i></a></li>
+        	<li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
             <li><a href="'.myWeb.$this->lang.$this->view.'">'.$this->title.'</a></li>';
         if(isset($_GET['id'])){
             $this->db->where('id',intval($_GET['id']));

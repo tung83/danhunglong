@@ -1,6 +1,12 @@
 <?php
 include_once 'front.php';
-
+function pageId($view){
+    if($view == 'trang-chu')
+    {
+        return 'home-page';
+    }
+    return '';
+}
 function menu($db,$lang, $view){
     $db->reset();
     $list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get('menu');

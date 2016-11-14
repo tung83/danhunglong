@@ -5,11 +5,11 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>.:DÂN HƯNG LONG:.</title>
-	<link rel="icon" type="image/png" href="<?=selfPath?>logo.png"/>   
+	<link rel="icon" type="image/png" href="<?=frontPath?>logo.png"/>   
     <?=common::basic_css()?> 
     <?=common::basic_js()?>
 </head>
-<body>
+<body id="<?=pageId($view)?>">
     <header>
         <div id="welcome">
             <div class="container">

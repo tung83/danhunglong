@@ -9,6 +9,12 @@ body{
 a:hover{
     text-decoration:none
 }
+.breadcrumb{
+    background-color: transparent;
+}
+.breadcrumb a{
+    color: #767676;
+}
 .nav-pills>li>a {
     border-radius: 0;
 }
@@ -69,7 +75,7 @@ a:hover{
 #header-content-wrapper{
     padding-top: 20px;    
 }
-#header-content-wrapper,#header-menu-wrapper{
+#header-content-wrapper,#home-page #header-menu-wrapper{
     background: url(/file/front/dark-grey-bg.jpg) repeat; 
 }
 #header-content{
@@ -230,7 +236,8 @@ a.hotline{
     margin-top: 0;
 }
 .copyright{
-    margin: 15px 0 20px 0;
+    margin: 15px 0 20px 0;   
+    font-size: 12px;
 }
 .copyright .company{
     color: #006cad;
