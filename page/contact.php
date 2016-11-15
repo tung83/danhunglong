@@ -30,28 +30,48 @@ class contact{
     function contact_insert(){
         $this->db->reset();
         if(isset($_POST['contact_send'])){
-            $name=htmlspecialchars($_POST['name']);
-            $adds=htmlspecialchars($_POST['adds']);
-            $phone=htmlspecialchars($_POST['phone']);
-            $email=htmlspecialchars($_POST['email']);
-            $subject=htmlspecialchars($_POST['subject']);
-            $content=htmlspecialchars($_POST['content']);
-            $insert=array(
-                'name'=>$name,'adds'=>$adds,'phone'=>$phone,
-                'email'=>$email,'subject'=>$subject,'content'=>$content,
-                'dates'=>date("Y-m-d H:i:s")
-            );
-            try{
-                $this->send_mail($insert);
-                var_dump($insert);
-                $this->db->insert('contact',$insert);                
-                //header('Location:'.$_SERVER['REQUEST_URI']);
-                echo '<script>alert("Thông tin của bạn đã được gửi đi, BQT sẽ phản hồi sớm nhất có thể, Xin cám ơn!");
-                    location.href="'.$_SERVER['REQUEST_URI'].'"
-                </script>';
-            }catch(Exception $e){
-                echo $e->getMessage();
+            if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])){
+                //your site secret key
+                $secret = '6LcaQQkUAAAAAMxjN-JsE3qRx1uhp-pJp9A42J_e';
+                //get verify response data
+                $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+                $responseData = json_decode($verifyResponse);
+                if($responseData->success){
+                                $name=htmlspecialchars($_POST['name']);
+                                $adds=htmlspecialchars($_POST['adds']);
+                                $phone=htmlspecialchars($_POST['phone']);
+                                $email=htmlspecialchars($_POST['email']);
+                                $subject=htmlspecialchars($_POST['subject']);
+                                $content=htmlspecialchars($_POST['content']);
+                                $insert=array(
+                                    'name'=>$name,'adds'=>$adds,'phone'=>$phone,
+                                    'email'=>$email,'subject'=>$subject,'content'=>$content,
+                                    'dates'=>date("Y-m-d H:i:s")
+                                );
+                                try{
+                                    $this->send_mail($insert);
+                                    var_dump($insert);
+                                    $this->db->insert('contact',$insert);                
+                                    //header('Location:'.$_SERVER['REQUEST_URI']);
+                                    echo '<script>alert("Thông tin của bạn đã được gửi đi, BQT sẽ phản hồi sớm nhất có thể, Xin cám ơn!");
+                                        location.href="'.$_SERVER['REQUEST_URI'].'"
+                                    </script>';
+                                }catch(Exception $e){
+                                    echo $e->getMessage();
+                                }
+
+                    $succMsg = 'Your contact request have submitted successfully.';
+                                $name = '';
+                                $email = '';
+                                $message = '';
+                }
+                else{
+                    $errMsg = 'Robot verification failed, please try again.';
+                }
             }
+            else{
+                $errMsg = 'Please click on the reCAPTCHA box.';
+            }            
         }
     }
     function contact(){
@@ -61,6 +81,7 @@ class contact{
         $item=$this->db->where('id',3)->getOne('qtext','content');
          
         $str.='    
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <section id="contact-page">
             <div class="container">
                 <div class="row contact-box">
@@ -110,7 +131,10 @@ class contact{
                                 <div class="form-group">
                                     <textarea name="content" id="content" required class="form-control"  placeholder="Nội Dung Tin Nhắn*" rows="8"></textarea>
                                     <div class="help-block with-errors"></div>
-                                </div>                        
+                                </div>
+                                <div class="form-group">    
+                                    <div class="g-recaptcha" data-sitekey="6LcaQQkUAAAAAB-OYdRvS3TsfqOdJWfTG6hQJ3TW"></div>
+                                </div> 
                                 <div class="form-group">
                                     <button type="submit" name="contact_send" class="btn btn-primary btn-md btn-custom">
                                         Gửi Tin
