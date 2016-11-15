@@ -1,5 +1,28 @@
+var recaptchaChecked = false;
+function recaptchaCallback() {
+    recaptchaChecked = true;
+    ToogleEnableSubmitButton();
+};
+function ToogleEnableSubmitButton(){
+    var empty = false;
+    $('form input,form textarea').each(function() {
+        var attr = $(this).attr('required');
+        if (typeof attr !== typeof undefined && attr !== false && $(this).val() == '' ) {
+            empty = true;
+        }
+    });
+
+    if (empty || !recaptchaChecked) {
+        $('.submit-button').addClass('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+    } else {
+        $('.submit-button').removeClass('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+    }
+}
 $(function(){
     
+    $('form input,form textarea').keyup(function() {
+        ToogleEnableSubmitButton();
+    });
     $( "#tabs" ).tabs();
     $("body").append('<a href="#" class="scrollTo-top" ><i class="fa fa-angle-double-up"></i></a>');
     var viewPortWidth = $(window).width();

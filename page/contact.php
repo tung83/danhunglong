@@ -1,6 +1,6 @@
 <?php
 class contact{
-    private $db,$view,$lang,$title;
+    private $db,$view,$lang,$title,$successMsg;
     function __construct($db,$lang='vi'){
         $this->db=$db;
         $this->db->reset();
@@ -50,20 +50,12 @@ class contact{
                                 );
                                 try{
                                     $this->send_mail($insert);
-                                    var_dump($insert);
                                     $this->db->insert('contact',$insert);                
-                                    //header('Location:'.$_SERVER['REQUEST_URI']);
-                                    echo '<script>alert("Thông tin của bạn đã được gửi đi, BQT sẽ phản hồi sớm nhất có thể, Xin cám ơn!");
-                                        location.href="'.$_SERVER['REQUEST_URI'].'"
-                                    </script>';
+                                    $this->successMsg = "Thông tin của bạn đã được gửi đi, BQT sẽ phản hồi sớm nhất có thể, Xin cám ơn!";
+                                        
                                 }catch(Exception $e){
                                     echo $e->getMessage();
                                 }
-
-                    $succMsg = 'Your contact request have submitted successfully.';
-                                $name = '';
-                                $email = '';
-                                $message = '';
                 }
                 else{
                     $errMsg = 'Robot verification failed, please try again.';
@@ -95,6 +87,7 @@ class contact{
                         </div> 
                     </div> 
                     <div class="row contact-wrap"> 
+                        '.(isset($this->successMsg)? '<div class="status alert alert-success"><i class="icon fa fa-check"></i>  '.$this->successMsg.'</div>' : '') .' 
                         <div class="status alert alert-success" style="display: none"></div>
                         <div class="col-sm-6">
                             <i>Cảm ơn Quý khách đã truy cập vào website. Mọi thông tin chi tiết xin vui lòng liên hệ:</i>
@@ -133,10 +126,10 @@ class contact{
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">    
-                                    <div class="g-recaptcha" data-sitekey="6LcaQQkUAAAAAB-OYdRvS3TsfqOdJWfTG6hQJ3TW"></div>
+                                    <div class="g-recaptcha" data-sitekey="6LcaQQkUAAAAAB-OYdRvS3TsfqOdJWfTG6hQJ3TW" data-callback="recaptchaCallback"></div>
                                 </div> 
                                 <div class="form-group">
-                                    <button type="submit" name="contact_send" class="btn btn-primary btn-md btn-custom">
+                                    <button type="submit" name="contact_send" class="btn btn-primary btn-md btn-custom submit-button">
                                         Gửi Tin
                                     </button>
                                     <button type="reset" name="reset" class="btn btn-primary btn-md btn-custom">
@@ -192,13 +185,11 @@ class contact{
         	<p>Phone: '.$item['phone'].'</p>
         	
         	<p>Email: '.$item['email'].'</p>
-            <p>Tiêu Đề: '.$item['fax'].'</p>
+            <p>Tiêu Đề: '.$item['subject'].'</p>
         	<p>Content: '.nl2br($item['content']).'</p>
         </body>
         </html>';
-        if ($mail->send()) {
-            echo "Message sent!";
-        } else {
+        if (!$mail->send()) {
             echo "Mailer Error: " . $mail->ErrorInfo;
         }
     }
