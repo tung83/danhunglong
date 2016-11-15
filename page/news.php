@@ -74,7 +74,7 @@ class news{
     function news_item($item){
         $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         return '
-            <div class="row">
+            <div class="row new-item">
                 <div class="col-xs-3">
                     <a href="'.$lnk.'" class="about-item ">
                         <img src="'.webPath.$item['img'].'" class="img-responsive" alt="" title=""/>
