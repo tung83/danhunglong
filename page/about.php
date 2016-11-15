@@ -50,8 +50,7 @@ class about{
         if(isset($_GET['id'])){
             $this->db->where('id',intval($_GET['id']));
             $item=$this->db->getOne('about','id,title');
-            $str.='
-            <li><a href="#">'.$item['title'].'</a></li>';
+            $str.='<li><a href="#">'.$item['title'].'</a></li>';
         }
         $str.='
         </ul>
@@ -94,7 +93,7 @@ class about{
         $item=$this->db->where('id',$id)->getOne('about');
         $title=$this->lang=='vi'?$item['title']:$item['e_title'];
         $content=$this->lang=='vi'?$item['content']:$item['e_content'];
-        $str.='  
+        return '  
         <section id="about-us">
             <div class="container">
                 <div class="row about-us-box">
@@ -119,7 +118,6 @@ class about{
                 '.shadowBottomDent().' 
             </div>
         </section>';
-        return $str;
     }
 }
 

@@ -224,14 +224,16 @@ function about($db,$lang){
     return $str;    
 }
 function news($db,$lang){
-    $str.='
-    <section id="page">';
     common::page('news');
     $news=new news($db,$lang);
     $str.=$news->breadcrumb();
-    
-    $str.='
-    </section>';
+    $str.=$news->top_content();
+    if(isset($_GET['id'])){
+        $str.=$news->news_one(intval($_GET['id']));    
+    }else{
+        $str.=$news->news_cate();
+    }     
+    $str.=$news->bottom_content(); 
     return $str;
 }
 function manual($db){

@@ -90,13 +90,7 @@ $(function(){
       },
       fixedContentPos: false
     });  
-    wow = new WOW(
-      {
-        animateClass: 'animated',
-        offset:       100
-      }
-    );
-    wow.init();
+    new WOW.init();
 })
 
 

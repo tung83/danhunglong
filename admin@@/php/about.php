@@ -34,36 +34,6 @@ function about($db)
         $active=$_POST['active']=="on"?1:0;
         $file=time().$_FILES['file']['name'];
 	}
-    /*if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
-        $list = explode(',',$_POST['listDel']);
-        foreach($list as $item){
-            $form->img_remove(intval($item),$db,$table);
-            $db->where('id',intval($item));
-            try{
-                $db->delete($table); 
-            } catch(Exception $e) {
-                $msg=mysql_error();
-            }
-        }
-        header("location:".$_SERVER['REQUEST_URI'],true);
-    }
-	if(isset($_POST["addNew"])) {
-        $insert = array(
-            'title'=>$title,'content'=>$content,'ind'=>$ind,
-            'active'=>$active,'dates'=>date('Y-m-d H:i:s')
-        );
-		try{
-            $recent = $db->insert($table,$insert);
-            if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(336,272, 'fill')->saveToFile(myPath.$file);
-                $db->where('id',$recent);
-                $db->update($table,array('img'=>$file));
-            }
-            header("location:".$_SERVER['REQUEST_URI'],true); 
-        } catch(Exception $e) {
-            $msg=mysql_error();
-        }			
-	}*/
 	if(isset($_POST["update"]))	{
 	   $update=array(
             'title'=>$title,'content'=>$content,
@@ -90,17 +60,6 @@ function about($db)
             $msg = $e->getErrorMessage();
        }
 	}
-	
-	/*if(isset($_POST["Del"])&&$_POST["Del"]==1) {
-        try{
-            $form->img_remove($_POST['idLoad'],$db,$table);
-            $db->where('id',$_POST['idLoad']);
-            $db->delete($table);            
-            header("location:".$_SERVER['REQUEST_URI'],true);
-        } catch(Exception $e) {
-            $msg=$e->getErrorMessage();
-        }
-	}*/
     $page_head= array(
                     array('#','Quản lý giới thiệu')
                 );

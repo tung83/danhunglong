@@ -156,7 +156,7 @@ a.hotline{
     background-repeat: repeat-x, repeat;
     background-position: bottom left, top left;
 }
-#slider-box, .ind-product,.about-us-box, .contact-box{
+#slider-box, .ind-product,.about-us-box, .contact-box, .news-box{
     border: 5px solid #fff;
     background: #fff;
     border-radius:5px 5px 5px 5px;
@@ -260,14 +260,26 @@ a.hotline{
     color: #ff6c00;
 }
 
- .about-us-box,.contact-box{
+ .about-us-box,.contact-box, .news-box{
     padding: 40px 21px 0 21px;
 }
-#about-us, #contact-page{
+#about-us, #contact-page, #news{
     margin-bottom: 30px;
 }
 .contact-wrap{
     margin-bottom: 40px;
+}
+.news-title{
+    margin: 0 0 20px 0;
+    color: #000;
+    font-weight: bold;
+    font-size: 19px;
+}
+.news-date{
+    margin-bottom: 5px;
+}
+.news-sum{
+    color: #000;    
 }
 
 
