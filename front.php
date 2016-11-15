@@ -1,11 +1,11 @@
 <?php
 $css=array(
     'font-awesome',
-    'animate',    
     'bootstrap.min',
     'jquery-ui',
     'magnific-popup',
     'jAlert-v3',
+    'animate',    
     'layerslider',
     'slick',
     'slick-theme',

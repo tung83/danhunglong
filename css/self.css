@@ -62,6 +62,18 @@ a:hover{
 .container{
     width:980px
 }
+::-webkit-input-placeholder {
+   font-style: italic;
+}
+:-moz-placeholder {
+   font-style: italic;  
+}
+::-moz-placeholder {
+   font-style: italic;  
+}
+:-ms-input-placeholder {  
+   font-style: italic; 
+}
 #welcome{
     background: #0e0e0e;
     padding: 6px 0;
