@@ -279,17 +279,42 @@ a.hotline{
     margin-bottom: 5px;
 }
 .news-sum{
-    color: #000;    
+    color: #000;  
 }
+.news-item{  
     border-bottom: 1px solid #e9e9e9;
     padding-bottom: 40px;
 }
-.news-item::last-of-type{
+.news-item:nth-child(5){
     border-bottom: 0px solid #e9e9e9;
     padding-bottom: 10px;
     
 }
 
+.pagination-wrapper{
+    position: relative;
+}
+.pagination-wrapper > div.text-center{
+    position: absolute;
+    top: 20px;
+    width: 100%;
+}
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+
+    background-color: #686868;
+    border-color: #4d4d4d;
+}
+.pagination>li>a, .pagination>li>span {
+    color: #717171;
+}
+.has-paging{
+    height: 100px;
+}
+.pagination>li>a, .pagination>li>span {
+    padding: 4px 10px;
+    font-size: 12px;
+    
+}
 
 
 

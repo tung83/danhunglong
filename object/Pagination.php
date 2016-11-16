@@ -18,6 +18,7 @@ class Pagination
     public $paginationstyle;
     public $defaultUrl;
     public $paginationUrl;
+    public $paginationTotalpages;
 	
     // pager style
     public $prevCss;
@@ -43,7 +44,7 @@ class Pagination
        return $this;
 	}
 	function process()
-	{		
+	{	
 	    $paginationlst = "";
 		$firstbound =0;
 		$lastbound =0;
@@ -52,6 +53,7 @@ class Pagination
 		if($this->totalrecords > $this->pagesize)
 	    {
 		     $totalpages = ceil($this->totalrecords / $this->pagesize);
+                     $this->paginationTotalpages = $totalpages;
    
 			if ($this->pagenumber > 1)
 			{
@@ -120,7 +122,7 @@ class Pagination
 		if($this->paginationstyle == 1)
 		   $arr = $this->advance_pagination_links($totalpages, $pagenumber);
 		else
-		   $arr = $this->simple_pagination_links($totalpages, 15, $pagenumber);
+		   $arr = $this->simple_pagination_links($totalpages, 6, $pagenumber);
 		if(count($arr) > 0)
 	    {
 		   foreach ($arr as $item){

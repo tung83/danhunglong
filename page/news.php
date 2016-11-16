@@ -1,6 +1,6 @@
 <?php
 class news{
-    private $db,$view,$lang,$title;
+    private $db,$view,$lang,$title,$paging_shown;
     function __construct($db,$lang='vi'){
         $this->db=$db;
         $this->db->reset();
@@ -106,7 +106,7 @@ class news{
             }
         }        
         
-        $pg=new Pagination(array('limit'=>limit,'count'=>$count,'page'=>$page,'type'=>0));        
+        $pg=new Pagination(array('limit'=>pd_lim,'count'=>$count,'page'=>$page,'type'=>0));  
         if($pId==0){
             $pg->set_url(array('def'=>myWeb.$this->lang.'/'.$this->view,'url'=>myWeb.$this->lang.'/'.'[p]/'.$this->view));
         }else{
@@ -114,7 +114,8 @@ class news{
             $pg->defaultUrl = myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
             $pg->paginationUrl = myWeb.$this->lang.'/'.$this->view.'/[p]/'.common::slug($cate['title']).'-p'.$cate['id'];
         }
-        $str.= '<div class="pagination-centered">'.$pg->process().'</div>';
+        $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
+        $this->paging_shown = ($pg->paginationTotalpages > 0);
         return $str;
     }
     function news_one($id=1){
@@ -146,10 +147,13 @@ class news{
                         <div class="col-xs-12">';
     }
     function bottom_content(){
+        $has_paging = ($this->paging_shown)? "has-paging":"";
         return '        </div>
                     </div>
                 </div>
                 '.shadowBottomDent().' 
+                <div class="'.$has_paging.'">
+                </div>
             </div>
         </section>';
     }

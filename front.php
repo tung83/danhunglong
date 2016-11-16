@@ -39,6 +39,6 @@ $js=array(
 );
 include_once 'config.php';
 include_once 'lang/'.$lang.'.php';
-define('limit',10);
-define('pd_lim',12);
+define('limit',5);
+define('pd_lim',6);
 ?>
