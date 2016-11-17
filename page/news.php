@@ -89,30 +89,35 @@ class news{
                         <span>'.nl2br(common::str_cut($item['sum'],620)).'</span>
                     </div>
                 </div>
-            </div>';
+            </div>
+            <hr/>';
     }
     function news_cate($pId=0){
         $page=isset($_GET['page'])?intval($_GET['page']):1;
         $this->db->reset();
         $this->db->where('active',1);
-        if($pId!=0) $this->db->where('pId',$pId);
+        if($pId!=0){
+            $this->db->where('pId',$pId);
+        }
         $this->db->orderBy('id');
         $this->db->pageLimit=limit;
         $list=$this->db->paginate('news',$page);
         $count=$this->db->totalCount;
+        $str.='<div class="news-list">';
         if($count>0){
             foreach($list as $item){
                 $str.=$this->news_item($item);
             }
         }        
+        $str.='</div>';
         
         $pg=new Pagination(array('limit'=>pd_lim,'count'=>$count,'page'=>$page,'type'=>0));  
         if($pId==0){
-            $pg->set_url(array('def'=>myWeb.$this->lang.'/'.$this->view,'url'=>myWeb.$this->lang.'/'.'[p]/'.$this->view));
+            $pg->set_url(array('def'=>myWeb.$this->lang.'/'.$this->view,'url'=>myWeb.$this->lang.'/'.$this->view.'/page[p]'));
         }else{
             $cate=$this->db->where('id',$pId)->getOne('news_cate','id,title');       
             $pg->defaultUrl = myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
-            $pg->paginationUrl = myWeb.$this->lang.'/'.$this->view.'/[p]/'.common::slug($cate['title']).'-p'.$cate['id'];
+            $pg->paginationUrl = $pg->defaultUrl.'/page[p]';
         }
         $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
         $this->paging_shown = ($pg->paginationTotalpages > 0);
