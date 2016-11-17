@@ -129,6 +129,7 @@ ul.nav > li > a{
     font-weight: bold;
     font-size: 15px;
     margin-bottom: 0;
+    line-height: 30px;
 }
 #header-menu-wrapper a {
     text-transform: uppercase;
@@ -322,7 +323,7 @@ ul.nav > li > a{
     
 }
 ul.dropdown-menu {    
-    left: -40% !important;
+    left: -57px !important;
     background-color: #1f7db5;
     border-radius: 8px;
     list-style: disc;
@@ -340,7 +341,7 @@ ul.dropdown-menu:before {
     box-sizing: border-box;
     position: absolute;
     bottom: 100%;
-    left: 45%;
+    left: 50%;
     border: 8px solid transparent;
     border-bottom-color: #1f7db5;
     content: ' ';

@@ -17,7 +17,7 @@ function menu($db,$lang, $view){
         $db_view=$lang=='vi'?$item['view']:$item['e_view'];
         $active = ($view==$db_view) ? 'active': '';
         if($db_view == 'san-pham'){
-            $str.='<li class="dropdown '.$active.'"> '
+            $str.='<li role="presentation" class="dropdown '.$active.'"> '
                     . '<a href="'.myWeb.$lang.'/'.$db_view.'" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'
                     . ''.$title.'</a> '
                     .menu_cate_lev1($db,$lang,'product_cate',$db_view)
