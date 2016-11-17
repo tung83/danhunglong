@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>.:DÂN HƯNG LONG:.</title>
-	<link rel="icon" type="image/png" href="<?=frontPath?>logo.png"/>   
+    <?=page_header($view,$db)?>  
+    <link rel="icon" type="image/png" href="<?=frontPath?>logo.png"/>   
     <?=common::basic_css()?> 
     <?=common::basic_js()?>
 </head>

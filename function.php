@@ -48,6 +48,49 @@ function menu_cate_lev1($db,$lang,$table, $db_view){
     }
     return $str;
 }
+
+function page_header($view, $db)
+{
+    $item_table = null;
+    $cate_table = null;
+    $info_table = null;
+    switch ($view) {
+        case 'san-pham':
+            $item_table = 'product';
+            $cate_table = 'product_cate';
+            break;
+        case 'tin-tuc':   
+            $item_table = 'news';
+            $cate_table = 'news_cate';
+            break;  
+            
+    } 
+    if($item_table){
+        if (isset($_GET['id'])) {
+            $db->where('id', intval($_GET['id']));
+            $info_table = $item_table;
+        }elseif(isset($_GET['pId'])){
+            $db->where('id', intval($_GET['pId']))->where('lev',1);
+            $info_table = $cate_table;
+        }
+    }
+    if(!isset($info_table)){
+        $db->where('view', $view);
+        $info_table = 'menu';
+    }
+    $item = $db->getOne($info_table, 'title,meta_keyword,meta_description');
+    $param = array(
+            'title' => $item['title'],
+            'keyword' => $item['meta_keyword'],
+            'description' => $item['meta_description']);
+    
+    $title = $param['title'] === '' ? head_title : $param['title']. ' - '.head_title;
+    $param['title'] = '.:'.$title.':.';
+    $param['meta_keyword'] = $param['meta_keyword'] === '' ? head_keyword : $param['meta_keyword'];
+    $param['meta_description'] = $param['meta_description'] === '' ?
+        head_description : $param['meta_description'];
+    common::page_head($param);
+}
 function foot_menu($db,$lang,$view){
     $db->reset();
     $list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get('menu');
