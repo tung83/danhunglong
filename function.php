@@ -15,28 +15,37 @@ function menu($db,$lang, $view){
     foreach($list as $item){
         $title=$lang=='vi'?$item['title']:$item['e_title'];
         $db_view=$lang=='vi'?$item['view']:$item['e_view'];
-        if($view==$db_view) $active=' class="active"';
-        else $active='';
+        $active = ($view==$db_view) ? 'active': '';
         if($db_view == 'san-pham'){
-            $str.='<li role="presentation" class="dropdown"> '
-                    . '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'
+            $str.='<li class="dropdown '.$active.'"> '
+                    . '<a href="'.myWeb.$lang.'/'.$db_view.'" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'
                     . ''.$title.'</a> '
-                    . '<ul class="dropdown-menu"> '
-                    . '     <li>'
-                    . '         <a href="#">Action</a></li> '
-                    . '     <li><a href="#">Another action</a></li> '
-                    . '     <li><a href="#">Something else here</a></li> '
-                    . '     <li role="separator" class="divider"></li> '
-                    . '     <li><a href="#">Separated link</a></li> '
-                    . '</ul> '
-                    . '</li>';
+                    .menu_cate_lev1($db,$lang,'product_cate',$db_view)
+                . '</li>';
             continue;
         }
         $str.='
-        <li'.$active.'><a href="'.myWeb.$lang.'/'.$db_view.'">'.$title.'</a></li>';
+        <li class="'.$active.'"><a href="'.myWeb.$lang.'/'.$db_view.'">'.$title.'</a></li>';
     }
     $str.='               
     </ul>'  ;
+    return $str;
+}
+function menu_cate_lev1($db,$lang,$table, $db_view){
+    $str = '';
+    $db->reset();
+    $sub_list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get($table,null,'id,title');
+    if(count($sub_list)>0){
+        $str.='
+        <ul class="dropdown-menu">';
+        foreach($sub_list as $sub_item){
+            $sub_lnk=myWeb.$lang.'/'.$db_view.'/'.common::slug($sub_item['title']).'-p'.$sub_item['id'];
+            $str.='
+            <li><a href="'.$sub_lnk.'">'.$sub_item['title'].'</a></li>';   
+        }
+        $str.='
+        </ul>';        
+    }
     return $str;
 }
 function foot_menu($db,$lang,$view){

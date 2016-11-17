@@ -123,12 +123,15 @@ a.hotline{
     background: #fff;
     border-radius:0 0px 5px 5px;
 }
-#header-menu-wrapper a {
-    color: #2a2a2a;
-    border-right: 1px solid #ececec;
-    text-transform: uppercase;
+ul.nav > li > a{
+    border-right: 1px solid #ececec;   
+    color: #2a2a2a; 
     font-weight: bold;
     font-size: 15px;
+    margin-bottom: 0;
+}
+#header-menu-wrapper a {
+    text-transform: uppercase;
 }
 .nav-justified>li {
     display: table-cell;
@@ -318,8 +321,44 @@ a.hotline{
     font-size: 12px;
     
 }
-
-
+ul.dropdown-menu {    
+    left: -40% !important;
+    background-color: #1f7db5;
+    border-radius: 8px;
+    list-style: disc;
+    font-weight: normal;
+    font-size: 16px;
+    color: #fff;
+    padding: 15px 5px 5px 40px;
+}
+ul.dropdown-menu a{
+    color: #fff;
+    font-size: 13px;
+}
+ul.dropdown-menu:before {
+    margin-top: -8px;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 100%;
+    left: 45%;
+    border: 8px solid transparent;
+    border-bottom-color: #1f7db5;
+    content: ' ';
+    height: 0;
+    width: 0;
+    pointer-events: none;
+}
+.direct-chat-text:after, .direct-chat-text:before {
+    position: absolute;
+    bottom: 100%;
+    left: 15px;
+    border: solid transparent;
+    border-bottom-color: #d2d6de;
+    content: ' ';
+    height: 0;
+    width: 0;
+    pointer-events: none;
+}
 
 
 
