@@ -17,8 +17,19 @@ a:hover{
 .breadcrumb a{
     color: #767676;
 }
-.nav-pills>li>a {
+.nav > li > a{
+    border-right: 1px solid #ececec;   
+    color: #2a2a2a; 
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 0;
+    line-height: 30px;
     border-radius: 0;
+}
+
+.nav>li>a:hover, .nav>li>a:focus, #header-menu-wrapper li.active>a, #header-menu-wrapper li.active>a:hover, #header-menu-wrapper li.active>a:focus {
+    color: #2480b8;
+    background-color: transparent;
 }
 .btn-primary {
     color: #fff;
@@ -120,25 +131,12 @@ a.hotline{
     background: #fff;
     border-radius:0 0px 5px 5px;
 }
-ul.nav > li > a{
-    border-right: 1px solid #ececec;   
-    color: #2a2a2a; 
-    font-weight: bold;
-    font-size: 15px;
-    margin-bottom: 0;
-    line-height: 30px;
-}
 #header-menu-wrapper a {
     text-transform: uppercase;
 }
 .nav-justified>li {
     display: table-cell;
     width: 1%;
-}
-
-#header-menu-wrapper li.active>a, #header-menu-wrapper li.active>a:hover, #header-menu-wrapper li.active>a:focus {
-    color: #2480b8;
-    background-color: transparent;
 }
 #shadow-bottom{
     height: 10px;
