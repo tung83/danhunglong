@@ -16,21 +16,25 @@ class news{
         }
     }
     function breadcrumb(){
-        $this->db->reset();
         $str.='
         <div class="container">
         <ul class="breadcrumb clearfix">
             <li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
             <li><a href="'.myWeb.$this->lang.'/'.$this->view.'">'.$this->title.'</a></li>';
-        if(isset($_GET['id'])){
+        if(isset($_GET['id'])){                        
+            $this->db->reset();
+            $cate=$this->db->where('id',$item['pId'])->getOne('news_cate','id,title');
+            $str.='<li><a href="'.myWeb.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'].'">'.$cate['title'].'</a></li>';
+            
+            $this->db->reset();
             $this->db->where('id',intval($_GET['id']));
-            $item=$this->db->getOne('news','id,title,pId');
+            $item=$this->db->getOne('news','id,title,pId');            
             $title = ($this->lang == 'en') ? $item['e_title'] : $item['title'];
             $str.='<li><a href="#">'.$title.'</a></li>';
-        }elseif(isset($_GET['pId'])){
+        }elseif(isset($_GET['pId'])){                    
+            $this->db->reset();
             $cate=$this->db->where('id',intval($_GET['pId']))->getOne('news_cate','id,title');
-            $str.='
-            <li><a href="#">'.$cate['title'].'</a></li>';
+            $str.=' <li><a href="#">'.$cate['title'].'</a></li>';
         }
         $str.='
         </div>
