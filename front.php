@@ -14,6 +14,7 @@ $css=array(
     'default',
     'component',
     'ribbon',
+    'hover',
     'nice-tabs',
     'self'
 );

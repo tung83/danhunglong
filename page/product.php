@@ -25,7 +25,7 @@ class product extends base{
             <div class="col-xs-3 product-col wow bounceIn animated" data-wow-duration="2s" data-wow-delay="60ms">
                 <div class="product-item">
                     <a href="'.$lnk.'">
-                        <img src="'.webPath.$img.'" class="img-responsive center-block"/>
+                        <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
                         <p class="text-center">'.$item['title'].'</p>
                     </a>
                 </div>
@@ -187,7 +187,7 @@ class product extends base{
         $this->db->where('id',$id);
         $item=$this->db->getOne('product','id,price,price_reduce,title,content,pId,feature,manual,promotion,video');
         $this->db->where('pId',$item['pId'])->where('id',$item['id'],'<>')->where('active',1)->orderBy('rand()');
-        $list=$this->db->get('product',5);
+        $list=$this->db->get('product');
         $lnk=domain.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         $str.='
         <div class="row product-detail clearfix">
@@ -240,23 +240,12 @@ class product extends base{
                         SẢN PHẨM CÙNG LOẠI
                 </h1>
             </div>';
-           $i=1;
-            foreach($list as $item){
-                if($i%3==1){
-                    $str.='
-                    <div class="row">';
-                }
-                $str.=$this->product_item($item);
-                if($i%3==0){
-                    $str.='
-                    </div>';
-                }
-                $i++;
+            $str.='<div class="slick product_list clearfix">';
+
+            foreach($list as $item){                
+                $str.=$this->product_item($item);                
             }  
-            if($i%3!=1){
-               $str.='
-               </div>'; 
-            }     
+            $str.='</div>';  
         }        
         return $str;
     }

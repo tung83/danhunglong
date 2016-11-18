@@ -91,5 +91,18 @@ $(function(){
       fixedContentPos: false
     });      
 })
+$(function() {
+    // slick
+    $('.slick').slick({
+        dots: false,
+        autoplay: true,
+        autoplaySpeed: 2500,
+        infinite: true,
+        speed: 100,
+        slidesToShow: 4,
+        slidesToScroll: 1
+    });
+    });
+
 
 

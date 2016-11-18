@@ -20,7 +20,6 @@
     color: transparent;
     border: none;
     outline: none;
-    background: transparent;
 }
 .slick-prev:hover,
 .slick-prev:focus,
@@ -29,7 +28,7 @@
 {
     color: transparent;
     outline: none;
-    background: transparent;
+    background: #686868;
 }
 .slick-prev:hover:before,
 .slick-prev:focus:before,
@@ -60,7 +59,7 @@
 
 .slick-prev
 {
-    left: -25px;
+    left: -12px;
 }
 [dir='rtl'] .slick-prev
 {
@@ -78,7 +77,7 @@
 
 .slick-next
 {
-    right: -25px;
+    right: -12px;
 }
 [dir='rtl'] .slick-next
 {
