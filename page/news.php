@@ -20,7 +20,7 @@ class news extends base{
             $img=webPath.$item['img'];
             if($img=='') $img='holder.js/126x100';
             $str.='
-                <div class="col-xs-3 news-col">
+                <div class="col-xs-3 news-col wow fadeIn animated" data-wow-duration="1000ms" data-wow-delay="600ms">
                     <div class="news-item">
                         <a href="'.$lnk.'">
                             <img src="'.$img.'" alt="'.$item['title'].'" class="img-responsive"/>
@@ -40,7 +40,7 @@ class news extends base{
     function news_item($item){
         $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         return '
-            <div class="row news-item">
+            <div class="row news-item wow fadeInLeft animated" data-wow-duration="1000ms" data-wow-delay="10ms">
                 <div class="col-xs-3">
                     <a href="'.$lnk.'" class="about-item ">
                         <img src="'.webPath.$item['img'].'" class="img-responsive" alt="" title=""/>

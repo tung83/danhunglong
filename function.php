@@ -283,7 +283,7 @@ function news($db,$lang){
     common::page('news');
     $news=new news($db,$lang);
     $str.=$news->breadcrumb_cate_lev1();
-    $str.=$news->top_content();
+    $str.=$news->top_content('');
     if(isset($_GET['id'])){
         $str.=$news->news_one(intval($_GET['id']));    
     }else{

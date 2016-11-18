@@ -26,7 +26,7 @@ class about{
         $title=$this->lang=='vi'?$item['title']:$item['e_title'];
         $sum=$this->lang=='vi'?$item['sum']:$item['e_sum'];  
         $str='
-        <div class="row ind-about">
+        <div class="row ind-about wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="10ms">
             <div class="col-xs-4"> 
                 <img src="'.webPath.$item['img'].'" class="img-responsive" alt="" title=""/>
             </div>
