@@ -1,45 +1,7 @@
 <?php
-class news{
-    private $db,$view,$lang,$title,$paging_shown;
+class news extends base{
     function __construct($db,$lang='vi'){
-        $this->db=$db;
-        $this->db->reset();
-        $this->lang=$lang;
-        $db->where('id',8);
-        $item=$db->getOne('menu');
-        if($lang=='en'){
-            $this->view=$item['e_view'];
-            $this->title=$item['e_title'];
-        }else{
-            $this->view=$item['view'];
-            $this->title=$item['title'];
-        }
-    }
-    function breadcrumb(){
-        $str.='
-        <div class="container">
-        <ul class="breadcrumb clearfix">
-            <li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
-            <li><a href="'.myWeb.$this->lang.'/'.$this->view.'">'.$this->title.'</a></li>';
-        if(isset($_GET['id'])){                        
-            $this->db->reset();
-            $cate=$this->db->where('id',$item['pId'])->getOne('news_cate','id,title');
-            $str.='<li><a href="'.myWeb.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'].'">'.$cate['title'].'</a></li>';
-            
-            $this->db->reset();
-            $this->db->where('id',intval($_GET['id']));
-            $item=$this->db->getOne('news','id,title,pId');            
-            $title = ($this->lang == 'en') ? $item['e_title'] : $item['title'];
-            $str.='<li><a href="#">'.$title.'</a></li>';
-        }elseif(isset($_GET['pId'])){                    
-            $this->db->reset();
-            $cate=$this->db->where('id',intval($_GET['pId']))->getOne('news_cate','id,title');
-            $str.=' <li><a href="#">'.$cate['title'].'</a></li>';
-        }
-        $str.='
-        </div>
-        </ul>';
-        return $str;
+        parent::__construct($db,8,'news',$lang);
     }
     function ind_news(){
         $this->db->reset();
@@ -138,33 +100,6 @@ class news{
                 </div>
                 <p>'.$content.'</p>
             </article>';                        
-    }
-    
-    function top_content(){
-        return '  
-        <section id="news">
-            <div class="container">
-                <div class="row news-box">
-                    <div class="row wow fadeInDown animated" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="col-xs-6">
-                            <div class="title-head">
-                                <span>'
-                                    .$this->title.' 
-                                </span>
-                            </div>
-                        </div> 
-                        <div class="col-xs-12">';
-    }
-    function bottom_content(){
-        $has_paging = ($this->paging_shown)? "has-paging":"";
-        return '        </div>
-                    </div>
-                </div>
-                '.shadowBottomDent().' 
-                <div class="'.$has_paging.'">
-                </div>
-            </div>
-        </section>';
     }
             
     function one_ind_news($id){

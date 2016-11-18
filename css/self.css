@@ -155,7 +155,7 @@ a.hotline{
     background-repeat: repeat-x, repeat;
     background-position: bottom left, top left;
 }
-#slider-box, .ind-product,.about-us-box, .contact-box, .news-box{
+#slider-box, .ind-product,.about-us-box, .contact-box, .news-box, .product-box{
     border: 5px solid #fff;
     background: #fff;
     border-radius:5px 5px 5px 5px;
@@ -187,15 +187,15 @@ a.hotline{
 .ind-product{
     padding: 40px 8px 0 8px;
 }
-.ind-product .product-item{
+.product-item{
     border: 1px solid #e1e1e1; 
     padding: 9px 9px 0px 9px;
 }
-.ind-product .product-item p{
+.product-item p{
     margin: 20px 0;
     color: #767676;
 }
-.ind-product .product-col{
+.product-col{
     padding: 15px 10px 15px 10px;
 }
 
@@ -260,7 +260,7 @@ a.hotline{
     color: #ff6c00;
 }
 
- .about-us-box,.contact-box, .news-box{
+ .about-us-box,.contact-box, .news-box, .product-box{
     padding: 40px 21px 0 21px;
 }
 #about-us, #contact-page, #news{
@@ -313,7 +313,7 @@ a.hotline{
     height: 100px;
 }
 .pagination>li>a, .pagination>li>span {
-    padding: 4px 10px;
+    padding: 3px 8px;
     font-size: 12px;
     
 }
@@ -330,6 +330,16 @@ ul.dropdown-menu {
 ul.dropdown-menu a{
     color: #fff;
     font-size: 13px;
+}
+ul.dropdown-menu >li >hr{
+    margin: 5px 20px 5px -16px;
+    border-color: #4c97c4;
+}
+ul.dropdown-menu >li:last-child >hr{
+    display: none;  
+}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+    color: #8fc6e6;
 }
 ul.dropdown-menu:before {
     margin-top: -8px;
@@ -355,7 +365,13 @@ ul.dropdown-menu:before {
     width: 0;
     pointer-events: none;
 }
-
+.pagination>li>a, .pagination>li>span {
+    margin-left: 2px;
+    border-radius: 4px;
+}
+.pagination>li:last-child>a, .pagination>li:last-child>span {
+    margin-left: 0;
+}
 
  a:hover, a:focus {
     color: #56a0cd;

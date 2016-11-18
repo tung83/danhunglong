@@ -1,48 +1,7 @@
 <?php
-class product{
-    private $db,$view,$lang,$title;
-    function __construct($db,$lang='vi'){
-        $this->db=$db;
-        $this->db->reset();
-        $this->lang=$lang;
-        $db->where('id',5);
-        $item=$db->getOne('menu');
-        if($lang=='en'){
-            $this->view=$item['e_view'];
-            $this->title=$item['e_title'];
-        }else{
-            $this->view=$item['view'];
-            $this->title=$item['title'];
-        }
-    }
-    function breadcrumb(){
-        $this->db->reset();
-        $str.='
-        <div class="container">
-        <ul class="breadcrumb clearfix">
-        	<li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i></a></li>
-            <li><a href="'.myWeb.$this->lang.'/'.$this->view.'">'.$this->title.'</a></li>';
-        if(isset($_GET['id'])){
-            $this->db->where('id',intval($_GET['id']));
-            $item=$this->db->getOne('product','id,title,pId');
-            $cate=$this->db->where('id',$item['pId'])->getOne('product_cate','id,title,pId');
-            $str.='
-            <li>
-                <a href="'.myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'].'">
-                '.$cate['title'].'
-                </a>
-            </li>';
-            $str.='
-            <li><a href="#">'.$item['title'].'</a></li>';
-        }elseif(isset($_GET['pId'])){
-            $cate=$this->db->where('id',intval($_GET['pId']))->getOne('product_cate','id,title,pId');
-            $str.='           
-            <li><a href="#">'.$cate['title'].'</a></li>';
-        }
-        $str.='
-        </ul>
-        </div>';
-        return $str;
+class product extends base{
+    function __construct($db,$lang='vi'){        
+        parent::__construct($db,5,'product',$lang);
     }
     function ind_product(){ 
         $str.='
@@ -63,7 +22,7 @@ class product{
             $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=$this->first_image($item['id']);
             $str.='
-            <div class="col-xs-3 product-col">
+            <div class="col-xs-3 product-col wow bounceIn animated" data-wow-duration="1000ms" data-wow-delay="600ms">
                 <div class="product-item">
                     <a href="'.$lnk.'">
                         <img src="'.webPath.$img.'" class="img-responsive center-block"/>
@@ -103,18 +62,27 @@ class product{
     function product_item($item){
         $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         $img=$this->first_image($item['id']);
+//        $str.='
+//        <div class="col-xs-3 wow fadeInLeft product-item text-center" data-wow-duration="2s">
+//        <a href="'.$lnk.'">
+//			<figure>
+//				<img src="'.webPath.'thumb_'.$img.'" alt="'.$item['title'].'" title="'.$item['title'].'" class="img-responsive center-block">
+//				<figcaption class="text-center">
+//					<h3>'.common::str_cut($item['title'],30).'</h3>
+//					<!--span><b>Giá bán:</b> <em>'.number_format($item['price'],0,'.','.').'VNĐ</em></span-->
+//				</figcaption>
+//			</figure>
+//        </a>
+//		</div>';
         $str.='
-        <div class="col-xs-4 wow fadeInLeft product-item text-center" data-wow-duration="2s">
-        <a href="'.$lnk.'">
-			<figure>
-				<img src="'.webPath.'thumb_'.$img.'" alt="'.$item['title'].'" title="'.$item['title'].'" class="img-responsive center-block">
-				<figcaption class="text-center">
-					<h3>'.common::str_cut($item['title'],30).'</h3>
-					<!--span><b>Giá bán:</b> <em>'.number_format($item['price'],0,'.','.').'VNĐ</em></span-->
-				</figcaption>
-			</figure>
-        </a>
-		</div>';
+            <div class="col-xs-3 wow fadeIn animated product-col" data-wow-duration="1000ms" data-wow-delay="600ms">
+                <div class="product-item">
+                    <a href="'.$lnk.'">
+                        <img src="'.webPath.$img.'" class="img-responsive center-block"/>
+                        <p class="text-center">'.$item['title'].'</p>
+                    </a>
+                </div>
+            </div>';
         return $str;
     }
     function product_list_item($item,$type=1){
@@ -142,15 +110,6 @@ class product{
         </div>';
         return $str;
     }
-    function check_pId(){
-        if(isset($_GET['pId'])){
-            $pId=intval($_GET['pId']);
-        }elseif(isset($_GET['id'])){
-            $item=$this->db->where('id',intval($_GET['id']))->getOne('product','pId');
-            $pId=$item['pId'];
-        }else $pId=0;
-        return $pId;
-    }
     function category(){
         $pId=$this->check_pId();
         $list=$this->db->where('active',1)->orderBy('ind','ASC')->get('product_cate',null,'id,title');
@@ -173,41 +132,40 @@ class product{
         </div>';
         return $str;
     }
-    function product_cate(){
-        $pId=$this->check_pId();
+    function product_cate($pId=0){
+        $pId = $this->check_pId();
+        $page=isset($_GET['page'])?intval($_GET['page']):1;
         $this->db->reset();
-        if($pId>0){
-            $lev=$this->db->where('id',$pId)->getOne('product_cate','lev');
+        $this->db->where('active',1);
+        if($pId!=0){
             $this->db->where('pId',$pId);
         }
-        $this->db->where('active',1)->orderBy('id');
-        $this->db->pageLimit=pd_lim;
-        $page=isset($_GET['page'])?intval($_GET['page']):1;
+        $this->db->orderBy('id');
+        $this->db->pageLimit=24;
         $list=$this->db->paginate('product',$page);
         $count=$this->db->totalCount;
-        $i=1;
-        foreach($list as $item){
-            if($i%3==1){
-                $str.='
-                <div class="row">';
+        $str.='<div class="product-list">'
+                . '<div class="row">';
+        if($count>0){
+            foreach($list as $item){
+                $str.=$this->product_item($item);
             }
-            $str.=$this->product_item($item);
-            if($i%3==0){
-                $str.='
-                </div>';
-            }
-            $i++;
-        }  
-        if($i%3!=1){
-           $str.='
-           </div>'; 
-        }  
-        /*$pagenumber = $page;
-        $totalrecords = $count;
-        $pg=new Pagination(array('limit'=>1,'count'=>20,'page'=>$page,'type'=>0));
-        $pg->set_url(array('def'=>'index.php','url'=>'index.php?page=[p]'));
-        $str.=$pg->process();*/
-        return $str; 
+        }        
+        $str.=      '</div>'
+                .'</div>'
+                .'<div class="clearfix"></div>';
+        
+        $pg=new Pagination(array('limit'=>24,'count'=>$count,'page'=>$page,'type'=>0));  
+        if($pId==0){
+            $pg->set_url(array('def'=>myWeb.$this->lang.'/'.$this->view,'url'=>myWeb.$this->lang.'/'.$this->view.'/page[p]'));
+        }else{
+            $cate=$this->db->where('id',$pId)->getOne('product_cate','id,title');       
+            $pg->defaultUrl = myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
+            $pg->paginationUrl = $pg->defaultUrl.'/page[p]';
+        }
+        $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
+        $this->paging_shown = ($pg->paginationTotalpages > 0);
+        return $str;
     }
     function product_list($pId,$type=1){
         $page=isset($_GET['page'])?intval($_GET['page']):1;

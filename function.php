@@ -1,5 +1,6 @@
 <?php
 include_once 'front.php';
+common::page('base');
 function pageId($view){
     if($view == 'trang-chu')
     {
@@ -40,8 +41,11 @@ function menu_cate_lev1($db,$lang,$table, $db_view){
         <ul class="dropdown-menu">';
         foreach($sub_list as $sub_item){
             $sub_lnk=myWeb.$lang.'/'.$db_view.'/'.common::slug($sub_item['title']).'-p'.$sub_item['id'];
-            $str.='
-            <li><a href="'.$sub_lnk.'">'.$sub_item['title'].'</a></li>';   
+            $str.='<li>'
+                    . '<a href="'.$sub_lnk.'">'.$sub_item['title'].'</a>'
+                    . '<hr/>'
+                . '</li>'; 
+            
         }
         $str.='
         </ul>';        
@@ -278,7 +282,7 @@ function about($db,$lang){
 function news($db,$lang){
     common::page('news');
     $news=new news($db,$lang);
-    $str.=$news->breadcrumb();
+    $str.=$news->breadcrumb_cate_lev1();
     $str.=$news->top_content();
     if(isset($_GET['id'])){
         $str.=$news->news_one(intval($_GET['id']));    
@@ -310,26 +314,14 @@ function product($db,$lang){
     <section id="page">';  
     common::page('product');
     $pd=new product($db,$lang);
-    $str.=$pd->breadcrumb();
-    $str.='
-    <div class="container">
-    <div class="row">
-        <div class="col-xs-3">
-        '.$pd->category().'
-        </div>
-        <div class="col-xs-9">';
+    $str.=$pd->breadcrumb_cate_lev1();
+    $str.=$pd->top_content('');
     if(isset($_GET['id'])){
-        $id=intval($_GET['id']);
-        $str.=$pd->product_one($id);
+        $str.=$pd->product_one(intval($_GET['id']));    
     }else{
         $str.=$pd->product_cate();
-    }
-    $str.='
-        </div>
-    </div>
-    </div>';
-    $str.='
-    </section>';
+    }     
+    $str.=$pd->bottom_content(); 
     return $str;
 }
 function partner($db){

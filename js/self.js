@@ -18,8 +18,8 @@ function ToogleEnableSubmitButton(){
         $('.submit-button').removeClass('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
     }
 }
-$(function(){
-    
+$(function(){    
+    new WOW().init();
     $('form input,form textarea').keyup(function() {
         ToogleEnableSubmitButton();
     });
@@ -89,8 +89,7 @@ $(function(){
             duration: 300
       },
       fixedContentPos: false
-    });  
-    new WOW.init();
+    });      
 })
 
 
