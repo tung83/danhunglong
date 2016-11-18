@@ -9,6 +9,35 @@ body{
 a:hover{
     text-decoration:none
 }
+.ui-widget-content {
+    background: transparent;
+    border: 0px;
+}
+.ui-widget-header {
+    background: transparent;
+    border: 0px;
+    border-bottom: 1px solid #4c97c4;
+    border-radius: 0;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+    border-bottom: 0;
+}
+.ui-tabs .ui-tabs-nav li:focus,.ui-tabs .ui-tabs-nav li a:focus {
+    outline: none;
+}
+.ui-tabs-panel  {
+    border: 1px solid #4c97c4 !important;
+    border-top: 0px !important;
+}
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+    color: #767676;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    border: 1px solid #4c97c4;
+    color: #4c97c4;
+}.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    color: #4c97c4;
+}
 .breadcrumb{
     background-color: transparent;
     margin-bottom: 18px;
@@ -18,13 +47,15 @@ a:hover{
     color: #767676;
 }
 .nav > li > a{
-    border-right: 1px solid #ececec;   
     color: #2a2a2a; 
     font-weight: bold;
     font-size: 15px;
     margin-bottom: 0;
     line-height: 30px;
     border-radius: 0;
+}
+.nav > li > a,.nav > li > a:hover,.nav > li > a:focus{
+    border-right: 1px solid #ececec;  
 }
 
 .nav>li>a:hover, .nav>li>a:focus, #header-menu-wrapper li.active>a, #header-menu-wrapper li.active>a:hover, #header-menu-wrapper li.active>a:focus {

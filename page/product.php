@@ -22,7 +22,7 @@ class product extends base{
             $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=$this->first_image($item['id']);
             $str.='
-            <div class="col-xs-3 product-col wow bounceIn animated" data-wow-duration="1000ms" data-wow-delay="60ms">
+            <div class="col-xs-3 product-col wow bounceIn animated" data-wow-duration="2s" data-wow-delay="60ms">
                 <div class="product-item">
                     <a href="'.$lnk.'">
                         <img src="'.webPath.$img.'" class="img-responsive center-block"/>
@@ -208,10 +208,10 @@ class product extends base{
         <div>
             <div id="tabs" class="tabs">
                 <ul>
-                    <li><a href="#tabs-1">MÔ TẢ CHI TIẾT</a></li>
-                    <li><a href="#tabs-2">THÔNG SỐ KỸ THUẬT</a></li>
-                    <!--li><a href="#tabs-3">GHI CHÚ</a></li>
-                    <li><a href="#tabs-4">BÌNH LUẬN</a></li-->
+                    <li><a href="#tabs-1"><i class="fa fa-file-text-o"></i> MÔ TẢ CHI TIẾT</a></li>
+                    <li><a href="#tabs-2"><i class="fa fa-list-alt"></i> THÔNG SỐ KỸ THUẬT</a></li>
+                    <li><a href="#tabs-3"><i class="fa fa-pencil-square-o"></i> GHI CHÚ</a></li>
+                    <!--li><a href="#tabs-4">BÌNH LUẬN</a></li-->
                 </ul>
                 <div id="tabs-1">
                     <article>
@@ -228,7 +228,7 @@ class product extends base{
                         <p>'.$item['manual'].'</p>
                     </article>
                 </div>
-                <div id="tabs-4">
+                <!--div id="tabs-4">
                     <div class="fb-comments" data-width="100%" data-href="'.$lnk.'" data-numposts="5"></div>
                 </div-->
             </div>       

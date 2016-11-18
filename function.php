@@ -17,11 +17,21 @@ function menu($db,$lang, $view){
         $title=$lang=='vi'?$item['title']:$item['e_title'];
         $db_view=$lang=='vi'?$item['view']:$item['e_view'];
         $active = ($view==$db_view) ? 'active': '';
-        if($db_view == 'san-pham'){
+        $db_cate_name = null;
+        switch ($db_view){
+            case 'san-pham':
+                $db_cate_name = 'product_cate';
+                break;
+            case 'tin-tuc':
+                $db_cate_name = 'news_cate';
+                break;
+                
+        }
+        if(isset($db_cate_name)){
             $str.='<li role="presentation" class="dropdown '.$active.'"> '
                     . '<a href="'.myWeb.$lang.'/'.$db_view.'" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'
                     . ''.$title.'</a> '
-                    .menu_cate_lev1($db,$lang,'product_cate',$db_view)
+                    .menu_cate_lev1($db,$lang,$db_cate_name,$db_view)
                 . '</li>';
             continue;
         }
