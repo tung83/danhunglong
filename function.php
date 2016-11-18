@@ -120,6 +120,12 @@ function foot_menu($db,$lang,$view){
     </ul>';
     return $str;
 }
+function foot_product_cate($db,$lang,$view){   
+    common::page('product');
+    $product=new product($db,$lang);
+    return $product->product_cate_list($db);    
+}
+
 function home($db,$lang){    
     $str='
     <section id="ind-slider">

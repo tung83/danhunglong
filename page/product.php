@@ -307,5 +307,21 @@ class product extends base{
         $img=$this->db->getOne('product_image','img');
         return $img['img'];
     }
+    
+    function product_cate_list($db){
+        $db->reset();
+        $list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get($this->db_cate_name);
+        $str.='
+        <ul>';
+        foreach($list as $item){
+            $title=$lang=='en'?$item['e_title']: $item['title'];
+            $db_view=$lang=='en'?$item['e_view']:$item['view'];
+            $str.='
+            <li><a href="'.myWeb.$lang.'/'.$db_view.'">'.$title.'</a></li>';   
+        }
+        $str.='
+        </ul>';
+        return $str;
+    }
 }
 ?>

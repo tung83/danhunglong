@@ -117,7 +117,8 @@
                 <div class="col-xs-3 footer-menu">
                     <?=foot_menu($db,$lang,$view)?>
                 </div>
-                <div class="col-xs-3">            
+                <div class="col-xs-3">  
+                    <?=foot_product_cate($db,$lang,$view)?>          
                 </div>
                 <div class="col-xs-6">            
                     <?=common::qtext($db,4)?>
