@@ -334,9 +334,12 @@ function product($db,$lang){
     $str.=$pd->top_content('');
     if(isset($_GET['id'])){
         $str.=$pd->product_one(intval($_GET['id']));    
-    }else{
+    }elseif(isset($_GET['hint'])){
+        $str.=$pd->product_search();    
+    }
+    else{
         $str.=$pd->product_cate();
-    }     
+    }
     $str.=$pd->bottom_content(); 
     return $str;
 }

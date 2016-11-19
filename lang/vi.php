@@ -26,6 +26,8 @@ define('pd_view'        ,'san-pham');
 define('sp_title'       ,'Hỗ trợ');
 define('video_title'    ,'Video');
 define('search'         ,'Tìm kiếm');
+define('search_view'         ,'tim-kiem');
+
 define('more_button'            ,'Xem thêm');
 define('btn_send'       ,'Gửi');
 define('serv'           ,'Dịch vụ');

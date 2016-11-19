@@ -78,7 +78,7 @@ class product extends base{
             <div class="col-xs-3 wow fadeIn animated product-col" data-wow-duration="1000ms" data-wow-delay="60ms">
                 <div class="product-item">
                     <a href="'.$lnk.'">
-                        <img src="'.webPath.$img.'" class="img-responsive center-block"/>
+                        <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
                         <p class="text-center">'.$item['title'].'</p>
                     </a>
                 </div>
@@ -163,6 +163,40 @@ class product extends base{
             $pg->defaultUrl = myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
             $pg->paginationUrl = $pg->defaultUrl.'/page[p]';
         }
+        $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
+        $this->paging_shown = ($pg->paginationTotalpages > 0);
+        return $str;
+    }
+    
+    function product_search(){
+        $page=isset($_GET['page'])?intval($_GET['page']):1;
+        $this->db->reset();
+        $this->db->where('active',1);
+        $this->db->where('title','%'.$_GET['hint'].'%', 'like');        
+        $this->db->orderBy('id');
+        $this->db->pageLimit=24;
+        $list=$this->db->paginate('product',$page);        
+        $count=$this->db->totalCount;
+       $str.='<div class="alert alert-success"><i class="icon fa fa-check"></i>
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Có '.$count. ' kết quả với từ khoá <b>"'.$_GET['hint'].'"</b>
+              </div>';
+        $str.='<div class="product-list">'
+                . '<div class="row">';
+        if($count>0){
+            foreach($list as $item){
+                $str.=$this->product_item($item);
+            }
+        }        
+        $str.=      '</div>'
+                .'</div>'
+                .'<div class="clearfix"></div>';
+        
+        $pg=new Pagination(array('limit'=>24,'count'=>$count,'page'=>$page,'type'=>0));  
+             
+            $pg->defaultUrl = myWeb.$this->lang.'/'.search_view.'/'.$_GET['hint'];
+            $pg->paginationUrl = myWeb.$this->lang.'/'.search_view.'/page[p]'.'/'.$_GET['hint'];
+        
         $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
         $this->paging_shown = ($pg->paginationTotalpages > 0);
         return $str;

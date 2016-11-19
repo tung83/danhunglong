@@ -3,6 +3,7 @@ function recaptchaCallback() {
     recaptchaChecked = true;
     ToogleEnableSubmitButton();
 };
+
 function ToogleEnableSubmitButton(){
     var empty = false;
     $('form input,form textarea').each(function() {
@@ -39,19 +40,6 @@ $(function(){
         event.preventDefault();
     }); 
     
-    $("#search #hint").keyup(function(e){
-        if(e.keyCode==13){
-            var val=$(this).val();
-            if(val==''){
-                alert('Bạn chưa nhập từ khoá...');
-                return;
-            }else{            
-                var val=val.split(' ');
-                var val=val.join('-');
-                $( location ).attr("href",'/'+$('#search #lang').val()+"/tim-kiem/"+val);
-            }     
-        }
-    })
     
     $(".test-popup-link").magnificPopup({
       type: "image",
@@ -101,6 +89,14 @@ $(function() {
         speed: 100,
         slidesToShow: 4,
         slidesToScroll: 1
+    });
+    
+    $("#search").on('submit',function(e){
+        e.preventDefault();
+        var val=$(this).find("#hint").val();
+        var searchLink=$(this).find("#search-link").val();
+
+        $( location ).attr("href",searchLink+val);
     });
     });
 

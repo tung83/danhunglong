@@ -5,6 +5,11 @@ body{
     line-height:19px;
     background: url(/file/front/light-grey-bg.png) top left repeat;
 }
+
+#search button{
+    border:0;
+    background:transparent;
+}
 /*slide 970 310*/
 a:hover{
     text-decoration:none

@@ -40,10 +40,15 @@
                             <div class="pull-right">Hotline: <a class="hotline" href="tel:<?=common::qtext($db,2)?>"><?=common::qtext($db,2)?></a></div>
                             <div class="clearfix"></div>
                             <div id="search-container" class="pull-right">
-                                <form role="form" id="search" action="javascript:void(0)">
+                                <form role="form" method="get" name="search" id="search">                                    
+                                    <input type="hidden" id="search-link" value="<?=myWeb.$lang.'/'.search_view.'/'?>" />
                                     <div class="input-group">
                                         <input type="text" id="hint" class="form-control" placeholder="<?=search?>"/>
-                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>                                
+                                        <span class="input-group-addon">
+                                            <button type="submit">
+                                                <span class="fa fa-search"></span>
+                                            </button>  
+                                        </span>  
                                     </div>
                                 </form>
                             </div>
@@ -65,6 +70,8 @@
     switch($view){
         case 'product':
         case 'san-pham':
+        case 'search':
+        case 'tim-kiem':
             echo product($db,$lang);
             break;
         case 'thiet-bi':
@@ -90,10 +97,6 @@
         case 'lien-he':
         case 'contact':
             echo contact($db,$lang);
-            break;
-        case 'search':
-        case 'tim-kiem':
-            echo search($db,$lang);
             break;
         default:
             echo home($db,$lang);

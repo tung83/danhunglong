@@ -27,14 +27,12 @@ define('_userName'  , 'tung');
 define('_dbName'    , 'danhunglong_db');	
 define('_pass'      , 'tung');
 
-//define('_userName'  , 'taiwan_db');	
-//define('_dbName'    , 'taiwan_db');	
-//define('_pass'      , 'Taiwan123@');
+
+//define('_userName'  , 'psmedia_dhl');	
+//define('_dbName'    , 'psmedia_dhl');	
+//define('_pass'      , '671977');
 
 
-//define('_userName'  , 'root');	
-//define('_dbName'    , 'taiwan');	
-//define('_pass'      , '');
 
 define('domain'     ,'lavoine.vn');
 define('root'       ,$_SERVER['DOCUMENT_ROOT']);
