@@ -21,6 +21,19 @@ class base{
         }
     }
     
+    function breadcrumb(){
+        $this->db->reset();
+        $str.='
+        <div class="container">
+        <ul class="breadcrumb clearfix">
+            <li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
+            <li><a href="'.myWeb.$this->lang.'/'.$this->view.'">'.$this->title.'</a></li>';
+        $str.='
+        </ul>
+        </div>';
+        return $str;
+    }
+    
     function breadcrumb_cate_lev1(){
         $str.='
         <div class="container">
@@ -34,7 +47,7 @@ class base{
             
             $this->db->reset();
             $cate=$this->db->where('id',$item['pId'])->getOne($this->db_cate_name,'id,title');
-            $str.='<li><a href="'.myWeb.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'].'">'.$cate['title'].'</a></li>';
+            $str.='<li><a href="'.myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'].'">'.$cate['title'].'</a></li>';
                        
             $title = ($this->lang == 'en') ? $item['e_title'] : $item['title'];
             $str.='<li><a href="#">'.$title.'</a></li>';
@@ -44,8 +57,28 @@ class base{
             $str.=' <li><a href="#">'.$cate['title'].'</a></li>';
         }
         $str.='
-        </div>
-        </ul>';
+        </ul>
+        </div>';
+        return $str;
+    }
+    
+    
+    function breadcrumb_with_Id(){
+        $str.='
+        <div class="container">
+        <ul class="breadcrumb clearfix">
+            <li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
+            <li><a href="'.myWeb.$this->lang.'/'.$this->view.'">'.$this->title.'</a></li>';
+        if(isset($_GET['id'])){      
+            $this->db->reset();
+            $this->db->where('id',intval($_GET['id']));
+            $item=$this->db->getOne($this->db_name,'id,title,pId');                  
+            $title = ($this->lang == 'en') ? $item['e_title'] : $item['title'];
+            $str.='<li><a href="#">'.$title.'</a></li>';
+        }
+        $str.='
+        </ul>
+        </div>';
         return $str;
     }
     
@@ -83,5 +116,9 @@ class base{
             $pId=$item['pId'];
         }else $pId=0;
         return $pId;
+    }
+    protected function db_orderBy(){        
+        $this->db->orderBy('ind','ASC');
+        $this->db->orderBy('id');
     }
 }

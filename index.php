@@ -82,6 +82,10 @@
         case 'du-an':
             echo project($db,$lang);
             break;
+        case 'promotion':
+        case 'khuyen-mai':
+            echo promotion($db,$lang);
+            break;
         case 'recruitment':
         case 'tuyen-dung':
             echo career($db,$lang);
@@ -137,13 +141,9 @@
             </div>
         </div>
     </footer>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.7&appId=1526299550957309";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript">
+(function(d,s,id){var z=d.createElement(s);z.type="text/javascript";z.id=id;z.async=true;z.src="//static.zotabox.com/a/2/a229ea4619b0e226502e4e3a326d5389/widgets.js";var sz=d.getElementsByTagName(s)[0];sz.parentNode.insertBefore(z,sz)}(document,"script","zb-embed-code"));
+</script>
 </body>
 </html>

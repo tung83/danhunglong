@@ -33,4 +33,5 @@ define('btn_send'       ,'Gửi');
 define('serv'           ,'Dịch vụ');
 define('news'           ,'Tin tức');
 define('other_article'  ,'Bài viết khác');
+define('all_menu_items'  ,'Tất cả');
 ?>

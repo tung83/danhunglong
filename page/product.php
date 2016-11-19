@@ -17,7 +17,9 @@ class product extends base{
                 <a href="'.myWeb.$this->lang.'/'.$this->view.'">'.more.'</a>
             </div>
             <div class="clearfix"></div>';
-        $list=$this->db->where('active',1)->where('home',1)->orderBy('id')->orderBy('id')->get('product');   
+        $this->db->where('active',1)->where('home',1);
+        $this->db_orderBy();
+        $list=$this->db->get('product');   
         foreach($list as $item){
             $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=$this->first_image($item['id']);
@@ -112,7 +114,9 @@ class product extends base{
     }
     function category(){
         $pId=$this->check_pId();
-        $list=$this->db->where('active',1)->orderBy('ind','ASC')->get('product_cate',null,'id,title');
+        $this->db->where('active',1);
+        $this->db_orderBy();
+        $list=$this->db->get('product_cate',null,'id,title');
         $str='
         <div class="row product-category">
         <div class="col-xs-12">';
@@ -132,7 +136,7 @@ class product extends base{
         </div>';
         return $str;
     }
-    function product_cate($pId=0){
+    function product_cate(){
         $pId = $this->check_pId();
         $page=isset($_GET['page'])?intval($_GET['page']):1;
         $this->db->reset();
@@ -140,7 +144,7 @@ class product extends base{
         if($pId!=0){
             $this->db->where('pId',$pId);
         }
-        $this->db->orderBy('id');
+        $this->db_orderBy();
         $this->db->pageLimit=24;
         $list=$this->db->paginate('product',$page);
         $count=$this->db->totalCount;
@@ -173,7 +177,7 @@ class product extends base{
         $this->db->reset();
         $this->db->where('active',1);
         $this->db->where('title','%'.$_GET['hint'].'%', 'like');        
-        $this->db->orderBy('id');
+        $this->db_orderBy();
         $this->db->pageLimit=24;
         $list=$this->db->paginate('product',$page);        
         $count=$this->db->totalCount;
@@ -199,22 +203,6 @@ class product extends base{
         
         $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
         $this->paging_shown = ($pg->paginationTotalpages > 0);
-        return $str;
-    }
-    function product_list($pId,$type=1){
-        $page=isset($_GET['page'])?intval($_GET['page']):1;
-        $this->db->reset();
-        if($pId!=0) $this->db->where('pId',$pId);
-        $this->db->where('active',1)->orderBy('id');
-        $this->db->pageLimit=limit;
-        $list=$this->db->paginate('product',$page,'id,title,price,price_reduce');
-        $str='
-        <div class="row">';
-        foreach($list as $item){
-            $str.=$this->product_list_item($item,$type);
-        }
-        $str.='
-        </div>';
         return $str;
     }
     function product_one($id){
@@ -283,9 +271,18 @@ class product extends base{
         }        
         return $str;
     }
+    function first_image($id){
+        $this->db->reset();
+        $this->db->where('active',1)->where('pId',$id);
+        $this->db_orderBy();
+        $img=$this->db->getOne('product_image','img');
+        return $img['img'];
+    }
     function product_image_show($id){
         $this->db->reset();
-        $list=$this->db->where('active',1)->where('pId',$id)->orderBy('ind','ASC')->orderBy('id')->get('product_image');
+        $this->db->where('active',1)->where('pId',$id);
+        $this->db_orderBy();
+        $list=$this->db->get('product_image');
         $temp=$tmp='';
         foreach($list as $item){
             $temp.='
@@ -323,7 +320,7 @@ class product extends base{
             itemMargin: 5,
             asNavFor: "#image-slider"
           });
-         
+
           $("#image-slider").flexslider({
             animation: "slide",
             controlNav: false,
@@ -335,18 +332,14 @@ class product extends base{
         </script>';
         return $str;
     }
-    function first_image($id){
+
+    function product_cate_list(){
         $this->db->reset();
-        $this->db->where('active',1)->where('pId',$id)->orderBy('ind','ASC')->orderBy('id');
-        $img=$this->db->getOne('product_image','img');
-        return $img['img'];
-    }
-    
-    function product_cate_list($db){
-        $db->reset();
-        $list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get($this->db_cate_name);
+        $this->db->where('active',1);
+        $this->db_orderBy();
+        $list=$this->db->get($this->db_cate_name);
         $str.='
-        <ul>';
+        <ul class="product-menu">';
         foreach($list as $item){
             $title=$lang=='en'?$item['e_title']: $item['title'];
             $db_view=$lang=='en'?$item['e_view']:$item['view'];

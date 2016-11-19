@@ -1,22 +1,7 @@
 <?php
-common::load('base','page');
-class about{
-    private $db;
-    private $lang;
-    private $view,$title;
+class about extends base{
     function __construct($db,$lang='vi'){
-        $this->db=$db;
-        $this->db->reset();
-        $this->lang=$lang;
-        $db->where('id',2);
-        $item=$db->getOne('menu');
-        if($lang=='en'){
-            $this->view=$item['e_view'];
-            $this->title=$item['e_title'];
-        }else{
-            $this->view=$item['view'];
-            $this->title=$item['title'];
-        }
+        parent::__construct($db,2,'about',$lang);
     }
     function ind_about(){
         $this->db->where('active',1);
@@ -37,23 +22,6 @@ class about{
                     <a href="'.myWeb.$this->lang.'/'.$this->view.'">'.more.'</a>
                 </p>
             </div>
-        </div>';
-        return $str;
-    }
-    function breadcrumb(){
-        $this->db->reset();
-        $str.='
-        <div class="container">
-        <ul class="breadcrumb clearfix">
-            <li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
-            <li><a href="'.myWeb.$this->lang.$this->view.'">'.$this->title.'</a></li>';
-        if(isset($_GET['id'])){
-            $this->db->where('id',intval($_GET['id']));
-            $item=$this->db->getOne('about','id,title');
-            $str.='<li><a href="#">'.$item['title'].'</a></li>';
-        }
-        $str.='
-        </ul>
         </div>';
         return $str;
     }

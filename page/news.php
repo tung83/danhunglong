@@ -5,7 +5,9 @@ class news extends base{
     }
     function ind_news(){
         $this->db->reset();
-        $list=$this->db->where('active',1)->orderBy('id')->get('news',5);
+        $this->db->where('active',1);
+        $this->db_orderBy();
+        $list=$this->db->get('news',5);
         $str='
         <div class="row ind-news">
             <div class="col-xs-12">
@@ -25,7 +27,7 @@ class news extends base{
                         <a href="'.$lnk.'">
                             <img src="'.$img.'" alt="'.$item['title'].'" class="img-responsive"/>
                             <p class="news-item-title">'.common::str_cut($item['title'],30).'</p>
-                            <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],160)).'</p>
+                            <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
                         </a>
                     </div>
                 </div>';   
@@ -58,14 +60,15 @@ class news extends base{
             </div>
             <hr/>';
     }
-    function news_cate($pId=0){
+    function news_cate(){
+        $pId = $this->check_pId();
         $page=isset($_GET['page'])?intval($_GET['page']):1;
         $this->db->reset();
         $this->db->where('active',1);
         if($pId!=0){
             $this->db->where('pId',$pId);
         }
-        $this->db->orderBy('id');
+        $this->db_orderBy();
         $this->db->pageLimit=limit;
         $list=$this->db->paginate('news',$page);
         $count=$this->db->totalCount;
@@ -101,27 +104,5 @@ class news extends base{
                 <p>'.$content.'</p>
             </article>';                        
     }
-            
-    function one_ind_news($id){
-        $this->db->reset();
-        $this->db->where('id',$id);
-        $item=$this->db->getOne('news','id,img,title,sum');
-        $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
-        $str='
-        <div class="ind_news">
-            <a href="'.$lnk.'">
-                <img src="'.webPath.$item['img'].'" alt="" title="'.$item['title'].'"/>
-                <h2>'.$item['title'].'</h2>
-                <span>'.common::str_cut($item['sum'],120).'</span>
-            </a>
-        </div>';
-        return $str;
-    }
-    function product_image_first($db,$pId){
-        $db->where('active',1)->where('pId',$pId);
-        $item=$db->getOne('product_image','img');
-        return $item['img'];
-    }
-
 }
 

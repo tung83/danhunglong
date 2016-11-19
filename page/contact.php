@@ -1,31 +1,8 @@
 <?php
-class contact{
-    private $db,$view,$lang,$title,$post_result;
+class contact extends base{
+    private $post_result;
     function __construct($db,$lang='vi'){
-        $this->db=$db;
-        $this->db->reset();
-        $this->lang=$lang;
-        $db->where('id',12);
-        $item=$db->getOne('menu');
-        if($lang=='en'){
-            $this->view=$item['e_view'];
-            $this->title=$item['e_title'];
-        }else{
-            $this->view=$item['view'];
-            $this->title=$item['title'];
-        }
-    }
-    function breadcrumb(){
-        $this->db->reset();
-        $str.='
-        <div class="container">
-        <ul class="breadcrumb clearfix">
-            <li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
-            <li><a href="'.myWeb.$this->lang.'/'.$this->view.'">'.$this->title.'</a></li>';
-        $str.='
-        </ul>
-        </div>';
-        return $str;
+        parent::__construct($db,12,'contact',$lang);
     }
     function contact_insert(){
         $this->db->reset();
@@ -110,7 +87,7 @@ class contact{
                         </div>
                         <div class="col-sm-6"> 
                             <p class="text-center">
-                                Hãy điền thông tin và tin nhắn quý khách, BQT sẽ trả lời sớm nhất có thể.
+                                Chú ý: Dấu (*) các trường bắt buộc phải nhập vào. Quý vị có thể gõ chữ tiếng Việt không dấu hoặc chữ tiếng Việt có dấu theo chuẩn UNICODE (UTF-8).
                             </p>
                             <form data-toggle="validator" role="form" class="contact-form" name="contact-form" method="post" action="">
                                 <div class="form-group">
@@ -151,8 +128,8 @@ class contact{
                     </div><!--/.row-->                    
                     <div class="row">
                        <div class="col-sm-12 text-center">
-                           <div class="gmap">
-                               '.$basic_config['gmap_script'].'
+                           <div id="google-map">
+                               
                            </div>
                        </div>
                     </div>

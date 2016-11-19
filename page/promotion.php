@@ -1,167 +1,72 @@
 <?php
-class promotion{
-    private $db,$view,$lang;
+class promotion extends base{
+    private $news_cateId;
     function __construct($db,$lang='vi'){
-        $this->db=$db;
-        $this->db->reset();
-        $this->lang=$lang;
-        $db->where('id',6);
-        $item=$db->getOne('menu');
-        if($lang=='en'){
-            $this->view=$item['e_view'];
-        }else{
-            $this->view=$item['view'];
-        }
-    }
-    function breadcrumb(){
-        $this->db->reset();
-        $str.='
-        <ul class="breadcrumb clearfix">
-        	<li><a href="'.myWeb.'"><i class="fa fa-home"></i></a></li>
-            <li><a href="'.myWeb.$this->view.'">Khuyến mãi</a></li>';
-        if(isset($_GET['id'])){
-            $this->db->where('id',intval($_GET['id']));
-            $item=$this->db->getOne('promotion','id,title,pId');
-            $cate=$this->db->where('id',$item['pId'])->getOne('promotion_cate','id,title');
-            $str.='
-            <li><a href="'.myWeb.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'].'">'.$cate['title'].'</a></li>
-            <li><a href="#">'.$item['title'].'</a></li>';
-        }elseif(isset($_GET['pId'])){
-            $cate=$this->db->where('id',intval($_GET['pId']))->getOne('promotion_cate','id,title');
-            $str.='
-            <li><a href="#">'.$cate['title'].'</a></li>';
-        }
-        $str.='
-        </ul>';
-        return $str;
+        parent::__construct($db,13,'news',$lang);
+        $this->news_cateId = 16;
     }
     function promotion_item($item){
-        $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
-        $str.='
-        <a href="'.$lnk.'" class="about-item clearfix">
-            <img src="'.webPath.$item['img'].'" class="img-responsive" alt="" title=""/>
-            <div>
-                <h2>'.$item['title'].'</h2>
-                <span>'.nl2br(common::str_cut($item['sum'],620)).'</span>
+        $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
+        return '
+            <div class="row news-item wow fadeInLeft animated" data-wow-duration="1000ms" data-wow-delay="10ms">
+                <div class="col-xs-3">
+                    <a href="'.$lnk.'" class="about-item ">
+                        <img src="'.webPath.$item['img'].'" class="img-responsive" alt="" title=""/>
+                    </a>     
+                </div>
+                <div class="col-xs-7">
+                    <a href="'.$lnk.'" class="about-item clearfix">
+                        <p class="news-title">'.$item['title'].'</p>
+                    </a>
+                    <p class="news-date"><i> '.date("d/m/Y",$item['date']).'</i></p>
+                    <div class="news-sum">
+                        <span>'.nl2br(common::str_cut($item['sum'],620)).'</span>
+                    </div>
+                </div>
             </div>
-        </a>';
-        return $str;
+            <hr/>';
     }
-    function promotion_cate($pId){
+    function promotion_cate(){
         $page=isset($_GET['page'])?intval($_GET['page']):1;
         $this->db->reset();
         $this->db->where('active',1);
-        if($pId!=0) $this->db->where('pId',$pId);
-        $this->db->orderBy('id');
+        $this->db->where('pId',$this->news_cateId);
+        $this->db_orderBy();
         $this->db->pageLimit=limit;
-        $list=$this->db->paginate('promotion',$page);
+        $list=$this->db->paginate('news',$page);
         $count=$this->db->totalCount;
+        $str.='<div class="news-list">';
         if($count>0){
             foreach($list as $item){
                 $str.=$this->promotion_item($item);
             }
         }        
-        $pg = new Pagination();
-        $pg->pagenumber = $page;
-        $pg->pagesize = limit;
-        $pg->totalrecords = $count;
-        $pg->showfirst = true;
-        $pg->showlast = true;
-        $pg->paginationcss = "pagination-large";
-        $pg->paginationstyle = 1; // 1: advance, 0: normal
+        $str.='</div>';
+        
+        $pg=new Pagination(array('limit'=>pd_lim,'count'=>$count,'page'=>$page,'type'=>0));  
         if($pId==0){
-            $pg->defaultUrl = myWeb.$this->view;
-            $pg->paginationUrl = myWeb.'[p]/'.$this->view;    
+            $pg->set_url(array('def'=>myWeb.$this->lang.'/'.$this->view,'url'=>myWeb.$this->lang.'/'.$this->view.'/page[p]'));
         }else{
-            $cate=$this->db->where('id',$pId)->getOne('promotion_cate','id,title');            
-            $pg->defaultUrl = myWeb.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
-            $pg->paginationUrl = myWeb.$this->view.'/[p]/'.common::slug($cate['title']).'-p'.$cate['id'];
+            $cate=$this->db->where('id',$pId)->getOne('news_cate','id,title');       
+            $pg->defaultUrl = myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
+            $pg->paginationUrl = $pg->defaultUrl.'/page[p]';
         }
-        $str.= '<div class="pagination pagination-centered">'.$pg->process().'</div>';
+        $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
+        $this->paging_shown = ($pg->paginationTotalpages > 0);
         return $str;
     }
-    function promotion_one(){
-        $id=intval($_GET['id']);
-        $item=$this->db->where('id',$id)->getOne('promotion');
-        $str='
-        <article class="article">
-            <h1 class="article">'.$item['title'].'</h1>
-            <p>'.$item['content'].'</p>
-        </article>';
-        $this->db->where('active',1)->where('id',$id,'<>');
-        $this->db->orderBy('id');
-        $list=$this->db->get('promotion',limit);
-        $count=$this->db->count;
-        if($count>0){
-            $str.='
-            <div class="hr-custom"></div>
-            <h2 class="title-tag"><span><b>Bài Viết Liên Quan</b></span></h2>
-            <ul class="about-list">';
-            foreach($list as $item){
-                $str.='<li>'.$this->promotion_item($item).'</li>';
-            }
-            $str.='
-            </ul>';
-        }     
-        $str.='
-        </div>
-        </div>';
-        return $str;
-    }
-    function ind_news(){
-        $this->db->reset();
-        $this->db->where('active',1)->orderBy('id');
-        $this->db->pageLimit=6;
-        $list=$this->db->paginate('news',1,'id,title,sum,img');
-        $str='
-        <div class="color">
-            <div class="container clearfix paint-drop-grey">
-            <h2 class="ind-title">Tin Tức</h2>
-            <ul class="ind-news clearfix">';
-        foreach($list as $item){
-            $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
-            $img=webPath.$item['img'];
-            if($img=='') $img='holder.js/126x100';
-            $str.='
-            <li class="clearfix">
-                <a href="'.$lnk.'">
-                    <img src="'.$img.'" alt="'.$item['title'].'" width="126" height="100"/>
-                    <div>
-                    <h2>'.common::str_cut($item['title'],30).'</h2>
-                    <span>'.nl2br(common::str_cut($item['sum'],60)).'</span>
-                    </div>
-                </a>
-            </li>';   
-        }
-        $str.='
-            </ul>
-            <p class="text-right">
-                <a href="'.myWeb.$this->view.'">'.all.'</a>
-            </p>
-            </div>
-        </div>';
-        return $str;
-    }
-    function one_ind_news($id){
-        $this->db->reset();
-        $this->db->where('id',$id);
-        $item=$this->db->getOne('news','id,img,title,sum');
-        $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
-        $str='
-        <div class="ind_news">
-            <a href="'.$lnk.'">
-                <img src="'.webPath.$item['img'].'" alt="" title="'.$item['title'].'"/>
-                <h2>'.$item['title'].'</h2>
-                <span>'.common::str_cut($item['sum'],120).'</span>
-            </a>
-        </div>';
-        return $str;
-    }
-    function product_image_first($db,$pId){
-        $db->where('active',1)->where('pId',$pId);
-        $item=$db->getOne('product_image','img');
-        return $item['img'];
+    function promotion_one($id=1){
+        $item=$this->db->where('id',$id)->getOne('news');
+        $title=$this->lang=='vi'?$item['title']:$item['e_title'];
+        $content=$this->lang=='vi'?$item['content']:$item['e_content'];
+        return  
+            '<article>
+                <div class="text-center">
+                    <h2 class="page-title">'.$title.'</h2>
+                </div>
+                <p>'.$content.'</p>
+            </article>';                        
     }
 
 }
-?>
+

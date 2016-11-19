@@ -47,16 +47,21 @@ function menu_cate_lev1($db,$lang,$table, $db_view){
     $db->reset();
     $sub_list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get($table,null,'id,title');
     if(count($sub_list)>0){
+        $cate_link = myWeb.$lang.'/'.$db_view;
         $str.='
         <ul class="dropdown-menu">';
         foreach($sub_list as $sub_item){
-            $sub_lnk=myWeb.$lang.'/'.$db_view.'/'.common::slug($sub_item['title']).'-p'.$sub_item['id'];
+            $sub_lnk=$cate_link.'/'.common::slug($sub_item['title']).'-p'.$sub_item['id'];
             $str.='<li>'
                     . '<a href="'.$sub_lnk.'">'.$sub_item['title'].'</a>'
                     . '<hr/>'
                 . '</li>'; 
             
         }
+        $str.='<li>'
+                . '<a href="'.$cate_link.'">'.all_menu_items.'</a>'
+                . '<hr/>'
+            . '</li>'; 
         $str.='
         </ul>';        
     }
@@ -74,6 +79,7 @@ function page_header($view, $db)
             $cate_table = 'product_cate';
             break;
         case 'tin-tuc':   
+        case 'khuyen-mai':   
             $item_table = 'news';
             $cate_table = 'news_cate';
             break;  
@@ -123,7 +129,7 @@ function foot_menu($db,$lang,$view){
 function foot_product_cate($db,$lang,$view){   
     common::page('product');
     $product=new product($db,$lang);
-    return $product->product_cate_list($db);    
+    return $product->product_cate_list();    
 }
 
 function home($db,$lang){    
@@ -233,8 +239,9 @@ function contact($db,$lang){
     <section id="page">';
     common::page('contact');
     $contact=new contact($db,$lang);
-    $str.=$contact->breadcrumb();
-    $str.=$contact->contact();
+    $str.=$contact->breadcrumb_with_Id();
+    $str.=$contact->contact();    
+    $str.=gmap();
     $str.='
     </section>';
     return $str;
@@ -289,7 +296,7 @@ function about($db,$lang){
     <section id="page">';
     common::page('about');
     $about=new about($db,$lang);
-    $str.=$about->breadcrumb();
+    $str.=$about->breadcrumb_with_Id();
     $str.=$about->about_one();
     $str.='
     </section>';
@@ -306,6 +313,19 @@ function news($db,$lang){
         $str.=$news->news_cate();
     }     
     $str.=$news->bottom_content(); 
+    return $str;
+}
+function promotion($db,$lang){
+    common::page('promotion');
+    $promotion=new promotion($db,$lang);
+    $str.=$promotion->breadcrumb_with_Id();
+    $str.=$promotion->top_content('');
+    if(isset($_GET['id'])){
+        $str.=$promotion->promotion_one(intval($_GET['id']));    
+    }else{
+        $str.=$promotion->promotion_cate();
+    }     
+    $str.=$promotion->bottom_content(); 
     return $str;
 }
 function manual($db){
@@ -445,5 +465,40 @@ function shadowBottomRow(){
 function shadowBottomDent(){
     return '<div id="dent-shadow-bottom" class="row">
             </div>';
+}
+
+
+function gmap(){      
+    return '
+        <script>   
+            function initMap() {
+                var companyAddress = {lat: 10.826959, lng: 106.769057};
+                var addCenter = {lat: 10.827, lng: 106.769057};
+                var map = new google.maps.Map(document.getElementById("google-map"), {
+                  zoom: 18,
+                  fullscreenControl: true,
+                  center: addCenter
+                });
+                var marker = new google.maps.Marker({
+                  position: companyAddress,
+                  map: map,
+                  title: "2 Tăng Nhơn Phú, Phước Long B, Quận 9"
+                });
+                var lequangdinhContentString = 
+                      "<h4 style=\"color: #2aa498\">Dân Hưng Long Company</h4>" +
+                      "<p>2 Tăng Nhơn Phú, Phước Long B, Quận 9</p>" +
+                      "<a  target=\"_blank\" href=\"https://www.google.com/maps/place/10%C2%B047\'55.4%22N+106%C2%B041\'15.6%22E/@10.7987615,106.6874546,19.5z/data=!4m5!3m4!1s0x0:0x0!8m2!3d10.798732!4d106.687669\">Get direction</a>";
+
+                  var infowindow = new google.maps.InfoWindow({
+                    content: lequangdinhContentString
+                  });
+                  infowindow.open(map, marker);
+              }
+        </script>
+        <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVWAnZRS56JnP5Nr5otnuzg47TsmJoKBM&callback=initMap">
+        </script>';
+    
+    return $str;
 }
 ?>

@@ -5,7 +5,10 @@ body{
     line-height:19px;
     background: url(/file/front/light-grey-bg.png) top left repeat;
 }
-
+#google-map {
+    height: 645px;
+    margin-bottom: 20px;
+}
 #search button{
     border:0;
     background:transparent;
@@ -64,9 +67,18 @@ a:hover{
     border-right: 1px solid #ececec;  
 }
 
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+    border-right: 1px solid #ececec;  
+}
+
 .nav>li>a:hover, .nav>li>a:focus, #header-menu-wrapper li.active>a, #header-menu-wrapper li.active>a:hover, #header-menu-wrapper li.active>a:focus {
     color: #2480b8;
+}
+.nav-pills>li.active>a{
     background-color: transparent;
+}
+.nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+    background-color: #eee;
 }
 .btn-primary {
     color: #fff;
@@ -279,10 +291,10 @@ a.hotline{
     padding-left: 35px;
 }
 
-.footer-menu a{
+footer a{
     color: #2a2a2a;
 }
-.footer-menu ul{
+.footer-menu ul,.product-menu{
     padding-left: 15px;
 }
 .dropdown-menu{
@@ -358,7 +370,7 @@ a.hotline{
     
 }
 ul.dropdown-menu {    
-    left: -57px !important;
+    left: -55px !important;
     background-color: #1f7db5;
     border-radius: 8px;
     list-style: disc;
@@ -386,7 +398,7 @@ ul.dropdown-menu:before {
     box-sizing: border-box;
     position: absolute;
     bottom: 100%;
-    left: 50%;
+    left: 47%;
     border: 8px solid transparent;
     border-bottom-color: #1f7db5;
     content: ' ';
