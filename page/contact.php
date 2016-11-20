@@ -79,7 +79,7 @@ class contact extends base{
         $str.=              '<div class="col-sm-6">
                             <i>Cảm ơn Quý khách đã truy cập vào website. Mọi thông tin chi tiết xin vui lòng liên hệ:</i>
                             <p>
-                                <img src="'.selfPath.'contact.png" class="img-responsive" alt="" title=""/>
+                                <img src="'.frontPath.'contact.png" class="img-responsive" alt="" title=""/>
                             </p>    
                             <p>
                                 '.common::qtext($this->db,3).'

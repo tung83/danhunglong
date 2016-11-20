@@ -39,7 +39,6 @@ define('root'       ,$_SERVER['DOCUMENT_ROOT']);
 define('myWeb'      ,'/');
 define('myPath'     ,'../file/upload/');
 define('webPath'    ,'/file/upload/');
-define('selfPath'   ,'/file/self/');
 define('frontPath'   ,'/file/front/');
 
 define('phpLib'     ,root.'/object/');
