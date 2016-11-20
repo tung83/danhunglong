@@ -233,6 +233,11 @@ a.hotline{
     left: auto !important;
 }
 
+#wowslider-container1 .ws_bullets a {
+    height: 8px !important;
+    width: 8px !important;
+}
+
 .ind-about{
     margin: 40px 95px 45px 55px;
 }
@@ -382,7 +387,6 @@ footer a{
     
 }
 ul.dropdown-menu {    
-    left: -55px !important;
     background-color: #1f7db5;
     border-radius: 8px;
     list-style: disc;
@@ -390,6 +394,12 @@ ul.dropdown-menu {
     font-size: 16px;
     color: #fff;
     padding: 15px 5px 5px 40px;
+}
+.nav > li:nth-child(3) ul.dropdown-menu {    
+    left: -30px !important;
+}
+.nav > li:nth-child(4) ul.dropdown-menu {    
+    left: -55px !important;
 }
 ul.dropdown-menu a{
     color: #fff;

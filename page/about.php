@@ -13,10 +13,14 @@ class about extends base{
         $str='
         <div class="row ind-about wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="10ms">
             <div class="col-xs-4"> 
-                <img src="'.webPath.$item['img'].'" class="img-responsive" alt="" title=""/>
+                <a href="'.myWeb.$this->view.'">
+                    <img src="'.webPath.$item['img'].'" class="img-responsive" alt="" title=""/>
+                </a>
             </div>
             <div class="col-xs-8">
-                <h2 class="title">'.$title.'</h2>
+                <a href="'.myWeb.$this->view.'">
+                    <h2 class="title">'.$title.'</h2>
+                </a>
                 <p>'.common::str_cut($sum,400).'</p>
                 <p class="text-right more">
                     <a href="'.myWeb.$this->view.'">'.more.'</a>
