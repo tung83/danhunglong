@@ -213,10 +213,11 @@ class product extends base{
         $lnk=domain.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         $str.='
         <div class="row product-detail clearfix">
-            <div class="col-md-5">
+            
+            <div class="col-xs-12">
+            <div class="col-xs-5">
                 '.$this->product_image_show($item['id']).'
             </div>
-            <div class="col-md-7">
                 <article class="product-one">
                 <h1>'.$item['title'].'</h1>
                 <!--b>Giá Bán Lẻ: <em>'.number_format($item['price'],0,',','.').'VNĐ</em></b-->
@@ -257,11 +258,9 @@ class product extends base{
         </div>';
         if(count($list)>0){
             $str.='
-            <div class="wow fadeInDown row">
-                <h2 class="title">
-                        SẢN PHẨM CÙNG LOẠI
-                </h1>
-            </div>';
+            <h3 class="small-title">
+                    SẢN PHẨM CÙNG LOẠI
+            </h3>';
             $str.='<div class="slick product_list clearfix">';
 
             foreach($list as $item){                

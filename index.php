@@ -65,8 +65,10 @@
             </div>
             <?=shadowBottom()?>            
         </div>   
-    </header>
+    </header>    
+    <section id="page-content">';
     <?php
+    
     switch($view){
         case 'product':
         case 'san-pham':
@@ -106,7 +108,8 @@
             echo home($db,$lang);
             brea;
     }
-    ?>
+    ?>        
+    </section>;
     <footer>
         <div class="container">
             <div class="row footer-top-row">
