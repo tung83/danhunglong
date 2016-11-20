@@ -1,7 +1,7 @@
 <?php
 class news extends base{
     function __construct($db){
-        parent::__construct($db,8,'news');
+        parent::__construct($db,4,'news');
     }
     function ind_news(){
         $this->db->reset();
@@ -22,7 +22,7 @@ class news extends base{
             $img=webPath.$item['img'];
             if($img=='') $img='holder.js/126x100';
             $str.='
-                <div class="col-xs-3 news-col wow fadeIn animated" data-wow-duration="1000ms" data-wow-delay="600ms">
+                <div class="col-xs-3 news-col wow fadeIn animated" data-wow-duration="1000ms">
                     <div class="news-item">
                         <a href="'.$lnk.'">
                             <img src="'.$img.'" alt="'.$item['title'].'" class="img-responsive"/>

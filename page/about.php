@@ -65,7 +65,7 @@ class about extends base{
         <section id="about-us">
             <div class="container">
                 <div class="row about-us-box">
-                    <div class="row wow fadeInDown animated" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="row wow fadeInDown animated" data-wow-duration="1000ms" data-wow-delay="10ms">
                         <div class="col-xs-6">
                             <div class="title-head">
                                 <span>'

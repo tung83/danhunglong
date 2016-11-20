@@ -9,7 +9,7 @@ class contact extends base{
         if(isset($_POST['contact_send'])){
             if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])){
                 //your site secret key
-                $secret = '6LcaQQkUAAAAAMxjN-JsE3qRx1uhp-pJp9A42J_e';
+                $secret = '6Ld4dAwUAAAAANKdvw2bqOs6iNL2QjVotriAC9LP';
                 //get verify response data
                 $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
                 $responseData = json_decode($verifyResponse);
@@ -113,7 +113,7 @@ class contact extends base{
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">    
-                                    <div class="g-recaptcha" data-sitekey="6LcaQQkUAAAAAB-OYdRvS3TsfqOdJWfTG6hQJ3TW" data-callback="recaptchaCallback"></div>
+                                    <div class="g-recaptcha" data-sitekey="6Ld4dAwUAAAAAO5XFJTGmwphISLniXunz6pwABJ3" data-callback="recaptchaCallback"></div>
                                 </div> 
                                 <div class="form-group">
                                     <button type="submit" name="contact_send" class="btn btn-primary btn-md btn-custom submit-button">

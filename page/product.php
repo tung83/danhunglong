@@ -1,7 +1,7 @@
 <?php
 class product extends base{
     function __construct($db){        
-        parent::__construct($db,5,'product');
+        parent::__construct($db,3,'product');
     }
     function ind_product(){ 
         $str.='
@@ -24,7 +24,7 @@ class product extends base{
             $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=$this->first_image($item['id']);
             $str.='
-            <div class="col-xs-3 product-col wow bounceIn animated" data-wow-duration="2s" data-wow-delay="60ms">
+            <div class="col-xs-3 product-col wow bounceIn animated" data-wow-duration="2s" data-wow-delay="10ms">
                 <div class="product-item">
                     <a href="'.$lnk.'">
                         <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
@@ -77,7 +77,7 @@ class product extends base{
 //        </a>
 //		</div>';
         $str.='
-            <div class="col-xs-3 wow fadeIn animated product-col" data-wow-duration="1000ms" data-wow-delay="60ms">
+            <div class="col-xs-3 wow fadeIn animated product-col" data-wow-duration="1000ms" data-wow-delay="10ms">
                 <div class="product-item">
                     <a href="'.$lnk.'">
                         <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>

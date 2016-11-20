@@ -2,8 +2,8 @@
 class promotion extends base{
     private $news_cateId;
     function __construct($db){
-        parent::__construct($db,13,'news');
-        $this->news_cateId = 16;
+        parent::__construct($db,5,'news');
+        $this->news_cateId = 3;
     }
     function promotion_item($item){
         $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
