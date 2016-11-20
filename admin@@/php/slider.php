@@ -17,7 +17,6 @@ function slider($db){
 	}
 	if(isset($_POST["addNew"])||isset($_POST["update"])) {
         $lnk=htmlspecialchars($_POST['lnk']);
-        $e_lnk=htmlspecialchars($_POST['e_lnk']);
         $ind=intval($_POST['ind']);	   
         $file=time().$_FILES['file']['name'];
         $active=$_POST['active']=='on'?1:0;        
@@ -37,7 +36,7 @@ function slider($db){
     }
 	if(isset($_POST["addNew"])) {
         $insert = array(
-                    'ind'=>$ind,'e_lnk'=>$e_lnk,
+                    'ind'=>$ind,
                     'active'=>$active,'lnk'=>$lnk
                 );
 		try{
@@ -54,7 +53,7 @@ function slider($db){
 	}
 	if(isset($_POST["update"]))	{
         $update=array(
-                    'ind'=>$ind,'e_lnk'=>$e_lnk,
+                    'ind'=>$ind,
                     'active'=>$active,'lnk'=>$lnk
                 );
         if(common::file_check($_FILES['file'])){
@@ -88,7 +87,7 @@ function slider($db){
     
     $str.=$form->search_area($db,$act,'category',$_GET['hint'],0);
     
-    $head_title=array('Hình ảnh','Liên kết<code>Vi</code>','Liên kết<code>En</code>','STT','Hiển thị');    
+    $head_title=array('Hình ảnh','Liên kết','STT','Hiển thị');    
 	$str.=$form->table_start($head_title);
     
     $page=isset($_GET["page"])?intval($_GET["page"]):1;
@@ -103,7 +102,6 @@ function slider($db){
             $item_content = array(
                 array(myPath.$item['img'],'image'),                
                 array($item['lnk'],'link'),
-                array($item['e_lnk'],'link'),
                 array($item['ind'],'text'),
                 array($item['active'],'bool')
             );
@@ -116,22 +114,11 @@ function slider($db){
 	<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
 	<div class="row">
         <div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
-        <div class="col-lg-12 admin-tabs">
-            <ul class="nav nav-tabs">
-    			<li class="active"><a href="#vietnamese" data-toggle="tab">Việt Nam</a></li>
-    			<li><a href="#english" data-toggle="tab">English</a></li>
-    		</ul>
-    		<div class="tab-content">
-    			<div class="tab-pane bg-vi active" id="vietnamese">
-                    '.$form->text('lnk',array('label'=>'Liên kết')).'
-    			</div>
-    			<div class="tab-pane bg-en" id="english">
-                    '.$form->text('e_lnk',array('label'=>'Liên kết')).'
-    			</div>
-    		</div>
+        <div class="col-lg-12">
+            '.$form->text('lnk',array('label'=>'Liên kết')).'            
         </div>
         <div class="col-lg-12">
-            '.$form->file('file',array('label'=>'Hình ảnh <code>( đề nghị: 970,310 )</code>')).'
+            '.$form->file('file',array('label'=>'Hình ảnh <code>( đề nghị: 970px:310px )</code>')).'
             '.$form->number('ind',array('label'=>'Thứ tự')).'
             '.$form->checkbox('active',array('label'=>'Hiển thị','checked'=>true)).'
         </div>

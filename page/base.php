@@ -1,24 +1,15 @@
 <?php
 class base{
-    protected $db,$lang,$view,$title,$db_name,$db_cate_name,$paging_shown;
-    protected function __construct($db,$id,$db_name,$lang='vi',$table='menu'){
+    protected $db,$view,$title,$db_name,$db_cate_name,$paging_shown;
+    protected function __construct($db,$id,$db_name,$table='menu'){
         $this->db_name = $db_name;
         $this->db_cate_name = $db_name.'_cate';
         $this->db=$db;
         $this->db->reset();
-        $this->lang=$lang;
         $db->where('id',$id);
         $item=$db->getOne($table);
-        switch($this->lang){
-            case 'en':
-                $this->view=$item['e_view'];
-                $this->title=$item['e_title'];
-                break;
-            default:
-                $this->view=$item['view'];
-                $this->title=$item['title'];
-                break;
-        }
+        $this->view=$item['view'];
+        $this->title=$item['title'];
     }
     
     function breadcrumb(){
@@ -26,8 +17,8 @@ class base{
         $str.='
         <div class="container">
         <ul class="breadcrumb clearfix">
-            <li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
-            <li><a href="'.myWeb.$this->lang.'/'.$this->view.'">'.$this->title.'</a></li>';
+            <li><a href="'.myWeb.'"><i class="fa fa-home"></i> Trang chủ</a></li>
+            <li><a href="'.myWeb.$this->view.'">'.$this->title.'</a></li>';
         $str.='
         </ul>
         </div>';
@@ -38,8 +29,8 @@ class base{
         $str.='
         <div class="container">
         <ul class="breadcrumb clearfix">
-            <li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
-            <li><a href="'.myWeb.$this->lang.'/'.$this->view.'">'.$this->title.'</a></li>';
+            <li><a href="'.myWeb.'"><i class="fa fa-home"></i> Trang chủ</a></li>
+            <li><a href="'.myWeb.$this->view.'">'.$this->title.'</a></li>';
         if(isset($_GET['id'])){      
             $this->db->reset();
             $this->db->where('id',intval($_GET['id']));
@@ -47,9 +38,9 @@ class base{
             
             $this->db->reset();
             $cate=$this->db->where('id',$item['pId'])->getOne($this->db_cate_name,'id,title');
-            $str.='<li><a href="'.myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'].'">'.$cate['title'].'</a></li>';
+            $str.='<li><a href="'.myWeb.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'].'">'.$cate['title'].'</a></li>';
                        
-            $title = ($this->lang == 'en') ? $item['e_title'] : $item['title'];
+            $title = $item['title'];
             $str.='<li><a href="#">'.$title.'</a></li>';
         }elseif(isset($_GET['pId'])){                    
             $this->db->reset();
@@ -60,20 +51,19 @@ class base{
         </ul>
         </div>';
         return $str;
-    }
-    
+    }    
     
     function breadcrumb_with_Id(){
         $str.='
         <div class="container">
         <ul class="breadcrumb clearfix">
-            <li><a href="'.myWeb.$this->lang.'"><i class="fa fa-home"></i> Trang chủ</a></li>
-            <li><a href="'.myWeb.$this->lang.'/'.$this->view.'">'.$this->title.'</a></li>';
+            <li><a href="'.myWeb.'"><i class="fa fa-home"></i> Trang chủ</a></li>
+            <li><a href="'.myWeb.$this->view.'">'.$this->title.'</a></li>';
         if(isset($_GET['id'])){      
             $this->db->reset();
             $this->db->where('id',intval($_GET['id']));
             $item=$this->db->getOne($this->db_name,'id,title,pId');                  
-            $title = ($this->lang == 'en') ? $item['e_title'] : $item['title'];
+            $title = $item['title'];
             $str.='<li><a href="#">'.$title.'</a></li>';
         }
         $str.='

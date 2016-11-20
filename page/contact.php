@@ -1,8 +1,8 @@
 <?php
 class contact extends base{
     private $post_result;
-    function __construct($db,$lang='vi'){
-        parent::__construct($db,12,'contact',$lang);
+    function __construct($db){
+        parent::__construct($db,12,'contact');
     }
     function contact_insert(){
         $this->db->reset();

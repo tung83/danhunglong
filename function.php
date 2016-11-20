@@ -8,14 +8,14 @@ function pageId($view){
     }
     return '';
 }
-function menu($db,$lang, $view){
+function menu($db, $view){
     $db->reset();
     $list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get('menu');
     $str.='         
     <ul class="nav nav-justified nav-pills">';
     foreach($list as $item){
-        $title=$lang=='vi'?$item['title']:$item['e_title'];
-        $db_view=$lang=='vi'?$item['view']:$item['e_view'];
+        $title=$item['title'];
+        $db_view=$item['view'];
         $active = ($view==$db_view) ? 'active': '';
         $db_cate_name = null;
         switch ($db_view){
@@ -29,25 +29,25 @@ function menu($db,$lang, $view){
         }
         if(isset($db_cate_name)){
             $str.='<li role="presentation" class="dropdown '.$active.'"> '
-                    . '<a href="'.myWeb.$lang.'/'.$db_view.'" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'
+                    . '<a href="'.myWeb.$db_view.'" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'
                     . ''.$title.'</a> '
-                    .menu_cate_lev1($db,$lang,$db_cate_name,$db_view)
+                    .menu_cate_lev1($db,$db_cate_name,$db_view)
                 . '</li>';
             continue;
         }
         $str.='
-        <li class="'.$active.'"><a href="'.myWeb.$lang.'/'.$db_view.'">'.$title.'</a></li>';
+        <li class="'.$active.'"><a href="'.myWeb.$db_view.'">'.$title.'</a></li>';
     }
     $str.='               
     </ul>'  ;
     return $str;
 }
-function menu_cate_lev1($db,$lang,$table, $db_view){
+function menu_cate_lev1($db,$table, $db_view){
     $str = '';
     $db->reset();
     $sub_list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get($table,null,'id,title');
     if(count($sub_list)>0){
-        $cate_link = myWeb.$lang.'/'.$db_view;
+        $cate_link = myWeb.$db_view;
         $str.='
         <ul class="dropdown-menu">';
         foreach($sub_list as $sub_item){
@@ -111,28 +111,28 @@ function page_header($view, $db)
         head_description : $param['meta_description'];
     common::page_head($param);
 }
-function foot_menu($db,$lang,$view){
+function foot_menu($db,$view){
     $db->reset();
     $list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get('menu');
     $str.='
     <ul class="foot-menu">';
     foreach($list as $item){
-        $title=$lang=='vi'?$item['title']:$item['e_title'];
-        $db_view=$lang=='vi'?$item['view']:$item['e_view'];
+        $title=$item['title'];
+        $db_view=$item['view'];
         $str.='
-        <li><a href="'.myWeb.$lang.'/'.$db_view.'">'.$title.'</a></li>';   
+        <li><a href="'.myWeb.$db_view.'">'.$title.'</a></li>';   
     }
     $str.='
     </ul>';
     return $str;
 }
-function foot_product_cate($db,$lang,$view){   
+function foot_product_cate($db,$view){   
     common::page('product');
-    $product=new product($db,$lang);
+    $product=new product($db);
     return $product->product_cate_list();    
 }
 
-function home($db,$lang){    
+function home($db){    
     $str='
     <section id="ind-slider">
         <div class="container">
@@ -149,16 +149,16 @@ function home($db,$lang){
     <section id="index">
         <div class="container">';
     common::page('about');
-    $about=new about($db,$lang);
+    $about=new about($db);
     $str.=$about->ind_about();
     
     common::page('product');
-    $product=new product($db,$lang);
+    $product=new product($db);
     $str.=$product->ind_product();
     $str.=shadowBottomDent();
     
     common::page('news');
-    $news=new news($db,$lang);
+    $news=new news($db);
     $str.=$news->ind_news();
     
     $str.='
@@ -234,11 +234,11 @@ function slide($db){
 	<!-- End WOWSlider.com BODY section -->';
     return $str;
 }
-function contact($db,$lang){
+function contact($db){
     $str.='
     <section id="page">';
     common::page('contact');
-    $contact=new contact($db,$lang);
+    $contact=new contact($db);
     $str.=$contact->breadcrumb_with_Id();
     $str.=$contact->contact();    
     $str.=gmap();
@@ -246,11 +246,11 @@ function contact($db,$lang){
     </section>';
     return $str;
 }
-function career($db,$lang){
+function career($db){
     $str.='
     <section id="page">';
     common::page('career');
-    $career=new career($db,$lang);
+    $career=new career($db);
     $str.=$career->breadcrumb();
     if(isset($_GET['id'])){
         $str.=$career->career_one();    
@@ -261,11 +261,11 @@ function career($db,$lang){
     </section>';
     return $str;
 }
-function project($db,$lang){
+function project($db){
     $str.='
     <section id="page">';
     common::page('project');
-    $project=new project($db,$lang);
+    $project=new project($db);
     $str.=$project->breadcrumb();
     if(isset($_GET['id'])){
         $str.=$project->project_one();    
@@ -276,11 +276,11 @@ function project($db,$lang){
     </section>';
     return $str;
 }
-function facility($db,$lang){
+function facility($db){
     $str.='
     <section id="page">';
     common::page('facility');
-    $facility=new facility($db,$lang);
+    $facility=new facility($db);
     $str.=$facility->breadcrumb();
     if(isset($_GET['id'])){
         $str.=$facility->facility_one();    
@@ -291,20 +291,20 @@ function facility($db,$lang){
     </section>';
     return $str;
 }
-function about($db,$lang){
+function about($db){
     $str.='
     <section id="page">';
     common::page('about');
-    $about=new about($db,$lang);
+    $about=new about($db);
     $str.=$about->breadcrumb_with_Id();
     $str.=$about->about_one();
     $str.='
     </section>';
     return $str;    
 }
-function news($db,$lang){
+function news($db){
     common::page('news');
-    $news=new news($db,$lang);
+    $news=new news($db);
     $str.=$news->breadcrumb_cate_lev1();
     $str.=$news->top_content('');
     if(isset($_GET['id'])){
@@ -315,9 +315,9 @@ function news($db,$lang){
     $str.=$news->bottom_content(); 
     return $str;
 }
-function promotion($db,$lang){
+function promotion($db){
     common::page('promotion');
-    $promotion=new promotion($db,$lang);
+    $promotion=new promotion($db);
     $str.=$promotion->breadcrumb_with_Id();
     $str.=$promotion->top_content('');
     if(isset($_GET['id'])){
@@ -345,11 +345,11 @@ function manual($db){
     $str.=$manual->manual_one();
     return $str;
 }
-function product($db,$lang){
+function product($db){
     $str.='
     <section id="page">';  
     common::page('product');
-    $pd=new product($db,$lang);
+    $pd=new product($db);
     $str.=$pd->breadcrumb_cate_lev1();
     $str.=$pd->top_content('');
     if(isset($_GET['id'])){
@@ -437,12 +437,12 @@ function social($db){
     </div>';
     return $str;
 }
-function search($db,$lang){
+function search($db){
     $hint=$_GET['hint'];
     $str.='
     <section id="page">';
     common::load('search','page');
-    $obj = new search($db,$hint,$lang);
+    $obj = new search($db,$hint);
     $obj->add('product','Sản Phẩm','san-pham');
     $obj->add('facility','Thiết bị','thiet-bi');
     $obj->add('project','Dự Án','du-an');

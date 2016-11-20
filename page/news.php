@@ -1,7 +1,7 @@
 <?php
 class news extends base{
-    function __construct($db,$lang='vi'){
-        parent::__construct($db,8,'news',$lang);
+    function __construct($db){
+        parent::__construct($db,8,'news');
     }
     function ind_news(){
         $this->db->reset();
@@ -18,7 +18,7 @@ class news extends base{
                 </div>
             </div>';
         foreach($list as $item){
-            $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
+            $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=webPath.$item['img'];
             if($img=='') $img='holder.js/126x100';
             $str.='
@@ -34,13 +34,13 @@ class news extends base{
         }
         $str.='<div class="clearfix"></div>
             <div class="text-center">
-                <a class="btn btn-primary" href="'.myWeb.$this->lang.'/'.$this->view.'">'.more_button.'</a>      
+                <a class="btn btn-primary" href="'.myWeb.$this->view.'">'.more_button.'</a>      
             </div>
         </div>';
         return $str;
     }
     function news_item($item){
-        $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
+        $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         return '
             <div class="row news-item wow fadeInLeft animated" data-wow-duration="1000ms" data-wow-delay="10ms">
                 <div class="col-xs-3">
@@ -82,10 +82,10 @@ class news extends base{
         
         $pg=new Pagination(array('limit'=>pd_lim,'count'=>$count,'page'=>$page,'type'=>0));  
         if($pId==0){
-            $pg->set_url(array('def'=>myWeb.$this->lang.'/'.$this->view,'url'=>myWeb.$this->lang.'/'.$this->view.'/page[p]'));
+            $pg->set_url(array('def'=>myWeb.$this->view,'url'=>myWeb.$this->view.'/page[p]'));
         }else{
             $cate=$this->db->where('id',$pId)->getOne('news_cate','id,title');       
-            $pg->defaultUrl = myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
+            $pg->defaultUrl = myWeb.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
             $pg->paginationUrl = $pg->defaultUrl.'/page[p]';
         }
         $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
@@ -94,8 +94,8 @@ class news extends base{
     }
     function news_one($id=1){
         $item=$this->db->where('id',$id)->getOne('news');
-        $title=$this->lang=='vi'?$item['title']:$item['e_title'];
-        $content=$this->lang=='vi'?$item['content']:$item['e_content'];
+        $title=$item['title'];
+        $content=$item['content'];
         return  
             '<article>
                 <div class="text-center">

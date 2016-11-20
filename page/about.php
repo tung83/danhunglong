@@ -1,15 +1,15 @@
 <?php
 class about extends base{
-    function __construct($db,$lang='vi'){
-        parent::__construct($db,2,'about',$lang);
+    function __construct($db){
+        parent::__construct($db,2,'about');
     }
     function ind_about(){
         $this->db->where('active',1);
-        $this->db->orderBy('id','ASC');
+        $this->db_orderBy();
         $item=$this->db->getOne('about');
-        $lnk=myWeb.$this->lang.'/'.$this->view;
-        $title=$this->lang=='vi'?$item['title']:$item['e_title'];
-        $sum=$this->lang=='vi'?$item['sum']:$item['e_sum'];  
+        $lnk=myWeb.$this->view;
+        $title=$item['title'];
+        $sum=$item['sum'];  
         $str='
         <div class="row ind-about wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="10ms">
             <div class="col-xs-4"> 
@@ -19,7 +19,7 @@ class about extends base{
                 <h2 class="title">'.$title.'</h2>
                 <p>'.common::str_cut($sum,400).'</p>
                 <p class="text-right more">
-                    <a href="'.myWeb.$this->lang.'/'.$this->view.'">'.more.'</a>
+                    <a href="'.myWeb.$this->view.'">'.more.'</a>
                 </p>
             </div>
         </div>';
@@ -59,8 +59,8 @@ class about extends base{
     function about_one(){
         $id=1;
         $item=$this->db->where('id',$id)->getOne('about');
-        $title=$this->lang=='vi'?$item['title']:$item['e_title'];
-        $content=$this->lang=='vi'?$item['content']:$item['e_content'];
+        $title=$item['title'];
+        $content=$item['content'];
         return '  
         <section id="about-us">
             <div class="container">

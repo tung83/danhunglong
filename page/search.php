@@ -74,7 +74,7 @@ class search{
             <h2><i class="fa fa-modx"></i> '.$item['label'].'</h2>
             <ul>';
             foreach($item['list'] as $sub_item){
-                $lnk=myWeb.$this->lang.'/'.$item['view'].'/'.common::slug($sub_item['title']).'-i'.$sub_item['id'];
+                $lnk=myWeb.$item['view'].'/'.common::slug($sub_item['title']).'-i'.$sub_item['id'];
                 $str.='
                 <li><a href="'.$lnk.'">
                 '.$sub_item['title'].'

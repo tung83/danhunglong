@@ -41,7 +41,7 @@
                             <div class="clearfix"></div>
                             <div id="search-container" class="pull-right">
                                 <form role="form" method="get" name="search" id="search">                                    
-                                    <input type="hidden" id="search-link" value="<?=myWeb.$lang.'/'.search_view.'/'?>" />
+                                    <input type="hidden" id="search-link" value="<?=myWeb.search_view.'/'?>" />
                                     <div class="input-group">
                                         <input type="text" id="hint" class="form-control" placeholder="<?=search?>"/>
                                         <span class="input-group-addon">
@@ -60,13 +60,13 @@
         <div id="header-menu-wrapper">
             <div id="menu-content" class="container">   
                 <div class="row">
-                    <?=menu($db,$lang,$view)?>
+                    <?=menu($db,$view)?>
                 </div>
             </div>
             <?=shadowBottom()?>            
         </div>   
     </header>    
-    <section id="page-content">';
+    <section id="page-content">
     <?php
     
     switch($view){
@@ -74,42 +74,42 @@
         case 'san-pham':
         case 'search':
         case 'tim-kiem':
-            echo product($db,$lang);
+            echo product($db);
             break;
         case 'thiet-bi':
         case 'facilities':
-            echo facility($db,$lang);
+            echo facility($db);
             break;
         case 'project':
         case 'du-an':
-            echo project($db,$lang);
+            echo project($db);
             break;
         case 'promotion':
         case 'khuyen-mai':
-            echo promotion($db,$lang);
+            echo promotion($db);
             break;
         case 'recruitment':
         case 'tuyen-dung':
-            echo career($db,$lang);
+            echo career($db);
             break;
         case 'news':
         case 'tin-tuc':
-            echo news($db,$lang);
+            echo news($db);
             break;
         case 'about-us':
         case 'gioi-thieu':
-            echo about($db,$lang);
+            echo about($db);
             break;
         case 'lien-he':
         case 'contact':
-            echo contact($db,$lang);
+            echo contact($db);
             break;
         default:
-            echo home($db,$lang);
+            echo home($db);
             brea;
     }
     ?>        
-    </section>;
+    </section>
     <footer>
         <div class="container">
             <div class="row footer-top-row">
@@ -125,10 +125,10 @@
             </div>            
             <div class="row footer-content">
                 <div class="col-xs-3 footer-menu">
-                    <?=foot_menu($db,$lang,$view)?>
+                    <?=foot_menu($db,$view)?>
                 </div>
                 <div class="col-xs-3">  
-                    <?=foot_product_cate($db,$lang,$view)?>          
+                    <?=foot_product_cate($db,$view)?>          
                 </div>
                 <div class="col-xs-6">            
                     <?=common::qtext($db,4)?>

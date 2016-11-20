@@ -1,12 +1,12 @@
 <?php
 class promotion extends base{
     private $news_cateId;
-    function __construct($db,$lang='vi'){
-        parent::__construct($db,13,'news',$lang);
+    function __construct($db){
+        parent::__construct($db,13,'news');
         $this->news_cateId = 16;
     }
     function promotion_item($item){
-        $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
+        $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         return '
             <div class="row news-item wow fadeInLeft animated" data-wow-duration="1000ms" data-wow-delay="10ms">
                 <div class="col-xs-3">
@@ -45,10 +45,10 @@ class promotion extends base{
         
         $pg=new Pagination(array('limit'=>pd_lim,'count'=>$count,'page'=>$page,'type'=>0));  
         if($pId==0){
-            $pg->set_url(array('def'=>myWeb.$this->lang.'/'.$this->view,'url'=>myWeb.$this->lang.'/'.$this->view.'/page[p]'));
+            $pg->set_url(array('def'=>myWeb.$this->view,'url'=>myWeb.$this->view.'/page[p]'));
         }else{
             $cate=$this->db->where('id',$pId)->getOne('news_cate','id,title');       
-            $pg->defaultUrl = myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
+            $pg->defaultUrl = myWeb.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
             $pg->paginationUrl = $pg->defaultUrl.'/page[p]';
         }
         $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
@@ -57,8 +57,8 @@ class promotion extends base{
     }
     function promotion_one($id=1){
         $item=$this->db->where('id',$id)->getOne('news');
-        $title=$this->lang=='vi'?$item['title']:$item['e_title'];
-        $content=$this->lang=='vi'?$item['content']:$item['e_content'];
+        $title=$item['title'];
+        $content=$item['content'];
         return  
             '<article>
                 <div class="text-center">

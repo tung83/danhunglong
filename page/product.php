@@ -1,7 +1,7 @@
 <?php
 class product extends base{
-    function __construct($db,$lang='vi'){        
-        parent::__construct($db,5,'product',$lang);
+    function __construct($db){        
+        parent::__construct($db,5,'product');
     }
     function ind_product(){ 
         $str.='
@@ -14,14 +14,14 @@ class product extends base{
                 </div>
             </div> 
             <div class="col-xs-6 text-right more">
-                <a href="'.myWeb.$this->lang.'/'.$this->view.'">'.more.'</a>
+                <a href="'.myWeb.$this->view.'">'.more.'</a>
             </div>
             <div class="clearfix"></div>';
         $this->db->where('active',1)->where('home',1);
         $this->db_orderBy();
         $list=$this->db->get('product');   
         foreach($list as $item){
-            $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
+            $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=$this->first_image($item['id']);
             $str.='
             <div class="col-xs-3 product-col wow bounceIn animated" data-wow-duration="2s" data-wow-delay="60ms">
@@ -62,7 +62,7 @@ class product extends base{
         return $str;
     }
     function product_item($item){
-        $lnk=myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
+        $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         $img=$this->first_image($item['id']);
 //        $str.='
 //        <div class="col-xs-3 wow fadeInLeft product-item text-center" data-wow-duration="2s">
@@ -127,7 +127,7 @@ class product extends base{
                 $active='';
             }
             $str.='
-            <a href="'.myWeb.$this->lang.'/'.$this->view.'/'.common::slug($item['title']).'-p'.$item['id'].'"'.$active.'>
+            <a href="'.myWeb.$this->view.'/'.common::slug($item['title']).'-p'.$item['id'].'"'.$active.'>
                 '.$item['title'].'
             </a>';
         }
@@ -161,10 +161,10 @@ class product extends base{
         
         $pg=new Pagination(array('limit'=>24,'count'=>$count,'page'=>$page,'type'=>0));  
         if($pId==0){
-            $pg->set_url(array('def'=>myWeb.$this->lang.'/'.$this->view,'url'=>myWeb.$this->lang.'/'.$this->view.'/page[p]'));
+            $pg->set_url(array('def'=>myWeb.$this->view,'url'=>myWeb.$this->view.'/page[p]'));
         }else{
             $cate=$this->db->where('id',$pId)->getOne('product_cate','id,title');       
-            $pg->defaultUrl = myWeb.$this->lang.'/'.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
+            $pg->defaultUrl = myWeb.$this->view.'/'.common::slug($cate['title']).'-p'.$cate['id'];
             $pg->paginationUrl = $pg->defaultUrl.'/page[p]';
         }
         $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
@@ -198,8 +198,8 @@ class product extends base{
         
         $pg=new Pagination(array('limit'=>24,'count'=>$count,'page'=>$page,'type'=>0));  
              
-            $pg->defaultUrl = myWeb.$this->lang.'/'.search_view.'/'.$_GET['hint'];
-            $pg->paginationUrl = myWeb.$this->lang.'/'.search_view.'/page[p]'.'/'.$_GET['hint'];
+            $pg->defaultUrl = myWeb.search_view.'/'.$_GET['hint'];
+            $pg->paginationUrl = myWeb.search_view.'/page[p]'.'/'.$_GET['hint'];
         
         $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
         $this->paging_shown = ($pg->paginationTotalpages > 0);
@@ -340,9 +340,9 @@ class product extends base{
         $str.='
         <ul class="product-menu">';
         foreach($list as $cate){
-            $title=$this->lang=='en'?$cate['e_title']: $cate['title'];
+            $title=$cate['title'];
             $str.='
-            <li><a href="'.myWeb.$this->lang.'/'.$this->view.'/'.common::slug($title).'-p'.$cate["id"].'">'.$title.'</a></li>';   
+            <li><a href="'.myWeb.$this->view.'/'.common::slug($title).'-p'.$cate["id"].'">'.$title.'</a></li>';   
         }
         $str.='
         </ul>';
