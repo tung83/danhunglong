@@ -245,7 +245,7 @@ class product extends base{
                         <p>'.$item['detail'].'</p>
                     </article>
                 </div>
-                <!--div id="tabs-3">
+                <div id="tabs-3">
                     <article>
                         <p>'.$item['manual'].'</p>
                     </article>
@@ -340,11 +340,10 @@ class product extends base{
         $list=$this->db->get($this->db_cate_name);
         $str.='
         <ul class="product-menu">';
-        foreach($list as $item){
-            $title=$lang=='en'?$item['e_title']: $item['title'];
-            $db_view=$lang=='en'?$item['e_view']:$item['view'];
+        foreach($list as $cate){
+            $title=$this->lang=='en'?$cate['e_title']: $cate['title'];
             $str.='
-            <li><a href="'.myWeb.$lang.'/'.$db_view.'">'.$title.'</a></li>';   
+            <li><a href="'.myWeb.$this->lang.'/'.$this->view.'/'.common::slug($title).'-p'.$cate["id"].'">'.$title.'</a></li>';   
         }
         $str.='
         </ul>';
