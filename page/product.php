@@ -207,7 +207,7 @@ class product extends base{
     }
     function product_one($id){
         $this->db->where('id',$id);
-        $item=$this->db->getOne('product','id,price,price_reduce,title,content,pId,feature,manual,promotion,video');
+        $item=$this->db->getOne('product','id,price,price_reduce,title,content,pId,feature,detail,manual,promotion,video');
         $this->db->where('pId',$item['pId'])->where('id',$item['id'],'<>')->where('active',1)->orderBy('rand()');
         $list=$this->db->get('product');
         $lnk=domain.'/'.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];

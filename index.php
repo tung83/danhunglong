@@ -19,9 +19,7 @@
                         </div>
                         <div id="social-items" class="col-xs-6">  
                             <div class="pull-right">
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                                <a href=""><i class="fa fa-google-plus"></i></a>
+                               <?= social($db)?>
                             </div>
                         </div>
                     </div>

@@ -393,6 +393,15 @@ function shadowBottomDent(){
             </div>';
 }
 
+function social($db){
+    $basic_config=$db->where('id',1)->getOne('basic_config','social_twitter, social_facebook, social_google_plus');
+    $str.='
+        <a href="'.$basic_config['social_twitter'].'" target="_blank"><i class="fa fa-twitter"></i></a>
+        <a href="'.$basic_config['social_facebook'].'" target="_blank"><i class="fa fa-facebook"></i></a>
+        <a href="'.$basic_config['social_google_plus'].'" target="_blank"><i class="fa fa-google-plus"></i></a>
+    ';
+    return $str;
+}
 
 function gmap(){      
     return '
