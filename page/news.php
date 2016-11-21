@@ -52,7 +52,7 @@ class news extends base{
                     <a href="'.$lnk.'" class="about-item clearfix">
                         <p class="news-title">'.$item['title'].'</p>
                     </a>
-                    <p class="news-date"><i> '.date("d/m/Y",$item['date']).'</i></p>
+                    <p class="news-date"><i> '.date("d/m/Y",strtotime($item['date'])).'</i></p>
                     <div class="news-sum">
                         <span>'.nl2br(common::str_cut($item['sum'],620)).'</span>
                     </div>

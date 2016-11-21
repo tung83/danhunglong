@@ -268,6 +268,7 @@ function news($db)
             '.$form->text('meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>true)).'      
             '.$form->textarea('meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>true)).'   
             '.$form->ckeditor('content',array('label'=>'Nội dung','required'=>true)).'
+            '.$form->datepicker('date',array('label'=>'Ngày','required'=>true)).'
 
         </div>
         <div class="col-lg-12">

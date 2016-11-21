@@ -188,8 +188,6 @@ CREATE TABLE `news` (
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `title`, `sum`, `content`, `meta_keyword`, `meta_description`, `e_title`, `e_sum`, `e_content`, `e_meta_keyword`, `e_meta_description`, `pId`, `maps`, `city`, `district`, `img`, `date`, `active`, `ind`) VALUES
-
 -- --------------------------------------------------------
 
 --

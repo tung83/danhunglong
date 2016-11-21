@@ -5,10 +5,6 @@ body{
     line-height:19px;
     background: url(/file/front/light-grey-bg.png) top left repeat;
 }
-#page-content img{
-    max-width: 100% !important;
-    height: auto  !important;
-}
 #page-content table{
     max-width: 100%  !important;
 }
@@ -257,9 +253,11 @@ a.hotline{
     border: 1px solid #e1e1e1; 
     padding: 9px 9px 0px 9px;
 }
-.product-item p{
-    margin: 20px 0;
+.product-item p {
+    margin: 15px 0 5px 0;
     color: #767676;
+    min-height: 38px;
+    vertical-align: bottom;
 }
 .product-item:hover p,.product-item:focus p{
     color: #2480b8;

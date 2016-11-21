@@ -3,21 +3,18 @@
 function ad_menu()
 {
 	$topNav=array(
-                    array(1,"Slider","slider","table"),
+                    array(1,"Slider","slider","camera-retro"),
                     /*array(10,'Banner quảng cáo','ads_banner','diamond'),*/
-                    array(2,'Quản lý sản phẩm',"product","star"),
+                    array(2,'Quản lý sản phẩm',"product","dropbox"),
 					/*array(3,"Quản lý phụ tùng","accessary","pencil"),	*/	
-                    array(4,"Giới thiệu","about","fire"),
-                    array(5,'Tin tức','news','random'),   
-                    array(6,'Thiết bị','facility','usd'),   
-                    array(7,'Dự án','project','usd'),                      
-                    array(9,'Tuyển dụng','career','bell-o'),
+                    array(4,"Giới thiệu","about","credit-card"),
+                    array(5,'Tin tức','news','pencil-square-o'),   
                     //array(9,'Video','video','youtube'),
                     /*array(14,'Hỗ trợ trực tuyến','support_online','headphones'),*/
                     //array(14,'Đặt hàng','cart','shopping-cart'),
-                    array(8,'Liên hệ','contact','plus'),                    
-                    array(11,"Pages SEO","seo","fire"),
-                    array(12,"Quản lý text","qtext","music"),
+                    array(8,'Liên hệ','contact','users'),                    
+                    array(11,"Pages SEO","seo","book"),
+                    array(12,"Quản lý text","qtext","folder-open"),
                     array(15,"Cấu hình cơ bản","basic_config","cog")
 					//array(13,"Quản lý người dùng","ad_user","user")
 				);

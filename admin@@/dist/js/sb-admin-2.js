@@ -1,7 +1,10 @@
 $(function() {
 
     $('#side-menu').metisMenu();
-
+    $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+    $('.datepicker').datepicker({
+        startDate: '-3d'
+    });
 });
 
 //Loads the correct sidebar on window load,

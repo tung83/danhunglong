@@ -270,6 +270,10 @@ class  form{
         $options=array_merge($options,array('class'=>'ckeditor'));
         return $this->textarea($name,$options);
     }
+    function datepicker($name,$options=array()){
+        $options=array_merge($options,array('class'=>'datepicker', 'data-provide'=>"datepicker"));
+        return $this->input($name,$options);
+    }
     function checkbox($name,$options=array()){
         if(isset($options['disabled'])) $disabled=$options['disabled'];else $disabled=false;
          if(isset($options['checked'])) $checked=$options['checked'];else $checked=false;
