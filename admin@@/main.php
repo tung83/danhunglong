@@ -18,15 +18,13 @@
 
     <!-- Custom CSS -->
     <link href="dist/css/sb-admin-2.css" rel="stylesheet"/>
+    
+    <link href="dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.css" rel="stylesheet" type="text/css"/>
     <link href="../css/jAlert-v3.css" rel="stylesheet"/>
 
-    <!-- Datepicker-->
-    <script src="../js/moment.js"></script>
-    <script src="../js/date_picker.js"></script>
-    <link rel="stylesheet" href="../css/date_picker.css"/>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -76,6 +74,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="dist/js/sb-admin-2.js"></script>
+    <script src="dist/js/bootstrap-datepicker.min.js"></script>
     <script src="../js/validator.min.js"></script>
     <script src="../js/holder.js"></script>
 	<script src="admin.js"></script>

@@ -86,5 +86,5 @@ $(".qty_change").on("keyup",function(e){
     if(e.keyCode == 8){
        //alert("keypress");
     }
-})
+});
 

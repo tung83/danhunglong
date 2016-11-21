@@ -19,6 +19,8 @@
 
     <!-- Custom CSS -->
     <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+    
+    <link href="dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -117,6 +119,7 @@ if(isset($_POST["Sign"]))
 
     <!-- Custom Theme JavaScript -->
     <script src="dist/js/sb-admin-2.js"></script>
+    <script src="dist/js/bootstrap-datepicker.min.js"></script>
 
 </body>
 

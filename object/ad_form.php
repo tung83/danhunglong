@@ -207,7 +207,11 @@ class  form{
             $str.='<label for="'.$name.'">'.$options['label'].' :</label>';
         }
         $dimension='';
-        $dimension.=' type="'.$type.'"';
+        if(isset($options['type']) && ($options['type'] != 'datepicker')){            
+            $dimension.=' type="'.$type.'"';
+        }else{          
+            $dimension.=' type="text"';            
+        }
         $dimension.=' name="'.$name.'" id="'.$name.'"';
         $dimension.=$this->required($required);
         $dimension.=$this->disabled($disabled);
@@ -230,6 +234,21 @@ class  form{
                 <textarea '.$dimension.'>'.$value.'</textarea>
                 ';
                 break;
+            case 'datepicker':
+                $date_value = date('d/m/Y');
+                if($value && value != ''){
+                    $date_value = date('d/m/Y',strtotime($value));
+                }
+                $str.='
+                    <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-today-btn="true" data-date-today-highlight="true">
+                         <input '.$dimension.' data-provide="datepicker" value="'.$date_value.'"/>                       
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                   ';
+                break;
+                        
             default:
                 $str.='
                 <input '.$dimension.' value="'.$value.'"/>
@@ -271,7 +290,7 @@ class  form{
         return $this->textarea($name,$options);
     }
     function datepicker($name,$options=array()){
-        $options=array_merge($options,array('class'=>'datepicker', 'data-provide'=>"datepicker"));
+        $options=array_merge($options,array('type'=>'datepicker', 'class'=>'datepicker form-control'));
         return $this->input($name,$options);
     }
     function checkbox($name,$options=array()){

@@ -139,25 +139,28 @@ function news($db)
     $type='news';
     $table='news';
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
-		$db->where('id',$_POST['idLoad']);
-        $list = $db->getOne($table);
-        $btn=array('name'=>'update','value'=>'Update');
-        $form = new form($list);
+            $db->where('id',$_POST['idLoad']);
+            $list = $db->getOne($table);
+            $btn=array('name'=>'update','value'=>'Update');
+            $form = new form($list);
 	} else {
-        $btn=array('name'=>'addNew','value'=>'Submit');	
-        $form = new form();
+            $btn=array('name'=>'addNew','value'=>'Submit');	
+            $form = new form();
 	}
 	if(isset($_POST["addNew"])||isset($_POST["update"])) {
-        $title=htmlspecialchars($_POST['title']);	   
-        $sum=htmlspecialchars($_POST['sum']);
-        $content=str_replace("'","",$_POST['content']);
-        $meta_kw=htmlspecialchars($_POST['meta_keyword']);
-        $meta_desc=htmlspecialchars($_POST['meta_description']);
-        
-        $active=$_POST['active']=="on"?1:0;
-        $file=time().$_FILES['file']['name'];
-        $ind=intval($_POST['ind']);
-        $pId=intval($_POST['frm_cate_1']);
+            $title=htmlspecialchars($_POST['title']);	   
+            $sum=htmlspecialchars($_POST['sum']);
+            $content=str_replace("'","",$_POST['content']);
+            $meta_kw=htmlspecialchars($_POST['meta_keyword']);
+            $meta_desc=htmlspecialchars($_POST['meta_description']);
+
+            $active=$_POST['active']=="on"?1:0;
+            $file=time().$_FILES['file']['name'];
+            $ind=intval($_POST['ind']);
+            
+            $dateInfo = date_parse_from_format('d/m/Y', $_POST['date']);
+            $date = $dateInfo['year'].'-'.$dateInfo['month'].'-'.$dateInfo['day'];
+            $pId=intval($_POST['frm_cate_1']);
 	}
     if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
         $list = explode(',',$_POST['listDel']);
@@ -172,41 +175,46 @@ function news($db)
         header("location:".$_SERVER['REQUEST_URI'],true);
     }
 	if(isset($_POST["addNew"])) {
-        $insert = array(
-            'title'=>$title,'sum'=>$sum,'content'=>$content,
-            
-            'active'=>$active,'ind'=>$ind,'pId'=>$pId
-        );
-		try{
-            $recent = $db->insert($table,$insert);
-            if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(210,150, 'fill')->saveToFile(myPath.$file);
-                $db->where('id',$recent);
-                $db->update($table,array('img'=>$file));
-            }
-            header("location:".$_SERVER['REQUEST_URI'],true); 
-        } catch(Exception $e) {
-            $msg=$e->getMessage();
-        }			
+            $insert = array(
+                'title'=>$title,'sum'=>$sum,'content'=>$content,
+                'meta_keyword'=>$meta_kw,
+                'meta_description'=>$meta_desc,
+                'date'=>$date,
+                'active'=>$active,'ind'=>$ind,'pId'=>$pId
+            );
+                    try{
+                $recent = $db->insert($table,$insert);
+                if(common::file_check($_FILES['file'])){
+                    WideImage::load('file')->resize(210,150, 'fill')->saveToFile(myPath.$file);
+                    $db->where('id',$recent);
+                    $db->update($table,array('img'=>$file));
+                }
+                header("location:".$_SERVER['REQUEST_URI'],true); 
+            } catch(Exception $e) {
+                $msg=$e->getMessage();
+            }			
 	}
 	if(isset($_POST["update"]))	{
-        $update=array(
-            'title'=>$title,'sum'=>$sum,'content'=>$content,
-            
-            'active'=>$active,'ind'=>$ind,'pId'=>$pId
-        );
-        if(common::file_check($_FILES['file'])){
-            WideImage::load('file')->resize(210,150, 'fill')->saveToFile(myPath.$file);
-            $update = array_merge($update,array('img'=>$file));
-            $form->img_remove($_POST['idLoad'],$db,$table);
-        }
-        try{
-            $db->where('id',$_POST['idLoad']);
-            $db->update($table,$update);  
-            header("location:".$_SERVER['REQUEST_URI'],true);   
-        } catch (Exception $e){
-            $msg = $e->getMessage();
-        }
+            $update=array(
+                'title'=>$title,'sum'=>$sum,'content'=>$content,
+                'meta_keyword'=>$meta_kw,
+                'meta_description'=>$meta_desc,
+                'date'=>$date,
+                'active'=>$active,'ind'=>$ind,'pId'=>$pId
+            );
+            if(common::file_check($_FILES['file'])){
+                WideImage::load('file')->resize(210,150, 'fill')->saveToFile(myPath.$file);
+                $update = array_merge($update,array('img'=>$file));
+                $form->img_remove($_POST['idLoad'],$db,$table);
+            }
+            try{
+                $db->where('id',$_POST['idLoad']);
+                $db->update($table,$update);  
+                //header("location:".$_SERVER['REQUEST_URI'],true);   
+            } catch (Exception $e){
+                $msg = $e->getMessage();
+                var_dump($msg);
+            }
 	}
 	
 	if(isset($_POST["Del"])&&$_POST["Del"]==1) {
@@ -269,7 +277,7 @@ function news($db)
             '.$form->textarea('meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>true)).'   
             '.$form->ckeditor('content',array('label'=>'Nội dung','required'=>true)).'
             '.$form->datepicker('date',array('label'=>'Ngày','required'=>true)).'
-
+             
         </div>
         <div class="col-lg-12">
             '.$form->file('file',array('label'=>'Hình ảnh<code>210px:150px</code>')).'

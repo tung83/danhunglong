@@ -8,6 +8,9 @@ body{
 #page-content table{
     max-width: 100%  !important;
 }
+form#search input:focus,form#search button:focus{
+    outline:none;
+}
 #google-map {
     height: 645px;
     margin-bottom: 20px;
@@ -394,7 +397,7 @@ ul.dropdown-menu {
     padding: 15px 5px 5px 40px;
 }
 .nav > li:nth-child(3) ul.dropdown-menu {    
-    left: -30px !important;
+    left: -55px !important;
 }
 .nav > li:nth-child(4) ul.dropdown-menu {    
     left: -55px !important;
