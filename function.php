@@ -8,7 +8,97 @@ function pageId($view){
     }
     return '';
 }
-function menu($db, $view){
+function menu($db,$view){
+    $db->reset();
+    $list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get('menu');
+    $str.='
+    <div class="wsmobileheader clearfix">
+        <a id="wsnavtoggle" class="animated-arrow"><span></span></a>
+        <a class="smallogo"><img src="'.frontPath.'logo.png" height="35" alt="" /></a>
+        <a class="callusicon" href="tel:0982 056 888"><span class="fa fa-phone"></span></a>
+    </div>            
+    <div class="header">
+    <div class="nav hidden-xs">
+    	<div class="container">
+            <div class="row">
+                <div class="before-comp-name"> </div>
+                <div class="comp-name">
+                    <span class="first-comp">Công ty tnhh kỹ thuật tự động</span><p class="sencond-comp">Thái Bình</p>
+                </div>
+                <div class=" pull-right">   
+                    <div class="header-contact">
+                        <span class="shop-contact first">
+                                <i class="fa fa-phone"></i> '.common::qtext($db,5).' 
+                        </span>
+                        <form>
+                            <div class="input-group search">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-describedby="basic-addon2">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="social_block">    					
+                        <a class="_blank" href="https://www.facebook.com/congtyotobinhlam" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a class="_blank" href="#" target="_blank"><i class="fa fa-twitter"></i></a>   
+                        <a class="_blank" href="#" target="_blank">
+                            <i class="fa fa-google-plus"></i>
+                        </a>								
+                    </div>
+                </div>
+            </div>
+    	</div>
+    </div>
+    <div class="menu-ground">
+    <div class="container clearfix bigmegamenu">
+    <div class="row">
+        <div class="logo clearfix">
+            <a href="'.myWeb.'" title="Responsive Slide Menus"><img src="'.frontPath.'logo.png" alt="" style=""/></a>
+        </div>
+
+        <!--Main Menu HTML Code-->
+        <nav class="wsmenu clearfix">
+            <ul class="mobile-sub wsmenu-list">';
+        foreach($list as $item){
+            $active=($view==$item['view'])?'active':'';
+            $title=$item['title'];
+            $lnk=myWeb.$item['view'];            
+            switch($item['view']){
+                case 'san-pham':
+                    $str.='
+                        <li><span class="wsmenu-click"><i class="wsmenu-arrow fa fa-angle-down"></i></span>
+                            <a href="'.$lnk.'" class="'.$active.'">'.$title.'<span class="arrow"></span></a>
+                            <ul class="wsmenu-submenu">';
+                    $cate=$db->where('active',1)->orderBy('ind','ASC')->get('product_cate',null,'id,title');
+                    foreach($cate as $cate_item){
+                        $lnk=myWeb.$item['view'].'/'.common::slug($cate_item['title']).'-p'.$cate_item['id'];                        
+                        $str.='                        
+                                <li><a href="'.$lnk.'"><i class="fa fa-angle-right"></i>'.$cate_item['title'].' </a></li>';
+                    }
+                    $str.=' </ul>
+                        </li>';
+                    break;
+                default:    
+                    $str.='
+                        <li><a href="'.$lnk.'"  class="'.$active.'">'.$title.'</a></li>';
+                    break;
+            }
+        }
+        $str.='            
+            </ul>
+        </nav>
+        <!--Menu HTML Code-->    
+    </div>    
+    </div>   
+    </div>    
+    </div>';
+    return $str;
+}
+
+function menu2($db, $view){
     $db->reset();
     $list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get('menu');
     $str.='         

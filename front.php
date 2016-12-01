@@ -16,6 +16,7 @@ $css=array(
     'ribbon',
     'hover',
     'nice-tabs',
+    'webslidemenu',
     'self'
 );
 $js=array(
@@ -32,6 +33,7 @@ $js=array(
     'layerslider.greensock',
     'layerslider.transitions',
     'wow',
+    'webslidemenu',
     'slick.min',
     'jquery.flexslider',
     'modernizr.custom.new',

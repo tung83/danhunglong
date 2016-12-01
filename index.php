@@ -4,66 +4,17 @@
     <meta charset="utf-8"/>
     <meta name="author" content=""/>
     <?=page_header($view,$db)?>  
-    <link rel="icon" type="image/png" href="<?=frontPath?>logo.png"/>   
+    <link rel="icon" type="image/png" href="<?=frontPath?>logo-ico.png"/>   
     <?=common::basic_css()?> 
     <?=common::basic_js()?>
 </head>
 <body id="<?=pageId($view)?>">
-    <header>
-        <div id="welcome">
-            <div class="container">
-                <div class="row">
-                    <div class="row">
-                        <div id="welcome-text" class="col-xs-6">
-                            Chào mừng bạn đến với website của chúng tôi!
-                        </div>
-                        <div id="social-items" class="col-xs-6">  
-                            <div class="pull-right">
-                               <?= social($db)?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div id="header-content-wrapper">
-            <div class="container">
-                <div id="header-content" class="row">                    
-                    <div class="row">
-                        <div id="header-logo" class="col-xs-3">
-                            <a href="<?=myWeb?>"><img src="<?=frontPath?>header-logo.png" alt="" title=""/></a>
-                        </div>
-                        <div class="col-xs-9 pull-right"> 
-                            <div class="pull-right">Hotline: <a class="hotline" href="tel:<?=common::qtext($db,2)?>"><?=common::qtext($db,2)?></a></div>
-                            <div class="clearfix"></div>
-                            <div id="search-container" class="pull-right">
-                                <form role="form" method="get" name="search" id="search">                                    
-                                    <input type="hidden" id="search-link" value="<?=myWeb.search_view.'/'?>" />
-                                    <div class="input-group">
-                                        <input type="text" id="hint" class="form-control" placeholder="<?=search?>"/>
-                                        <span class="input-group-addon">
-                                            <button type="submit">
-                                                <span class="fa fa-search"></span>
-                                            </button>  
-                                        </span>  
-                                    </div>
-                                </form>
-                            </div>
-                            </div>
-                    </div>
-                    </div>
-            </div>
-        </div>
-        <div id="header-menu-wrapper">
-            <div id="menu-content" class="container">   
-                <div class="row">
-                    <?=menu($db,$view)?>
-                </div>
-            </div>
-            <?=shadowBottom()?>            
-        </div>   
-    </header>    
+    <div class="wsmenucontainer clearfix">
+        <div class="overlapblackbg"></div>
+        <header>
+            <?=menu($db,$view)?>         
+        </header>  
+        <div class="wrapper">
     <section id="page-content">
     <?php
     
