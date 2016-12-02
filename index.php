@@ -1,7 +1,8 @@
 <?php include_once 'function.php';?><!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8"/>    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content=""/>
     <?=page_header($view,$db)?>  
     <link rel="icon" type="image/png" href="<?=frontPath?>logo-ico.png"/>   
@@ -15,89 +16,98 @@
             <?=menu($db,$view)?>         
         </header>  
         <div class="wrapper">
-    <section id="page-content">
-    <?php
-    
-    switch($view){
-        case 'product':
-        case 'san-pham':
-        case 'search':
-        case 'tim-kiem':
-            echo product($db);
-            break;
-        case 'thiet-bi':
-        case 'facilities':
-            echo facility($db);
-            break;
-        case 'project':
-        case 'du-an':
-            echo project($db);
-            break;
-        case 'promotion':
-        case 'khuyen-mai':
-            echo promotion($db);
-            break;
-        case 'recruitment':
-        case 'tuyen-dung':
-            echo career($db);
-            break;
-        case 'news':
-        case 'tin-tuc':
-            echo news($db);
-            break;
-        case 'about-us':
-        case 'gioi-thieu':
-            echo about($db);
-            break;
-        case 'lien-he':
-        case 'contact':
-            echo contact($db);
-            break;
-        default:
-            echo home($db);
-            brea;
-    }
-    ?>        
-    </section>
-    <footer>
-        <div class="container">
-            <div class="row footer-top-row">
-                <div class="col-xs-3 footer-menu">
-                    Menu
-                </div>
-                <div class="col-xs-3">
-                    Danh mục sản phẩm
-                </div>
-                <div class="col-xs-6">
-                    Thông tin liên hệ
-                </div>
-            </div>            
-            <div class="row footer-content">
-                <div class="col-xs-3 footer-menu">
-                    <?=foot_menu($db,$view)?>
-                </div>
-                <div class="col-xs-3">  
-                    <?=foot_product_cate($db,$view)?>          
-                </div>
-                <div class="col-xs-6">            
-                    <?=common::qtext($db,4)?>
-                </div>
-            </div>
-            <?=shadowBottomRow()?>
-            <div class="row">                
-                <div class="row">
-                    <div class="col-xs-12 text-center copyright">
-                        Copyright © 2016 <b class="company">Dan Hung Long</b>, All rights reserved. Designed by <a class="psmedia">PSmedia.vn</a>
+        <section id="page-content">
+        <?php
+
+        switch($view){
+            case 'product':
+            case 'san-pham':
+            case 'search':
+            case 'tim-kiem':
+                echo product($db);
+                break;
+            case 'thiet-bi':
+            case 'facilities':
+                echo facility($db);
+                break;
+            case 'project':
+            case 'du-an':
+                echo project($db);
+                break;
+            case 'promotion':
+            case 'khuyen-mai':
+                echo promotion($db);
+                break;
+            case 'recruitment':
+            case 'tuyen-dung':
+                echo career($db);
+                break;
+            case 'news':
+            case 'tin-tuc':
+                echo news($db);
+                break;
+            case 'about-us':
+            case 'gioi-thieu':
+                echo about($db);
+                break;
+            case 'lien-he':
+            case 'contact':
+                echo contact($db);
+                break;
+            default:
+                echo home($db);
+                brea;
+        }
+        ?>        
+        </section>
+        <footer>
+            <div class="container">
+                <div class="row footer-top-row">
+                    <div class="col-md-3 col-xs-5 footer-menu">
+                        <span class="footer-menu-span">
+                            Menu
+                        </span>
+                        <div class="footer-menu-span">
+                            <?=foot_menu($db,$view)?>
+                        </div>     
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <span class="footer-product-span">
+                            Danh mục sản phẩm
+                        </span>
+                        <div class="footer-product-span">
+                            <?=foot_product_cate($db,$view)?>   
+                        </div>  
+                    </div>
+                    <div class="col-md-6">
+                        <span class="footer-contact-span">
+                            Thông tin liên hệ
+                        </span>    
+                        <div class="footer-contact-span">
+                            <?=common::qtext($db,4)?>
+                        </div>      
+                    </div>
+                </div>  
+            </div> 
+            <div class="copyright-wrapper">
+                <div class="container">             
+                    <div class="row">                
+                        <div class="row">
+                            <div class="col-md-12 text-center copyright">
+                                Copyright © 2016 <b class="company">Dan Hung Long</b>, All rights reserved. Designed by <a class="psmedia">PSmedia.vn</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>    
+        </footer>
         </div>
-    </footer>
+    </div>
 
 <div class="coccoc-alo-phone coccoc-alo-green coccoc-alo-show" id="coccoc-alo-phoneIcon" style="left: 0px; bottom: 0px;">
-	<div class="coccoc-alo-ph-circle"></div>
-	<div class="coccoc-alo-ph-circle-fill"></div>
-	<div class="coccoc-alo-ph-img-circle">
+    <div class="coccoc-alo-ph-circle"></div>
+    <div class="coccoc-alo-ph-circle-fill"></div>
+    <div class="coccoc-alo-ph-img-circle">
         <a href="tel:<?=common::qtext($db,2)?>"><img src="<?=frontPath?>phone-ring.png" alt=""/></a>
     </div>
 </div>

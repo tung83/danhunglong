@@ -18,7 +18,7 @@ function menu($db,$view){
         <a class="callusicon" href="tel:0982 056 888"><span class="fa fa-phone"></span></a>
     </div>            
     <div class="header">
-    <div class="nav hidden-xs">
+    <div class="nav hidden-xs hidden-sm">
     	<div class="container">
             <div class="row">
                 <div class="before-comp-name"> </div>
@@ -228,7 +228,7 @@ function home($db){
         <div class="container">
             <div class="row">
                 <div id="slider-box">
-                    '.wow_slider($db).'
+                  
                 </div>
             </div>
         </div>
