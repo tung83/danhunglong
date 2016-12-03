@@ -11,20 +11,22 @@ class about extends base{
         $title=$item['title'];
         $sum=$item['sum'];  
         $str='
-        <div class="row ind-about wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="10ms">
-            <div class="col-xs-4"> 
-                <a href="'.myWeb.$this->view.'">
-                    <img src="'.webPath.$item['img'].'" class="img-responsive" alt="" title=""/>
-                </a>
+        <div class="ind-about wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="10ms">
+            <div class="container">
+                <div class="row">            
+                    <div class="col-xs-12">
+                        <div class="title-head">
+                            <span>'
+                                .$this->title.' 
+                            </span>
+                        </div>
+                        <p class="text-center">'.$sum.'</p>
+                        <p class="text-right more">
+                            <a href="'.myWeb.$this->view.'">'.more.'</a>
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-8">
-                <a href="'.myWeb.$this->view.'">
-                    <h2 class="title">'.$title.'</h2>
-                </a>
-                <p>'.common::str_cut($sum,400).'</p>
-                <p class="text-right more">
-                    <a href="'.myWeb.$this->view.'">'.more.'</a>
-                </p>
             </div>
         </div>';
         return $str;

@@ -1,0 +1,10 @@
+diff a/function.php b/function.php	(rejected hunks)
+@@ -228,7 +228,7 @@
+         <div class="container">
+             <div class="row">
+                 <div id="slider-box">
+-                    '.wow_slider($db).'
++                  
+                 </div>
+             </div>
+         </div>

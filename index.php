@@ -62,30 +62,37 @@
         </section>
         <footer>
             <div class="container">
-                <div class="row footer-top-row">
+                <div class="row footer-content">
                     <div class="col-md-3 col-xs-5 footer-menu">
-                        <span class="footer-menu-span">
-                            Menu
-                        </span>
-                        <div class="footer-menu-span">
-                            <?=foot_menu($db,$view)?>
-                        </div>     
+                        <div class="footer-menu-part">
+                            <span class="footer-top-span">
+                                Menu
+                            </span>
+                            <div>
+                                <?=foot_menu($db,$view)?>
+                            </div>     
+                        </div>
                     </div>
                     <div class="col-md-3 col-xs-6">
-                        <span class="footer-product-span">
-                            Danh mục sản phẩm
-                        </span>
-                        <div class="footer-product-span">
-                            <?=foot_product_cate($db,$view)?>   
-                        </div>  
+                        <div class="footer-product-part">
+                            <span class="footer-top-span">
+                                Sản phẩm
+                            </span>
+                            <div>
+                                <?=foot_product_cate($db,$view)?>   
+                            </div>  
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <span class="footer-contact-span">
-                            Thông tin liên hệ
-                        </span>    
-                        <div class="footer-contact-span">
-                            <?=common::qtext($db,4)?>
-                        </div>      
+                        <div class="footer-contact-part">
+                            <span class="footer-top-span">
+                                Liên hệ công ty
+                            </span>    
+                            <div>
+                                <?=common::qtext($db,4)?>
+                            </div> 
+                            <?=social($db)?>
+                        </div>
                     </div>
                 </div>  
             </div> 
@@ -94,7 +101,7 @@
                     <div class="row">                
                         <div class="row">
                             <div class="col-md-12 text-center copyright">
-                                Copyright © 2016 <b class="company">Dan Hung Long</b>, All rights reserved. Designed by <a class="psmedia">PSmedia.vn</a>
+                                Copyright © 2016 <b class="company">Thái Bình</b>, All rights reserved. Designed by <a class="psmedia"><b>PSmedia.vn</b></a>
                             </div>
                         </div>
                     </div>

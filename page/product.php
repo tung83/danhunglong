@@ -5,16 +5,13 @@ class product extends base{
     }
     function ind_product(){ 
         $str.='
-        <section class="row ind-product"> 
-            <div class="col-xs-6">
+        <section class="ind-product"> 
+            <div class="col-xs-12">
                 <div class="title-head">
                     <span>'
                         .$this->title.' 
                     </span>
                 </div>
-            </div> 
-            <div class="col-xs-6 text-right more">
-                <a href="'.myWeb.$this->view.'">'.more.'</a>
             </div>
             <div class="clearfix"></div>';
         $this->db->where('active',1)->where('home',1);
@@ -24,16 +21,23 @@ class product extends base{
             $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=$this->first_image($item['id']);
             $str.='
-            <div class="col-xs-3 product-col wow bounceIn animated" data-wow-duration="2s">
-                <div class="product-item">
+            <div class="col-md-2 col-sm-3 col-xs-12 product-col wow bounceIn animated" data-wow-duration="2s">
+                <div class="product-item item">
                     <a href="'.$lnk.'">
                         <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
-                        <p class="text-center">'.$item['title'].'</p>
+                    </a>
+                    <a href="'.$lnk.'">                    
+                        <p class="item-title text-center">'.$item['title'].'</p>
                     </a>
                 </div>
             </div>';
         }
-        $str.='
+        $str.=' 
+            <div class="clearfix"></div>
+                <div class="text-center">
+                    <a class="btn btn-primary btn-primary-long see-more" href="'.myWeb.$this->view.'">'.more_button.'</a>      
+                </div>
+            </div>
         </section><!--/#partner-->';
         
         return $str;

@@ -15,7 +15,7 @@ function menu($db,$view){
     <div class="wsmobileheader clearfix">
         <a id="wsnavtoggle" class="animated-arrow"><span></span></a>
         <a class="smallogo"><img src="'.frontPath.'logo.png" height="35" alt="" /></a>
-        <a class="callusicon" href="tel:0982 056 888"><span class="fa fa-phone"></span></a>
+        <a class="callusicon" href="tel:'.common::qtext($db,5).'"><span class="fa fa-phone"></span></a>
     </div>            
     <div class="header">
     <div class="nav hidden-xs hidden-sm">
@@ -24,30 +24,22 @@ function menu($db,$view){
                 <div class="before-comp-name"> </div>
                 <div class="comp-name">
                     <span class="first-comp">Công ty tnhh kỹ thuật tự động</span><p class="sencond-comp">Thái Bình</p>
-                </div>
-                <div class=" pull-right">   
-                    <div class="header-contact">
-                        <span class="shop-contact first">
-                                <i class="fa fa-phone"></i> '.common::qtext($db,5).' 
-                        </span>
-                        <form>
+                </div> 
+                <div>
+                    <div class="header-contact pull-right">                   
+                        <form class="pull-right">
                             <div class="input-group search">
                                 <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-describedby="basic-addon2">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
-                        </form>
+                        </form> 
+                        <span class="shop-contact first  pull-right">
+                            <i class="fa fa-phone"></i> '.common::qtext($db,5).' 
+                        </span>
                     </div>
-                    <div id="social_block">    					
-                        <a class="_blank" href="https://www.facebook.com/congtyotobinhlam" target="_blank">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a class="_blank" href="#" target="_blank"><i class="fa fa-twitter"></i></a>   
-                        <a class="_blank" href="#" target="_blank">
-                            <i class="fa fa-google-plus"></i>
-                        </a>								
-                    </div>
+                    '.social($db).' 
                 </div>
             </div>
     	</div>
@@ -225,19 +217,13 @@ function foot_product_cate($db,$view){
 function home($db){    
     $str='
     <section id="ind-slider">
-        <div class="container">
-            <div class="row">
-                <div id="slider-box">
-                  
-                </div>
-            </div>
+        <div id="slider-box">
+            '.wow_slider($db).'
         </div>
-        '.shadowBottom().' 
     </section>';   
     
     $str.='
-    <section id="index">
-        <div class="container">';
+    <section id="index">';
     common::page('about');
     $about=new about($db);
     $str.=$about->ind_about();
@@ -252,7 +238,6 @@ function home($db){
     $str.=$news->ind_news();
     
     $str.='
-        </div>
     </section>';
     
     
@@ -485,14 +470,15 @@ function shadowBottomDent(){
 
 function social($db){
     $basic_config=$db->where('id',1)->getOne('basic_config','social_twitter, social_facebook, social_google_plus');
-    $str.='
-        <a href="'.$basic_config['social_twitter'].'" target="_blank"><i class="fa fa-twitter"></i></a>
-        <a href="'.$basic_config['social_facebook'].'" target="_blank"><i class="fa fa-facebook"></i></a>
-        <a href="'.$basic_config['social_google_plus'].'" target="_blank"><i class="fa fa-google-plus"></i></a>
+    $str.=' 
+        <div id="social_block">    
+            <a href="'.$basic_config['social_twitter'].'" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="'.$basic_config['social_facebook'].'" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="'.$basic_config['social_google_plus'].'" target="_blank"><i class="fa fa-google-plus"></i></a>			
+        </div>
     ';
     return $str;
 }
-
 function gmap(){      
     return '
         <script>   

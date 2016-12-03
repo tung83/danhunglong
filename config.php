@@ -24,7 +24,7 @@ unset($process);
 //define area
 define('_hostName'  , 'localhost');	
 define('_userName'  , 'tung');	
-define('_dbName'    , 'danhunglong_db');	
+define('_dbName'    , 'psmedia_dhl');	
 define('_pass'      , 'tung');
 
 

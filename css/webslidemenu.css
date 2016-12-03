@@ -331,7 +331,6 @@
 	z-index:1000;
 	margin:0px;
 	padding:2px;
-	border:solid 1px #eeeeee;
 	background-color:#fff;
 	opacity: 0;
 	-o-transform-origin: 0% 0%;
@@ -344,9 +343,9 @@
 	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;}
 
 .wsmenu-submenu li a {
-	background:#fff !important;
+	background:#db5010 !important;
 	background-image:none !important;
-	color: #666666 !important;
+	color: #fff !important;
 	border-right: 0 none !important;
 	text-align:left;
 	display:block;
@@ -413,7 +412,7 @@
 .hometext{ display:block !important;}
 .wsmenu{ width:100%; font-size:13px !important; position:relative;}
 .bigmegamenu{ position:static !important; }
-.wsmenu-list li a { white-space:nowrap !important; padding-left:4px !important; padding-right:10px !important;}
+.wsmenu-list li a { white-space:nowrap !important; padding-left:10px !important; padding-right:10px !important;}
 .megacollink {width:48%; margin:1% 1%;}
 .typographylinks{width:48%; margin:1% 1%;}
 

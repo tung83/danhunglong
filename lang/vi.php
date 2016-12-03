@@ -12,7 +12,7 @@ define('onl'            ,'Đang online');
 define('vis'            ,'Tổng truy cập');
 define('city_choose'    ,'Chọn tỉnh/Thành phố...');
 define('dist_choose'    ,'Chọn quận/huyện...');
-define('more'           ,'Xem thêm...');
+define('more'           ,'Chi tiết...');
 define('about_title'    ,'Giới Thiệu');
 define('product_title'  ,'Sản phẩm');
 define('detail_price'   ,'Giá');

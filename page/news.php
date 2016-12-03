@@ -9,34 +9,42 @@ class news extends base{
         $this->db_orderBy();
         $list=$this->db->get('news',5);
         $str='
-        <div class="row ind-news">
-            <div class="col-xs-12">
-                <div class="title-head">
-                    <span>'
-                        .$this->title.' 
-                    </span>
-                </div>
-            </div>';
+        <div class="ind-news">  
+            <div class="container">
+                <div class="row">   
+                <div class="row">    
+                    <div class="col-xs-12">
+                        <div class="title-head">
+                            <span>'
+                                .$this->title.' 
+                            </span>
+                        </div>
+                    </div>';
         foreach($list as $item){
             $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=webPath.$item['img'];
             if($img=='') $img='holder.js/126x100';
             $str.='
-                <div class="col-xs-3 news-col wow fadeIn animated" data-wow-duration="1000ms">
-                    <div class="news-item">
-                        <a href="'.$lnk.'">
-                            <img src="'.$img.'" alt="'.$item['title'].'" class="img-responsive"/>
-                            <p class="news-item-title">'.common::str_cut($item['title'],30).'</p>
-                            <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
-                        </a>
-                    </div>
-                </div>';   
+                    <div class="col-md-4 col-sm-6 col-xs-12 news-col wow fadeIn animated" data-wow-duration="1000ms">
+                        <div class="news-item">
+                            <a href="'.$lnk.'">
+                                <img src="'.$img.'" alt="'.$item['title'].'" class="img-responsive"/>
+                                <p class="news-item-title">'.common::str_cut($item['title'],30).'</p>
+                                <p class="news-date">'.date("d/m/Y",strtotime($item['date'])).'</p>
+                                <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
+                            </a>
+                        </div>
+                    </div>';   
         }
-        $str.='<div class="clearfix"></div>
-            <div class="text-center">
-                <a class="btn btn-primary" href="'.myWeb.$this->view.'">'.more_button.'</a>      
-            </div>
-        </div>';
+        $str.='
+                    <div class="clearfix"></div>
+                        <div class="text-center">
+                            <a class="btn btn-primary btn-primary-long see-more" href="'.myWeb.$this->view.'">'.more_button.'</a>      
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>';
         return $str;
     }
     function news_item($item){
