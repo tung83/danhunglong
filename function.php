@@ -25,8 +25,8 @@ function menu($db,$view){
                 <div class="comp-name">
                     <span class="first-comp">Công ty tnhh kỹ thuật tự động</span><p class="sencond-comp">Thái Bình</p>
                 </div> 
-                <div>
-                    <div class="header-contact pull-right">                   
+                <div class="header-right">
+                    <div class="header-contact">                   
                         <form class="pull-right">
                             <div class="input-group search">
                                 <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-describedby="basic-addon2">
@@ -36,7 +36,10 @@ function menu($db,$view){
                             </div>
                         </form> 
                         <span class="shop-contact first  pull-right">
-                            <i class="fa fa-phone"></i> '.common::qtext($db,5).' 
+                            <i class="fa fa-phone"></i>
+                               <a href="tel:'.common::qtext($db,5).'">'
+            . '                     <b> '.common::qtext($db,5).' </b>
+                               </a> 
                         </span>
                     </div>
                     '.social($db).' 
@@ -57,14 +60,21 @@ function menu($db,$view){
         foreach($list as $item){
             $active=($view==$item['view'])?'active':'';
             $title=$item['title'];
-            $lnk=myWeb.$item['view'];            
+            $lnk=myWeb.$item['view'];  
+            $db_cate_name = null;          
             switch($item['view']){
                 case 'san-pham':
-                    $str.='
+                    $db_cate_name = 'product_cate';                    
+                    break;
+                case 'tin-tuc':
+                    $db_cate_name = 'news_cate';  
+            }
+            if(isset($db_cate_name)){
+                $str.='
                         <li><span class="wsmenu-click"><i class="wsmenu-arrow fa fa-angle-down"></i></span>
                             <a href="'.$lnk.'" class="'.$active.'">'.$title.'<span class="arrow"></span></a>
                             <ul class="wsmenu-submenu">';
-                    $cate=$db->where('active',1)->orderBy('ind','ASC')->get('product_cate',null,'id,title');
+                    $cate=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get($db_cate_name,null,'id,title');
                     foreach($cate as $cate_item){
                         $lnk=myWeb.$item['view'].'/'.common::slug($cate_item['title']).'-p'.$cate_item['id'];                        
                         $str.='                        
@@ -72,12 +82,10 @@ function menu($db,$view){
                     }
                     $str.=' </ul>
                         </li>';
-                    break;
-                default:    
-                    $str.='
-                        <li><a href="'.$lnk.'"  class="'.$active.'">'.$title.'</a></li>';
-                    break;
+                continue;
             }
+            $str.='
+                <li><a href="'.$lnk.'"  class="'.$active.'">'.$title.'</a></li>';
         }
         $str.='            
             </ul>
@@ -87,66 +95,6 @@ function menu($db,$view){
     </div>   
     </div>    
     </div>';
-    return $str;
-}
-
-function menu2($db, $view){
-    $db->reset();
-    $list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get('menu');
-    $str.='         
-    <ul class="nav nav-justified nav-pills">';
-    foreach($list as $item){
-        $title=$item['title'];
-        $db_view=$item['view'];
-        $active = ($view==$db_view) ? 'active': '';
-        $db_cate_name = null;
-        switch ($db_view){
-            case 'san-pham':
-                $db_cate_name = 'product_cate';
-                break;
-            case 'tin-tuc':
-                $db_cate_name = 'news_cate';
-                break;
-                
-        }
-        if(isset($db_cate_name)){
-            $str.='<li role="presentation" class="dropdown '.$active.'"> '
-                    . '<a href="'.myWeb.$db_view.'" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'
-                    . ''.$title.'</a> '
-                    .menu_cate_lev1($db,$db_cate_name,$db_view)
-                . '</li>';
-            continue;
-        }
-        $str.='
-        <li class="'.$active.'"><a href="'.myWeb.$db_view.'">'.$title.'</a></li>';
-    }
-    $str.='               
-    </ul>'  ;
-    return $str;
-}
-function menu_cate_lev1($db,$table, $db_view){
-    $str = '';
-    $db->reset();
-    $sub_list=$db->where('active',1)->orderBy('ind','ASC')->orderBy('id')->get($table,null,'id,title');
-    if(count($sub_list)>0){
-        $cate_link = myWeb.$db_view;
-        $str.='
-        <ul class="dropdown-menu">';
-        foreach($sub_list as $sub_item){
-            $sub_lnk=$cate_link.'/'.common::slug($sub_item['title']).'-p'.$sub_item['id'];
-            $str.='<li>'
-                    . '<a href="'.$sub_lnk.'">'.$sub_item['title'].'</a>'
-                    . '<hr/>'
-                . '</li>'; 
-            
-        }
-        $str.='<li>'
-                . '<a href="'.$cate_link.'">'.all_menu_items.'</a>'
-                . '<hr/>'
-            . '</li>'; 
-        $str.='
-        </ul>';        
-    }
     return $str;
 }
 
@@ -161,7 +109,7 @@ function page_header($view, $db)
             $cate_table = 'product_cate';
             break;
         case 'tin-tuc':   
-        case 'khuyen-mai':   
+        case 'tuyen-dung':   
             $item_table = 'news';
             $cate_table = 'news_cate';
             break;  
@@ -321,21 +269,6 @@ function contact($db){
     </section>';
     return $str;
 }
-function career($db){
-    $str.='
-    <section id="page">';
-    common::page('career');
-    $career=new career($db);
-    $str.=$career->breadcrumb();
-    if(isset($_GET['id'])){
-        $str.=$career->career_one();    
-    }else{
-        $str.=$career->career_all();
-    }    
-    $str.='
-    </section>';
-    return $str;
-}
 function project($db){
     $str.='
     <section id="page">';
@@ -346,21 +279,6 @@ function project($db){
         $str.=$project->project_one();    
     }else{
         $str.=$project->project_all();
-    }    
-    $str.='
-    </section>';
-    return $str;
-}
-function facility($db){
-    $str.='
-    <section id="page">';
-    common::page('facility');
-    $facility=new facility($db);
-    $str.=$facility->breadcrumb();
-    if(isset($_GET['id'])){
-        $str.=$facility->facility_one();    
-    }else{
-        $str.=$facility->facility_all();
     }    
     $str.='
     </section>';
@@ -390,17 +308,17 @@ function news($db){
     $str.=$news->bottom_content(); 
     return $str;
 }
-function promotion($db){
-    common::page('promotion');
-    $promotion=new promotion($db);
-    $str.=$promotion->breadcrumb_with_Id();
-    $str.=$promotion->top_content('');
+function career($db){
+    common::page('career');
+    $career=new career($db);
+    $str.=$career->breadcrumb_with_Id();
+    $str.=$career->top_content('');
     if(isset($_GET['id'])){
-        $str.=$promotion->promotion_one(intval($_GET['id']));    
+        $str.=$career->career_one(intval($_GET['id']));    
     }else{
-        $str.=$promotion->promotion_cate();
+        $str.=$career->career_cate();
     }     
-    $str.=$promotion->bottom_content(); 
+    $str.=$career->bottom_content(); 
     return $str;
 }
 function manual($db){
@@ -438,6 +356,45 @@ function product($db){
     $str.=$pd->bottom_content(); 
     return $str;
 }
+
+function bien_tan($db){
+    common::page('bien_tan');
+    $bien_tan=new bien_tan($db);
+    $str.=$bien_tan->breadcrumb_with_Id();
+    $str.=$bien_tan->top_content('');
+    if(isset($_GET['id'])){
+        $str.=$bien_tan->product_one(intval($_GET['id']));    
+    }else{
+        $str.=$bien_tan->product_cate();
+    }     
+    return $str;
+}
+
+function servo($db){
+    common::page('servo');
+    $servo=new servo($db);
+    $str.=$servo->breadcrumb_with_Id();
+    $str.=$servo->top_content('');
+    if(isset($_GET['id'])){
+        $str.=$servo->product_one(intval($_GET['id']));    
+    }else{
+        $str.=$servo->product_cate();
+    }     
+    return $str;
+}
+
+function dong_co($db){
+    common::page('dong_co');
+    $dong_co=new dong_co($db);
+    $str.=$dong_co->breadcrumb_with_Id();
+    $str.=$dong_co->top_content('');
+    if(isset($_GET['id'])){
+        $str.=$dong_co->product_one(intval($_GET['id']));    
+    }else{
+        $str.=$dong_co->product_cate();
+    }     
+    return $str;
+}
 function search($db){
     $hint=$_GET['hint'];
     $str.='
@@ -470,7 +427,7 @@ function shadowBottomDent(){
 
 function social($db){
     $basic_config=$db->where('id',1)->getOne('basic_config','social_twitter, social_facebook, social_google_plus');
-    $str.=' 
+    $str.='
         <div id="social_block">    
             <a href="'.$basic_config['social_twitter'].'" target="_blank"><i class="fa fa-twitter"></i></a>
             <a href="'.$basic_config['social_facebook'].'" target="_blank"><i class="fa fa-facebook"></i></a>

@@ -4,6 +4,12 @@ body{
     font-size:14px;
     line-height:19px;
 }
+
+@media (min-width: 992px){
+    .container {
+        width: 100%;
+    }
+}
 @media (min-width: 1200px){
     .container {
         width: 1170px;
@@ -78,8 +84,8 @@ a:hover, a:focus{
 }
 .breadcrumb{
     background-color: transparent;
-    margin-bottom: 18px;
-    margin-top: 8px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 .breadcrumb a{
     color: #767676;
@@ -113,6 +119,9 @@ header{
     list-style: none;
     margin:0;padding:0;    
 }
+.header .nav a {
+    color: #fff;
+}
 .shop-contact.first {
     padding-right: 40px;
 }
@@ -127,7 +136,10 @@ header{
     float: left;
     line-height: 25px;
     font-size: 22px;
-    padding-right: 10px;
+    padding-right: 5px;
+}
+.shop-contact b {
+    font-size: 16px;
 }
 #social_block {
     display: block;
@@ -167,10 +179,10 @@ header #social_block a{
     padding-left: 22px;
     height: 80px;
     font-family: "Times New Roman", Georgia, Serif;
-    width:430px;
-    text-transform: uppercase;
-        
+    width:360px;
+    text-transform: uppercase;        
 }
+
 .comp-name span{
     display:inline-block;
     
@@ -179,7 +191,11 @@ header #social_block a{
     font-size: 30px;
 }
 .header-contact{
+}
+.header-right{
     width: 350px;
+    display: inline-block;   
+    float: right;
 }
 .logo{
     padding:0px 0px;
@@ -210,6 +226,9 @@ header #social_block a{
 .wsmenu > .wsmenu-list > li > a > .arrow:after{ 
     border-top-color:#fff !important;
 }
+.wsmenu > .wsmenu-list > li > a.active > .arrow:after{ 
+    border-top-color:#db5010 !important;
+}
 .wsmenu > .wsmenu-list > li:hover>a{
     background:#fff !important; 
     color:#db5010 !important;}
@@ -221,9 +240,10 @@ header #social_block a{
     color:#db5010 !important;
 }
 .wsmenu > .wsmenu-submenu > li > a:hover {background:#424242; border-radius:0px!important; color:#fff;}
-.wsmenu .wsmenu-list li a:hover .arrow:after{ border-top-color:#fff;}
-.wsmenu .wsmenu-list li a.active .arrow:after{ border-top-color:#fff;}
-.wsmenu .wsmenu-list li:hover>a .arrow:after{ border-top-color:#fff;}
+.wsmenu .wsmenu-list li a:hover .arrow:after{ border-top-color:#db5010!important;}
+.wsmenu .wsmenu-list li a.active .arrow:after{ border-top-color:#db5010;}
+.wsmenu .wsmenu-list li:hover>a .arrow:after{ border-top-color:#db5010;}
+
 .wsmenu .megamenu .link-list .title{
     text-transform: uppercase;
     color:#db5010 !important
@@ -235,10 +255,9 @@ header #social_block a{
 @media(min-width:992px){
     .wrapper{
         margin-top:191px;
-    }
-    
+    }    
 }
-@media (max-width: 767px){
+@media (max-width: 991px){
     .wrapper{
         margin-top:50px;
     }
@@ -277,10 +296,13 @@ header #social_block a{
 .title-head span{
     font-size: 28px;
     font-weight: 500;    
-    margin-top: 80px;
+    margin-top: 20px;
     margin-bottom: 50px;
     font-style: italic;
     display: inline-block;
+}
+#home-page .title-head span{  
+    margin-top: 80px;
 }
 .item-title{
     color: #118cff;
@@ -453,7 +475,7 @@ footer a:hover, footer a:focus{
 }
 
  .about-us-box,.contact-box, .news-box, .product-box{
-    padding: 40px 21px 0 21px;
+    margin-bottom: 10px;
 }
 #contact-page, #news, #product{
     margin-bottom: 30px;
@@ -495,11 +517,17 @@ footer a:hover, footer a:focus{
 }
 .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
 
-    background-color: #686868;
-    border-color: #4d4d4d;
+    background-color: #f26522!important;
+    border-color: #e54e06;
+}
+.pagination>li>a.has_icon{
+    background-color: #f26522!important;
+    border-color: #e54e06;
+    color: #fff;
+    margin-left: 1px;
 }
 .pagination>li>a, .pagination>li>span {
-    color: #717171;
+    color: #f26522;
 }
 .has-paging{
     height: 100px;
@@ -508,6 +536,11 @@ footer a:hover, footer a:focus{
     padding: 3px 8px;
     font-size: 12px;
     
+}
+.pagination>li>a, .pagination>li>span {
+    border-radius: 0 !important;    
+    border-top: 0px;
+    border-bottom: 0;
 }
 ul.dropdown-menu {    
     background-color: #1f7db5;
@@ -561,13 +594,6 @@ ul.dropdown-menu:before {
     height: 0;
     width: 0;
     pointer-events: none;
-}
-.pagination>li>a, .pagination>li>span {
-    margin-left: 2px;
-    border-radius: 4px;
-}
-.pagination>li:last-child>a, .pagination>li:last-child>span {
-    margin-left: 0;
 }
 
 

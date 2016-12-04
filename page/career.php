@@ -1,11 +1,11 @@
 <?php
-class promotion extends base{
+class career extends base{
     private $news_cateId;
     function __construct($db){
         parent::__construct($db,5,'news');
         $this->news_cateId = 3;
     }
-    function promotion_item($item){
+    function career_item($item){
         $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         return '
             <div class="row news-item wow fadeInLeft animated" data-wow-duration="1000ms" data-wow-delay="10ms">
@@ -26,7 +26,7 @@ class promotion extends base{
             </div>
             <hr/>';
     }
-    function promotion_cate(){
+    function career_cate(){
         $page=isset($_GET['page'])?intval($_GET['page']):1;
         $this->db->reset();
         $this->db->where('active',1);
@@ -38,7 +38,7 @@ class promotion extends base{
         $str.='<div class="news-list">';
         if($count>0){
             foreach($list as $item){
-                $str.=$this->promotion_item($item);
+                $str.=$this->career_item($item);
             }
         }        
         $str.='</div>';
@@ -55,7 +55,7 @@ class promotion extends base{
         $this->paging_shown = ($pg->paginationTotalpages > 0);
         return $str;
     }
-    function promotion_one($id=1){
+    function career_one($id=1){
         $item=$this->db->where('id',$id)->getOne('news');
         $title=$item['title'];
         $content=$item['content'];

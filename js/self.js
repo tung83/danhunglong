@@ -98,7 +98,9 @@ $(function() {
 
         $( location ).attr("href",searchLink+val);
     });
-    });
+    
+    $('.pagination>li>a:has(i)').addClass('has_icon');
+});
 
 
 

@@ -1,69 +1,9 @@
 <?php
-class product extends base{
-    function __construct($db){        
-        parent::__construct($db,3,'product');
-    }
-    function ind_product(){ 
-        $str.='
-        <section class="ind-product"> 
-            <div class="col-xs-12">
-                <div class="title-head">
-                    <span>'
-                        .$this->title.' 
-                    </span>
-                </div>
-            </div>
-            <div class="clearfix"></div>';
-        $this->db->where('active',1)->where('home',1);
-        $this->db_orderBy();
-        $list=$this->db->get('product');   
-        foreach($list as $item){
-            $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
-            $img=$this->first_image($item['id']);
-            $str.='
-            <div class="col-md-2 col-sm-3 col-xs-12 product-col wow bounceIn animated" data-wow-duration="2s">
-                <div class="product-item item">
-                    <a href="'.$lnk.'">
-                        <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
-                    </a>
-                    <a href="'.$lnk.'">                    
-                        <p class="item-title text-center">'.$item['title'].'</p>
-                    </a>
-                </div>
-            </div>';
-        }
-        $str.=' 
-            <div class="clearfix"></div>
-                <div class="text-center">
-                    <a class="btn btn-primary btn-primary-long see-more" href="'.myWeb.$this->view.'">'.more_button.'</a>      
-                </div>
-            </div>
-        </section><!--/#partner-->';
-        
-        return $str;
-    }
-    function hot_product(){
-        $this->db->reset();
-        $this->db->where('active',1)->where('home',1);
-        $list=$this->db->get('product',null);
-        $i=1;
-        foreach($list as $item){
-            if($i%4==1){
-                $str.='
-                <div class="row">';
-            }
-            $str.=$this->product_item($item);
-            if($i%4==0){
-                $str.='
-                </div>';
-            }
-            $i++;
-        }   
-        if($i%4!=1){
-            $str.='
-            </div>';
-        }
-        return $str;
+class servo extends base{
+    private $product_cateId;
+    function __construct($db){
+        parent::__construct($db,8,'product');
+        $this->product_cateId = 2;
     }
     function product_item($item){
         $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
@@ -81,63 +21,12 @@ class product extends base{
             </div>';
         return $str;
     }
-    function product_list_item($item,$type=1){
-        $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
-        $img=$this->first_image($item['id']);
-        if(trim($img)==='') $img='holder.js/400x300';else $img=webPath.$img;
-        if($type==1){
-            $str='
-            <div class="col-md-12 col-sm-6 col-md-3 product-item">';    
-        }else{
-            $str='
-            <div class="col-md-12 col-sm-6 col-md-4 product-item">';
-        }        
-        $str.='
-        <a href="'.$lnk.'">
-            <div>
-                <p>'.($item['price']==0?contact:number_format($item['price'],0,',','.').' VNĐ').'</p>
-                <img src="'.$img.'" class="img-responsive" />
-                <p>
-                    <h2>'.$item['title'].'</h2>
-                    <button class="btn btn-default">'.more.'</button>
-                </p>
-            </div>
-        </a>
-        </div>';
-        return $str;
-    }
-    function category(){
-        $pId=$this->check_pId();
-        $this->db->where('active',1);
-        $this->db_orderBy();
-        $list=$this->db->get('product_cate',null,'id,title');
-        $str='
-        <div class="row product-category">
-        <div class="col-xs-12">';
-        foreach($list as $item){
-            if($item['id']==$pId){
-                $active=' class="active"';
-            }else{
-                $active='';
-            }
-            $str.='
-            <a href="'.myWeb.$this->view.'/'.common::slug($item['title']).'-p'.$item['id'].'"'.$active.'>
-                '.$item['title'].'
-            </a>';
-        }
-        $str.='
-        </div>
-        </div>';
-        return $str;
-    }
     function product_cate(){
         $pId = $this->check_pId();
         $page=isset($_GET['page'])?intval($_GET['page']):1;
         $this->db->reset();
         $this->db->where('active',1);
-        if($pId!=0){
-            $this->db->where('pId',$pId);
-        }
+        $this->db->where('pId',$this->product_cateId);
         $this->db_orderBy();
         $this->db->pageLimit=24;
         $list=$this->db->paginate('product',$page);
@@ -166,39 +55,6 @@ class product extends base{
         return $str;
     }
     
-    function product_search(){
-        $page=isset($_GET['page'])?intval($_GET['page']):1;
-        $this->db->reset();
-        $this->db->where('active',1);
-        $this->db->where('title','%'.$_GET['hint'].'%', 'like');        
-        $this->db_orderBy();
-        $this->db->pageLimit=24;
-        $list=$this->db->paginate('product',$page);        
-        $count=$this->db->totalCount;
-       $str.='<div class="alert alert-success"><i class="icon fa fa-check"></i>
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Có '.$count. ' kết quả với từ khoá <b>"'.$_GET['hint'].'"</b>
-              </div>';
-        $str.='<div class="product-list">'
-                . '<div class="row">';
-        if($count>0){
-            foreach($list as $item){
-                $str.=$this->product_item($item);
-            }
-        }        
-        $str.=      '</div>'
-                .'</div>'
-                .'<div class="clearfix"></div>';
-        
-        $pg=new Pagination(array('limit'=>24,'count'=>$count,'page'=>$page,'type'=>0));  
-             
-            $pg->defaultUrl = myWeb.search_view.'/'.$_GET['hint'];
-            $pg->paginationUrl = myWeb.search_view.'/page[p]'.'/'.$_GET['hint'];
-        
-        $str.= '<div class="pagination-wrapper"> <div class="text-center">'.$pg->process().'</div></div>';
-        $this->paging_shown = ($pg->paginationTotalpages > 0);
-        return $str;
-    }
     function product_one($id){
         $this->db->where('id',$id);
         $item=$this->db->getOne('product','id,price,price_reduce,title,content,pId,feature,detail,manual,promotion,video');
@@ -326,21 +182,5 @@ class product extends base{
         return $str;
     }
 
-    function product_cate_list(){
-        $this->db->reset();
-        $this->db->where('active',1);
-        $this->db_orderBy();
-        $list=$this->db->get($this->db_cate_name);
-        $str.='
-        <ul class="product-menu">';
-        foreach($list as $cate){
-            $title=$cate['title'];
-            $str.='
-            <li><a href="'.myWeb.$this->view.'/'.common::slug($title).'-p'.$cate["id"].'">'.$title.'</a></li>';   
-        }
-        $str.='
-        </ul>';
-        return $str;
-    }
 }
-?>
+

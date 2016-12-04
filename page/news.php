@@ -29,10 +29,12 @@ class news extends base{
                         <div class="news-item">
                             <a href="'.$lnk.'">
                                 <img src="'.$img.'" alt="'.$item['title'].'" class="img-responsive"/>
-                                <p class="news-item-title">'.common::str_cut($item['title'],30).'</p>
-                                <p class="news-date">'.date("d/m/Y",strtotime($item['date'])).'</p>
-                                <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
                             </a>
+                            <a href="'.$lnk.'">
+                                <p class="news-item-title">'.common::str_cut($item['title'],30).'</p>
+                            </a>
+                            <p class="news-date">'.date("d/m/Y",strtotime($item['date'])).'</p>
+                            <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
                         </div>
                     </div>';   
         }

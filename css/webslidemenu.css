@@ -407,7 +407,7 @@
 .wsmenu-submenu .fa{ margin-right:7px;}
 
 
-@media only screen and (min-width:780px) and (max-width:1064px) {
+@media only screen and (min-width:992px) and (max-width:1064px) {
 .wsmenu-list > li > a > .fa { display:none !important;}
 .hometext{ display:block !important;}
 .wsmenu{ width:100%; font-size:13px !important; position:relative;}
@@ -422,7 +422,7 @@
 
  
 
-@media only screen and (min-width: 781px) {
+@media only screen and (min-width:992px) {
 
 .wsmenu-list li:hover > .wsmenu-submenu{display:block !important;}
 .wsmenu-submenu li:hover > .wsmenu-submenu-sub{display:block !important;}
@@ -433,7 +433,7 @@
 
 
 /*------------------------------------ Mobile CSS ---------------------------------------------*/
-@media only screen and (max-width: 780px) {
+@media only screen and (max-width:991px) {
 .wsoffcanvasopener .wsmenu {
 	left:0px;
 	-webkit-transition:all 0.4s ease-in-out;

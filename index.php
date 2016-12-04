@@ -20,38 +20,33 @@
         <?php
 
         switch($view){
-            case 'product':
             case 'san-pham':
             case 'search':
             case 'tim-kiem':
                 echo product($db);
                 break;
-            case 'thiet-bi':
-            case 'facilities':
-                echo facility($db);
+            case 'bien-tan':
+                echo bien_tan($db);
                 break;
-            case 'project':
+            case 'servo':
+                echo servo($db);
+                break;
+            case 'dong-co':
+                echo dong_co($db);
+                break;
             case 'du-an':
                 echo project($db);
                 break;
-            case 'promotion':
-            case 'khuyen-mai':
-                echo promotion($db);
-                break;
-            case 'recruitment':
             case 'tuyen-dung':
                 echo career($db);
                 break;
-            case 'news':
             case 'tin-tuc':
                 echo news($db);
                 break;
-            case 'about-us':
             case 'gioi-thieu':
                 echo about($db);
                 break;
             case 'lien-he':
-            case 'contact':
                 echo contact($db);
                 break;
             default:
@@ -115,7 +110,7 @@
     <div class="coccoc-alo-ph-circle"></div>
     <div class="coccoc-alo-ph-circle-fill"></div>
     <div class="coccoc-alo-ph-img-circle">
-        <a href="tel:<?=common::qtext($db,2)?>"><img src="<?=frontPath?>phone-ring.png" alt=""/></a>
+        <a href="tel:<?=common::qtext($db,5)?>"><img src="<?=frontPath?>phone-ring.png" alt=""/></a>
     </div>
 </div>
 <script type="text/javascript">
