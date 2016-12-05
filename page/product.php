@@ -1,4 +1,5 @@
 <?php
+//http://bootsnipp.com/snippets/z4Wor
 class product extends base{
     function __construct($db){        
         parent::__construct($db,3,'product');
@@ -21,7 +22,7 @@ class product extends base{
             $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=$this->first_image($item['id']);
             $str.='
-            <div class="col-md-2 col-sm-3 col-xs-12 product-col wow bounceIn animated" data-wow-duration="2s">
+            <div class="col-md-2 col-sm-3 product-col wow bounceIn animated" data-wow-duration="2s">
                 <div class="product-item item">
                     <a href="'.$lnk.'">
                         <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
@@ -69,7 +70,7 @@ class product extends base{
         $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         $img=$this->first_image($item['id']);
         $str.='
-            <div class="col-xs-3 wow fadeIn animated product-col" data-wow-duration="1000ms">
+            <div class="col-md-3 wow fadeIn animated product-col" data-wow-duration="1000ms">
                 <div class="product-item item">
                     <a href="'.$lnk.'">
                         <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>

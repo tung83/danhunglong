@@ -148,9 +148,12 @@ function foot_menu($db,$view){
     <ul class="foot-menu">';
     foreach($list as $item){
         $title=$item['title'];
-        $db_view=$item['view'];
-        $str.='
-        <li><a href="'.myWeb.$db_view.'">'.$title.'</a></li>';   
+        if($title !="BIẾN TẦN" && $title !="SERVO" && $title !="ĐỘNG CƠ")
+        {
+            $db_view=$item['view'];
+            $str.='
+            <li><a href="'.myWeb.$db_view.'">'.$title.'</a></li>';
+        }
     }
     $str.='
     </ul>';
@@ -179,11 +182,18 @@ function home($db){
     common::page('product');
     $product=new product($db);
     $str.=$product->ind_product();
-    $str.=shadowBottomDent();
+    
+    common::page('service');
+    $service=new service($db);
+    $str.=$service->ind_service();
     
     common::page('news');
     $news=new news($db);
     $str.=$news->ind_news();
+    
+    common::page('project');
+    $project=new project($db);
+    $str.=$project->ind_project();
     
     $str.='
     </section>';
@@ -270,18 +280,15 @@ function contact($db){
     return $str;
 }
 function project($db){
-    $str.='
-    <section id="page">';
     common::page('project');
     $project=new project($db);
-    $str.=$project->breadcrumb();
+    $str.=$project->breadcrumb_with_Id();
+    $str.=$project->top_content('');
     if(isset($_GET['id'])){
-        $str.=$project->project_one();    
+        $str.=$project->project_one(intval($_GET['id']));    
     }else{
-        $str.=$project->project_all();
-    }    
-    $str.='
-    </section>';
+        $str.=$project->project_cate();
+    }     
     return $str;
 }
 function about($db){
@@ -392,6 +399,19 @@ function dong_co($db){
         $str.=$dong_co->product_one(intval($_GET['id']));    
     }else{
         $str.=$dong_co->product_cate();
+    }     
+    return $str;
+}
+
+function service($db){
+    common::page('service');
+    $service=new service($db);
+    $str.=$service->breadcrumb_with_Id();
+    $str.=$service->top_content('');
+    if(isset($_GET['id'])){
+        $str.=$service->service_one(intval($_GET['id']));    
+    }else{
+        $str.=$service->service_cate();
     }     
     return $str;
 }

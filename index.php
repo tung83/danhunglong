@@ -34,6 +34,9 @@
             case 'dong-co':
                 echo dong_co($db);
                 break;
+            case 'dich-vu':
+                echo service($db);
+                break;
             case 'du-an':
                 echo project($db);
                 break;

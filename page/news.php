@@ -5,7 +5,7 @@ class news extends base{
     }
     function ind_news(){
         $this->db->reset();
-        $this->db->where('active',1);
+        $this->db->where('active',1)->where('home',1);
         $this->db_orderBy();
         $list=$this->db->get('news',5);
         $str='

@@ -57,7 +57,7 @@ class base{
         $str.='
         <div class="container">
         <ul class="breadcrumb clearfix">
-            <li><a href="'.myWeb.'"><i class="fa fa-home-o"></i> Trang chủ</a></li>
+            <li><a href="'.myWeb.'"><i class="fa fa-home"></i> Trang chủ</a></li>
             <li><a href="'.myWeb.$this->view.'">'.$this->title.'</a></li>';
         if(isset($_GET['id'])){      
             $this->db->reset();
