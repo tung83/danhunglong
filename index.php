@@ -109,15 +109,12 @@
         </div>
     </div>
 
-<div class="coccoc-alo-phone coccoc-alo-green coccoc-alo-show" id="coccoc-alo-phoneIcon" style="left: 0px; bottom: 0px;">
+<div class="coccoc-alo-phone coccoc-alo-green coccoc-alo-show" id="coccoc-alo-phoneIcon" style="right: 0px; bottom: 0px;">
     <div class="coccoc-alo-ph-circle"></div>
     <div class="coccoc-alo-ph-circle-fill"></div>
     <div class="coccoc-alo-ph-img-circle">
-        <a href="tel:<?=common::qtext($db,5)?>"><img src="<?=frontPath?>phone-ring.png" alt=""/></a>
+        <a href="tel:<?=common::qtext($db,5)?>"><img class="coccoc-img" src="<?=frontPath?>phone-ring.png" alt=""/></a>
     </div>
 </div>
-<script type="text/javascript">
-(function(d,s,id){var z=d.createElement(s);z.type="text/javascript";z.id=id;z.async=true;z.src="//static.zotabox.com/a/2/a229ea4619b0e226502e4e3a326d5389/widgets.js";var sz=d.getElementsByTagName(s)[0];sz.parentNode.insertBefore(z,sz)}(document,"script","zb-embed-code"));
-</script>
 </body>
 </html>
