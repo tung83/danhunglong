@@ -183,10 +183,6 @@ function home($db){
     $product=new product($db);
     $str.=$product->ind_product();
     
-    common::page('service');
-    $service=new service($db);
-    $str.=$service->ind_service();
-    
     common::page('news');
     $news=new news($db);
     $str.=$news->ind_news();
