@@ -5,10 +5,12 @@ function ad_menu()
 	$topNav=array(
                     array(1,"Slider","slider","camera-retro"),
                     /*array(10,'Banner quảng cáo','ads_banner','diamond'),*/
-                    array(2,'Quản lý sản phẩm',"product","dropbox"),
+                    array(2,"Giới thiệu","about","credit-card"),
+                    array(3,'Quản lý sản phẩm',"product","dropbox"),
 					/*array(3,"Quản lý phụ tùng","accessary","pencil"),	*/	
-                    array(4,"Giới thiệu","about","credit-card"),
+                    array(4,'Dịch vụ','service','anchor'), 
                     array(5,'Tin tức','news','pencil-square-o'),   
+                    array(6,'Dự án','project','briefcase'), 
                     //array(9,'Video','video','youtube'),
                     /*array(14,'Hỗ trợ trực tuyến','support_online','headphones'),*/
                     //array(14,'Đặt hàng','cart','shopping-cart'),
@@ -20,11 +22,9 @@ function ad_menu()
 				);
 	//Submenu (parent,name,lnk)
 	$subNav=array(
-                    array(2,'Danh mục sản phẩm','type=product_cate'),
+                    array(3,'Danh mục sản phẩm','type=product_cate'),
                     /*array(2,'Danh mục sản phẩm cấp 2','type=product_cate_2'), */
-                    array(2,'Danh sách sản phẩm','type=product'), 
-                    array(3,'Loại phụ tùng','type=accessary_cate'),
-                    array(3,'Danh sách phụ tùng','type=accessary'),
+                    array(3,'Danh sách sản phẩm','type=product'), 
                     array(5,'Danh mục tin tức','type=news_cate'),
                     array(5,'Danh sách tin tức','type=news'),  
                     /*array(6,'Danh mục dịch vụ','type=serv_cate'),

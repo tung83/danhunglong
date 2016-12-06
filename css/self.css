@@ -509,6 +509,77 @@ footer a:hover, footer a:focus{
     display: none;  
 }
 
+/*//project*/
+.project-col{
+    margin: 0;
+    padding: 0;
+}
+.project-item img {
+    opacity: 1;
+    -webkit-transition: opacity 0.35s;
+    transition: opacity 0.35s;
+    overflow: hidden;
+}
+.project-item:hover img {
+    opacity: 0.7;
+}
+.project-item figcaption, .project-item figcaption > a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.project-item figcaption {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.25em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.project-item:hover p {
+    -webkit-transform: translate3d(0,-10px,0);
+    transform: translate3d(0,-10px,0);
+    height: 45px;
+    bottom: -10px;
+}
+
+.project-item p {
+    -webkit-transition: -webkit-transform 0.35s;
+    transition: transform 0.35s;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    opacity: 0.73;
+    margin: 0;
+    padding: 0;
+    min-height: 35px;
+    vertical-align: central;
+}
+.project-item figcaption::before, .project-item figcaption::after {
+    pointer-events: none;
+}
+
+.project-item figcaption > a {
+    z-index: 1000;
+    text-indent: 200%;
+    white-space: nowrap;
+    font-size: 0;
+    opacity: 0;
+}
+.project-item figcaption, .project-item figcaption > a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
 .pagination-wrapper{
     position: relative;
 }

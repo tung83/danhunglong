@@ -185,7 +185,7 @@ function news($db)
                     try{
                 $recent = $db->insert($table,$insert);
                 if(common::file_check($_FILES['file'])){
-                    WideImage::load('file')->resize(210,150, 'fill')->saveToFile(myPath.$file);
+                    WideImage::load('file')->resize(800,550, 'fill')->saveToFile(myPath.$file);
                     $db->where('id',$recent);
                     $db->update($table,array('img'=>$file));
                 }
@@ -203,7 +203,7 @@ function news($db)
                 'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
             if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(210,150, 'fill')->saveToFile(myPath.$file);
+                WideImage::load('file')->resize(800,550, 'fill')->saveToFile(myPath.$file);
                 $update = array_merge($update,array('img'=>$file));
                 $form->img_remove($_POST['idLoad'],$db,$table);
             }
@@ -280,7 +280,7 @@ function news($db)
              
         </div>
         <div class="col-lg-12">
-            '.$form->file('file',array('label'=>'Hình ảnh<code>210px:150px</code>')).'
+            '.$form->file('file',array('label'=>'Hình ảnh<code>(800,550)</code>')).'
             '.$form->number('ind',array('label'=>'Thứ tự')).'
             '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
         </div>

@@ -19,12 +19,12 @@ class service extends base{
         $list=$this->db->get('service');   
         foreach($list as $item){
             $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
-            $img=$this->first_image($item['id']);
+            $img=webPath.$item['img'];
             $str.='
             <div class="col-md-2 col-sm-3 service-col wow bounceIn animated" data-wow-duration="2s">
                 <div class="service-item item">
                     <a href="'.$lnk.'">
-                        <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
+                        <img src="'.$img.'" class="img-responsive center-block hvr-grow"/>
                     </a>
                     <a href="'.$lnk.'">                    
                         <p class="item-title text-center">'.$item['title'].'</p>
