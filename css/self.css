@@ -224,6 +224,9 @@ header #social_block a{
     background:transparent !important;    
 }
 
+.wsmenu > .wsmenu-list > li > a > .arrow{ 
+    padding-right: 5px;
+}
 .wsmenu > .wsmenu-list > li > a > .arrow:after{ 
     border-top-color:#fff !important;
 }
