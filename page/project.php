@@ -21,7 +21,7 @@ class project extends base{
             $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=webPath.$item['img'];
             $str.='
-            <div class="col-md-2 col-sm-3 project-col wow bounceIn animated" data-wow-duration="2s">
+            <div class="col-md-3 col-sm-2 project-col wow fadeInLeft animated" data-wow-duration="2s">
                 <figure class="project-item item">
                        <img src="'.$img.'" class="img-responsive center-block"/>
                    
@@ -44,16 +44,17 @@ class project extends base{
     }
     function project_item($item){
         $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
+        $img=webPath.$item['img'];
         return '
-            <div class="col-md-4 wow fadeIn animated project-col" data-wow-duration="1000ms">
-                <div class="project-item item">
-                    <a href="'.$lnk.'">
-                        <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
-                    </a>
-                    <a href="'.$lnk.'">
+             <div class="col-md-4 col-sm-2 project-col wow fadeInLeft animated" data-wow-duration="2s">
+                <figure class="project-item item">
+                       <img src="'.$img.'" class="img-responsive center-block"/>
+                   
+                    <figcaption>
                         <p class="item-title text-center">'.$item['title'].'</p>
-                    </a>
-                </div>
+                        <a href="'.$lnk.'">View more</a>                     
+                    </figcaption>			
+                </figure>
             </div>';
     }
     function project_cate(){
