@@ -14,7 +14,7 @@ function menu($db,$view){
     $str.='
     <div class="wsmobileheader clearfix">
         <a id="wsnavtoggle" class="animated-arrow"><span></span></a>
-        <a class="smallogo"><img src="'.frontPath.'logo.png" height="35" alt="" /></a>
+        <a href="'.myWeb.'" class="smallogo"><img src="'.frontPath.'logo.png" height="35" alt="" /></a>
         <a class="callusicon" href="tel:'.common::qtext($db,5).'"><span class="fa fa-phone"></span></a>
     </div>            
     <div class="header">

@@ -224,6 +224,12 @@ header #social_block a{
     background:transparent !important;    
 }
 
+@media (max-width: 991px){
+    .wsmenu > .wsmenu-list > li > a{
+        line-height: 28px;
+    }
+}
+
 .wsmenu > .wsmenu-list > li > a > .arrow{ 
     padding-right: 5px;
 }
