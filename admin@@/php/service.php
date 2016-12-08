@@ -1,14 +1,14 @@
 <?php
 function mainProcess($db)
 {
-    return project($db);
+    return service($db);
 }
-function project($db)
+function service($db)
 {
 	$msg='';
-    $act='project';
-    $type='project';
-    $table='project';
+    $act='service';
+    $type='service';
+    $table='service';
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
             $db->where('id',$_POST['idLoad']);
             $list = $db->getOne($table);
@@ -24,7 +24,6 @@ function project($db)
             $content=str_replace("'","",$_POST['content']);
             $meta_kw=htmlspecialchars($_POST['meta_keyword']);
             $meta_desc=htmlspecialchars($_POST['meta_description']);
-
             $home=$_POST['home']=='on'?1:0;
             $active=$_POST['active']=="on"?1:0;
             $file=time().$_FILES['file']['name'];

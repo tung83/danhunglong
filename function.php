@@ -171,17 +171,20 @@ function home($db){
         <div id="slider-box">
             '.wow_slider($db).'
         </div>
-    </section>';   
+    </section>';  
+    common::page('product');
+    $product=new product($db);
+    $str.=$product->ind_product();
+    
+    common::page('service');
+    $service=new service($db);
+    $str.=$service->ind_service();     
     
     $str.='
     <section id="index">';
     common::page('about');
     $about=new about($db);
     $str.=$about->ind_about();
-    
-    common::page('product');
-    $product=new product($db);
-    $str.=$product->ind_product();
     
     common::page('news');
     $news=new news($db);
@@ -192,7 +195,9 @@ function home($db){
     $str.=$project->ind_project();
     
     $str.='
-    </section>';
+        <div id="google-map"> </div>
+    </section>'; 
+    $str.=gmap();
     
     
     /*$str.=partner($db);*/
@@ -456,22 +461,21 @@ function gmap(){
     return '
         <script>   
             function initMap() {
-                var companyAddress = {lat: 10.826959, lng: 106.769057};
-                var addCenter = {lat: 10.827, lng: 106.769057};
+                var companyAddress = {lat: 10.799718, lng: 106.716524};
+                var addCenter = {lat: 10.8, lng: 106.716524};
                 var map = new google.maps.Map(document.getElementById("google-map"), {
-                  zoom: 18,
+                  zoom: 17,
                   fullscreenControl: true,
                   center: addCenter
                 });
                 var marker = new google.maps.Marker({
                   position: companyAddress,
                   map: map,
-                  title: "2 Tăng Nhơn Phú, Phước Long B, Quận 9"
+                  title: "566/12 Điện Biên Phủ, Phường 22, Quận Bình Thạnh, Tp. Hồ Chí Minh"
                 });
                 var lequangdinhContentString = 
-                      "<h4 style=\"color: #2aa498\">Dân Hưng Long Company</h4>" +
-                      "<p>2 Tăng Nhơn Phú, Phước Long B, Quận 9</p>" +
-                      "<a  target=\"_blank\" href=\"https://www.google.com/maps/place/10%C2%B047\'55.4%22N+106%C2%B041\'15.6%22E/@10.7987615,106.6874546,19.5z/data=!4m5!3m4!1s0x0:0x0!8m2!3d10.798732!4d106.687669\">Get direction</a>";
+                      "<h4 style=\"color: #f26522\">KỸ THUẬT TỰ ĐỘNG THÁI BÌNH</h4>" +
+                      "<a  target=\"_blank\" href=\"https://www.google.com/maps/place/10%C2%B047\'59.0%22N+106%C2%B042\'59.5%22E/@10.7999526,106.7158448,17.5z/data=!4m5!3m4!1s0x0:0x0!8m2!3d10.799718!4d106.716524\">Get direction</a>";
 
                   var infowindow = new google.maps.InfoWindow({
                     content: lequangdinhContentString

@@ -153,7 +153,7 @@ function news($db)
             $content=str_replace("'","",$_POST['content']);
             $meta_kw=htmlspecialchars($_POST['meta_keyword']);
             $meta_desc=htmlspecialchars($_POST['meta_description']);
-
+            $home=$_POST['home']=='on'?1:0;
             $active=$_POST['active']=="on"?1:0;
             $file=time().$_FILES['file']['name'];
             $ind=intval($_POST['ind']);
@@ -180,7 +180,7 @@ function news($db)
                 'meta_keyword'=>$meta_kw,
                 'meta_description'=>$meta_desc,
                 'date'=>$date,
-                'active'=>$active,'ind'=>$ind,'pId'=>$pId
+                'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
                     try{
                 $recent = $db->insert($table,$insert);
@@ -200,7 +200,7 @@ function news($db)
                 'meta_keyword'=>$meta_kw,
                 'meta_description'=>$meta_desc,
                 'date'=>$date,
-                'active'=>$active,'ind'=>$ind,'pId'=>$pId
+                'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
             if(common::file_check($_FILES['file'])){
                 WideImage::load('file')->resize(800,550, 'fill')->saveToFile(myPath.$file);
@@ -282,6 +282,7 @@ function news($db)
         <div class="col-lg-12">
             '.$form->file('file',array('label'=>'Hình ảnh<code>(800,550)</code>')).'
             '.$form->number('ind',array('label'=>'Thứ tự')).'
+            '.$form->checkbox('home',array('label'=>'Trang chủ')).'
             '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
         </div>
     

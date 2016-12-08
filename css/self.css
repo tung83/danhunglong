@@ -27,8 +27,8 @@ form#search input:focus,form#search button:focus{
     outline:none;
 }
 #google-map {
-    height: 645px;
-    margin-bottom: 20px;
+    height: 410px;
+    margin-top: 20px;
 }
 #search button{
     border:0;
@@ -306,7 +306,8 @@ header #social_block a{
     display: inline-block;
 }
 #home-page .title-head span{  
-    margin-top: 80px;
+    margin-bottom: 30px; 
+    margin-top: 40px;
 }
 .item-title{
     color: #118cff;
@@ -384,16 +385,17 @@ header #social_block a{
 .ind-about img,.ind-news img{
     border: 2px solid #fff;    
 }
-.product-item{
+.product-item,.service-item{
     border: 1px solid #e1e1e1; 
     padding: 9px 9px 0px 9px;
 }
 
-.product-item:hover img, .product-item:focus img, .product-item:active img{
+.product-item:hover img, .product-item:focus img, .product-item:active img,
+.service-item:hover img, .service-item:focus img, .service-item:active img{
     -webkit-transform: scale(1.08);
     transform: scale(1.08);
 }
-.product-item img {
+.product-item img,.service-item img  {
     display: inline-block;
     vertical-align: middle;
     -webkit-transform: translateZ(0);
@@ -407,17 +409,17 @@ header #social_block a{
     -webkit-transition-property: transform;
     transition-property: transform;
 }
-.product-item .item-title{
+.product-item .item-title,.service-item .item-title{
     border-top: 1px solid #e1e1e1;
     min-height: 70px;
 }
-.product-col{
+.product-col,.service-col{
     padding: 15px 10px 15px 10px;
 }
 
 .news-item-title { 
     color: #0070b3;
-    margin: 22px 0 17px 0;
+    margin: 22px 0 8px 0;
     
 }
 .ind-news .news-item{
@@ -501,7 +503,7 @@ footer a:hover, footer a:focus{
  .about-us-box,.contact-box, .news-box, .product-box, .project-box, .service-box{
     margin-bottom: 10px;
 }
-#contact-page, #news, #product, #project, #service{
+#news, #product, #project, #service{
     margin-bottom: 30px;
 }
 .contact-wrap{
@@ -515,6 +517,8 @@ footer a:hover, footer a:focus{
 }
 .news-date{
     margin-bottom: 5px;
+    font-size: 11px;
+    color: #d0d0d0;
 }
 .news-sum{
     color: #000;  

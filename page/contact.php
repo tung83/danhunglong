@@ -125,17 +125,10 @@ class contact extends base{
                                 </div>
                             </form> 
                         </div>
-                    </div><!--/.row-->                    
-                    <div class="row">
-                       <div class="col-sm-12 text-center">
-                           <div id="google-map">
-                               
-                           </div>
-                       </div>
-                    </div>
+                    </div><!--/.row-->   
                 </div><!--/.row contact-box--> 
-                '.shadowBottomDent().' 
             </div><!--/.container-->
+             <div id="google-map"> </div>
         </section><!--/#contact-page-->';
         return $str;
     }

@@ -408,8 +408,7 @@ function product($db){
         </div>
         <div class="col-lg-12">
             '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
-            '.$form->checkbox('home',array('label'=>'Trang chủ')).'
-            
+            '.$form->checkbox('home',array('label'=>'Trang chủ')).'            
             '.$form->number('ind',array('label'=>'Thứ tự')).'
     	</div>
         
