@@ -28,8 +28,8 @@ define('_dbName'    , 'psmedia_dhl');
 define('_pass'      , 'tung');
 
 
-//define('_userName'  , 'psmedia_dhl');	
-//define('_dbName'    , 'psmedia_dhl');	
+//define('_userName'  , 'psmedia_thaibinh');	
+//define('_dbName'    , 'psmedia_thaibinhauto');	
 //define('_pass'      , '671977');
 
 
