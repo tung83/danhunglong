@@ -26,10 +26,11 @@ function menu($db,$view){
                     <span class="first-comp">Công ty tnhh kỹ thuật tự động</span><p class="sencond-comp">Thái Bình</p>
                 </div> 
                 <div class="header-right">
-                    <div class="header-contact">                   
-                        <form class="pull-right">
+                    <div class="header-contact">    
+                        <form class="pull-right" role="form" method="get" name="search" id="search">
+                            <input type="hidden" id="search-link" value="'.myWeb.search_view.'/" />                                  
                             <div class="input-group search">
-                                <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-describedby="basic-addon2">
+                                <input type="text" id="hint" class="form-control" placeholder="Tìm kiếm..." aria-describedby="basic-addon2">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
                                 </span>

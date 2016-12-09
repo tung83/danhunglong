@@ -30,10 +30,6 @@ form#search input:focus,form#search button:focus{
     height: 410px;
     margin-top: 20px;
 }
-#search button{
-    border:0;
-    background:transparent;
-}
 
 a:hover, a:focus{
     text-decoration:none;
@@ -391,15 +387,24 @@ header #social_block a{
 .ind-about img,.ind-news img{
     border: 2px solid #fff;    
 }
+
+@media (max-width: 1199px){   
+    .product-box,.service-box{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
 .product-item,.service-item{
     border: 1px solid #e1e1e1; 
     padding: 9px 9px 0px 9px;
 }
 
-.product-item:hover img, .product-item:focus img, .product-item:active img,
-.service-item:hover img, .service-item:focus img, .service-item:active img{
-    -webkit-transform: scale(1.08);
-    transform: scale(1.08);
+@media (min-width: 1200px){   
+    .product-item:hover img, .product-item:focus img, .product-item:active img,
+    .service-item:hover img, .service-item:focus img, .service-item:active img{
+        -webkit-transform: scale(1.08);
+        transform: scale(1.08);
+    }
 }
 .product-item img,.service-item img  {
     display: inline-block;
@@ -428,6 +433,13 @@ header #social_block a{
     margin: 22px 0 8px 0;
     
 }
+
+@media (max-width: 1199px){   
+    .ind-news{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
 .ind-news .news-item{
     font-size: 13px;
 }
@@ -443,8 +455,11 @@ footer{
 .footer-content{
     padding: 0 0 30px 0;
 }
-.footer-menu{
-    padding-left: 0;
+
+@media (min-width: 1200px){   
+    .footer-menu{
+        padding-left: 0;
+    }
 }
 .footer-content .footer-top-span{
     display: inline-block;    
@@ -461,6 +476,11 @@ footer{
 }
 .footer-product-part{
     width: 190px;    
+}
+@media(max-width:991px){
+    .footer-contact-part .footer-top-span{
+        margin-top: 15px;
+    }
 }
 .footer-contact-part{
     max-width: 500px;  
@@ -563,7 +583,6 @@ footer a:hover, footer a:focus{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-}
 .project-item figcaption, .project-item figcaption > a {
     position: absolute;
     top: 0;
@@ -628,6 +647,12 @@ footer a:hover, footer a:focus{
     height: 100%;
 }
 
+@media (max-width: 1199px){   
+    .project-item{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
 
 .pagination-wrapper{
     position: relative;

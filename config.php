@@ -44,7 +44,7 @@ define('frontPath'   ,'/file/front/');
 define('phpLib'     ,root.'/object/');
 define('pageLib'    ,root.'/page/');
 define('widgetLib'  ,root.'/widget/');
-define('head_title'    ,'Dân Hưng Long');
+define('head_title'    ,'Kỹ Thuật Tự Động Thái Bình');
 
 
 //define area end

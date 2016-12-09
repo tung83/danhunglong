@@ -21,7 +21,7 @@ class project extends base{
             $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=webPath.$item['img'];
             $str.='
-            <div class="col-md-3 col-sm-2 project-col wow fadeInLeft animated" data-wow-duration="2s">
+            <div class="col-md-3 col-sm-4 project-col wow fadeInLeft animated" data-wow-duration="2s">
                 <figure class="project-item item">
                        <img src="'.$img.'" class="img-responsive center-block"/>
                    
@@ -45,7 +45,7 @@ class project extends base{
         $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         $img=webPath.$item['img'];
         return '
-             <div class="col-md-4 col-sm-2 project-col wow fadeInLeft animated" data-wow-duration="2s">
+              <div class="col-md-3 col-sm-4 project-col wow fadeInLeft animated" data-wow-duration="2s">
                 <figure class="project-item item">
                        <img src="'.$img.'" class="img-responsive center-block"/>
                    

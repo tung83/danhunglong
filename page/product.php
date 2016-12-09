@@ -22,10 +22,10 @@ class product extends base{
             $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=$this->first_image($item['id']);
             $str.='
-            <div class="col-md-2 col-sm-3 product-col wow bounceIn animated" data-wow-duration="2s">
+            <div class="col-md-2 col-sm-4 product-col wow bounceIn animated" data-wow-duration="2s">
                 <div class="product-item item">
                     <a href="'.$lnk.'">
-                        <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
+                        <img src="'.webPath.$img.'" class="img-responsive center-block"/>
                     </a>
                     <a href="'.$lnk.'">                    
                         <p class="item-title text-center">'.$item['title'].'</p>
@@ -72,7 +72,7 @@ class product extends base{
             <div class="col-md-3 wow fadeIn animated product-col" data-wow-duration="1000ms">
                 <div class="product-item item">
                     <a href="'.$lnk.'">
-                        <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
+                        <img src="'.webPath.$img.'" class="img-responsive center-block"/>
                     </a>
                     <a href="'.$lnk.'">
                         <p class="item-title text-center">'.$item['title'].'</p>

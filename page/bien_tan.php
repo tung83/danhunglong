@@ -9,7 +9,7 @@ class bien_tan extends base{
         $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         $img=$this->first_image($item['id']);
         $str.='
-            <div class="col-xs-3 wow fadeIn animated product-col" data-wow-duration="1000ms">
+            <div class="col-md-3 wow fadeIn animated product-col" data-wow-duration="1000ms">
                 <div class="product-item item">
                     <a href="'.$lnk.'">
                         <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>

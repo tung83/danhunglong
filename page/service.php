@@ -24,7 +24,7 @@ class service extends base{
             <div class="col-md-2 col-sm-3 service-col wow bounceIn animated" data-wow-duration="2s">
                 <div class="service-item item">
                     <a href="'.$lnk.'">
-                        <img src="'.$img.'" class="img-responsive center-block hvr-grow"/>
+                        <img src="'.$img.'" class="img-responsive center-block"/>
                     </a>
                     <a href="'.$lnk.'">                    
                         <p class="item-title text-center">'.$item['title'].'</p>
@@ -43,17 +43,18 @@ class service extends base{
     }
     function service_item($item){
         $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
+        $img=webPath.$item['img'];
         return '
-            <div class="col-md-4 wow fadeIn animated service-col" data-wow-duration="1000ms">
-                <div class="service-item item">
-                    <a href="'.$lnk.'">
-                        <img src="'.webPath.$img.'" class="img-responsive center-block hvr-grow"/>
-                    </a>
-                    <a href="'.$lnk.'">
-                        <p class="item-title text-center">'.$item['title'].'</p>
-                    </a>
-                </div>
-            </div>';
+        <div class="col-md-2 col-sm-3 service-col wow bounceIn animated" data-wow-duration="2s">
+            <div class="service-item item">
+                <a href="'.$lnk.'">
+                    <img src="'.$img.'" class="img-responsive center-block"/>
+                </a>
+                <a href="'.$lnk.'">                    
+                    <p class="item-title text-center">'.$item['title'].'</p>
+                </a>
+            </div>
+        </div>';
     }
     function service_cate(){
         $page=isset($_GET['page'])?intval($_GET['page']):1;
